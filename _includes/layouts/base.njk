@@ -35,6 +35,9 @@
 
 		{#- Add the heading-anchors web component to the JavaScript bundle #}
 		<script type="module">{% include "node_modules/@zachleat/heading-anchors/heading-anchors.js" %}</script>
+
+		{# Add schema.org structured data as JSON-LD #}
+		<script eleventy:ignore type="application/ld+json">{{ schemaorg | dump(\t) | safe }}</script>
 	</head>
 	<body>
 		<a href="#main" id="skip-link" class="visually-hidden">Skip to main content</a>
