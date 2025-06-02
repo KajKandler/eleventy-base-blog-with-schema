@@ -1,11 +1,11 @@
 export default {
-	title: "Eleventy Base Blog v9",
+	title: "Eleventy Base Blog v9 + Schema.org Structured Data",
 	url: "https://example.com/",
 	language: "en",
-	description: "I am writing about my experiences as a naval navel-gazer.",
+	description: "How Kaj Kandler added schema.org structured data to the base-blog starter project of eleventy (11ty)",
 	author: {
-		name: "Your Name Here",
-		email: "youremailaddress@example.com",
-		url: "https://example.com/about-me/"
+		name: "Kaj Kandler",
+		email: "kajkandler@entitygarden.com",
+		url: "https://kajkandler.com/"
 	}
 }
