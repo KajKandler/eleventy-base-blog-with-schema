@@ -1,4 +1,5 @@
 import { DateTime } from "luxon";
+import { HtmlBasePlugin } from "@11ty/eleventy";
 
 export default function(eleventyConfig) {
 	eleventyConfig.addFilter("readableDate", (dateObj, format, zone) => {
@@ -40,4 +41,12 @@ export default function(eleventyConfig) {
 	eleventyConfig.addFilter("sortAlphabetically", strings =>
 		(strings || []).sort((b, a) => b.localeCompare(a))
 	);
+
+	eleventyConfig.addFilter("constructID", (relative_url, base, fragment) => {
+		var u = new URL( HtmlBasePlugin.applyBaseToUrl(fragment, base, {
+			pathPrefix: eleventyConfig.pathPrefix,
+			pageUrl: relative_url
+		}));
+		return u.href;
+	});
 };
