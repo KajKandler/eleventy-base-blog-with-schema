@@ -1,0 +1,79 @@
+---
+title: Why is Schema Markup important for any Website or Blog
+description: This articles describes the influence of structured data on SEO and optimizing your digital persona hub.
+date: "git Last Modified"
+tags: another tag
+---
+Search engines like Google have evolved from matching words to matching based on meaning of the words. That way Google can distinguish apple the company from apple the fruit. It also allows a search engine to take semantics into account.
+
+Starting in 2012, the largest search engines in the world asked website publishers to mark up their semantic entities. They founded schema.org to build a common vocabulary of "things". Things can be classified in a taxonomy, such as "Organization", "Corporation", "Person", "Creative Work", "Book", "Website", "Webapge", or "Article".
+
+## Why are schema.org annotations important for SEO?
+
+Schema.org annotations are important for SEO because Google admittedly supports some of its rich results with structured data.
+
+For its rich results, such as Featured Snippet or Knowledge Panel, Google uses a subset of the schema.org defined entity types and properties.
+
+Google also emphasizes that it prefers helpful content and content that is published by reputable people or organizations (EEAT). Schema.org annotations can make it clear who is responsible for the content, as well as how to contact the publisher.
+
+## Why are schema.org Annotations Important for Digital Persona Optimization?
+
+Digital Persona Optimization aims to connect all profiles and appearances of a single persona to a network of information. Schema markup makes it clear that a persona or organization has different profiles where content is  published. Schema.org annotations can further specify weather a person is the host or was a guest in a podcast. Such structured data can even specify if a person (or thing) is the subject of a podcast or merely mentioned in an episode.
+
+Google, Bing, OpenAI, Anthropic, Grok, and other crawlers extract facts about people, organizations, locations, events and creative works. They want to understand the semantic relationships between them. Structured data in form of schema.org annotations helps them to build a knowledge graph. That knowledge graph grounds the current flavor of Large Language Models in reality.
+
+The most powerful tool to optimize your digital persona is a digital persona hub based on a personal website. On your own website, you can leverage  schema markup to make your links even more meaningful.
+
+> "Image how much more powerful the [IndieWeb](https://indieweb.org/) would become when all links would be annotated with schema.org entity types."
+>
+> &mdash; Kaj Kandler
+
+## Best Practices for Schema Markup
+
+### 1. Annotate your Website with Global Information
+
+Annotate your website with information such as who is the publisher and how can the publisher be contacted.
+
+Use the entities Website, Webpage together with Organization or Person as the publisher. Include information how to contact the publisher. Either per form, email or phone address. The more contact information the better it is for your reputation in Google's eyes.
+
+Further more, add any public identifier of your organization, such as tax IDs or industry classifications.
+
+Post this global information on all pages of the website.
+
+### 2. Annotate the About Page(s)
+
+Create About pages for the publisher and describe the organization or person and the purpose of the website. Publish all the identifiable information mentioned above.
+
+Describe more details than in the global information, such as former employment or affiliation with other organizations.
+
+Publish in the text what the annotations say. When possible link to the things you describe and annotate.
+
+If you have authors separate from the author, create About pages for the authors as well. Don't just have the author and the list of his or her articles. Use the opportunity to have an extended author bio with a photo and links to social profiles.
+
+### 3. Annotate Articles in a Blog
+
+For Blog articles annotate the author with the author's about page as url.
+
+Also annotate the main topics the article is about as well as major mentions.
+
+### 4. Add a Breadcrumbs hierarchy to the Schema markup
+
+Breadcrumbs are a common feature on many content management systems. They help users to navigate and search engines to understand the structure of the content.
+
+You can add the breadcrumb to a Webpage annotation.
+
+### 4. Annotation Should Match the Content on the Page
+
+Don't make things up in the schema markup. You want the schema markup to confirm what is written on the page.
+
+### 5. Connect the Schema Markup to one Graph
+
+It is important that you mark up the different entities but connect them either through nested schema and or through proper "@id" connections.
+
+Three or four disconnected graphs erode the power of the schema markup.
+
+## Final Thoughts
+
+Schema Markup helps search engines and modern AI Models to understand the content of your website with more precision. If you want to rank your content, schema markup is an easy addition to your website.
+
+Schema Markup also raises the search engines' trust in your content. Because you can declare who you are and what business you stand for. Schema Markup is necessary for many rich results in the Google Search results. Schema Markup is particularly powerful for triggering knowledge panels for your name or brand.
