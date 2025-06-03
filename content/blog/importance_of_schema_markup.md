@@ -1,8 +1,9 @@
 ---
 title: Why is Schema Markup important for any Website or Blog
 description: This articles describes the influence of structured data on SEO and optimizing your digital persona hub.
-date: "git Last Modified"
-tags: another tag
+date: "git Created"
+tags: 
+- Concept
 eleventyComputed:
   schemaorg:
     "@graph":
@@ -55,7 +56,7 @@ eleventyComputed:
         alternateName:
         - "DPO"
         url: "https://entitygarden.com/glossary/digital_persona_optimization/"
-        mainentityOfPage: "https://entitygarden.com/glossary/digital_persona_optimization/"
+        mainEntityOfPage: "https://entitygarden.com/glossary/digital_persona_optimization/"
         sameAs:
         - "https://entitygarden.com/glossary/digital_persona_optimization/"
       - "@type": "Thing"
@@ -70,7 +71,7 @@ Search engines like Google have evolved from matching words to matching based on
 
 Starting in 2012, the largest search engines in the world asked website publishers to mark up their semantic entities. They founded schema.org to build a common vocabulary of "things". Things can be classified in a taxonomy, such as "Organization", "Corporation", "Person", "Creative Work", "Book", "Website", "Webapge", or "Article".
 
-## Why are schema.org annotations important for SEO?
+## Why are schema.org Annotations Important for SEO?
 
 Schema.org annotations are important for SEO because Google admittedly supports some of its rich results with structured data.
 
@@ -80,7 +81,7 @@ Google also emphasizes that it prefers helpful content and content that is publi
 
 ## Why are schema.org Annotations Important for Digital Persona Optimization?
 
-[Digital Persona Optimization](https://entitygarden.com/glossary/digital_persona_optimization/) is the process to educate search engines about profiles and appearances of a single persona. It aims to create a network of information, so search engines understand the entity. 
+[Digital Persona Optimization](https://entitygarden.com/glossary/digital_persona_optimization/) is the process to educate search engines about profiles and appearances of a single [digital persona](https://entitygarden.com/glossary/digital_persona/). It aims to create a network of information, so search engines understand the entity. 
 
 Schema markup makes it clear that a persona or organization has different profiles where content is  published. Schema.org annotations can further specify weather a person is the host or was a guest in a podcast. Such structured data can even specify if a person (or thing) is the subject of a podcast or merely mentioned in an episode.
 
@@ -94,7 +95,7 @@ The most powerful tool to optimize your digital persona is a [digital persona hu
 
 ## Best Practices for Schema Markup
 
-### 1. Annotate your Website with Global Information
+### 1. Annotate Your Website with Global Information
 
 Annotate your website with information such as who is the publisher and how can the publisher be contacted.
 
@@ -120,17 +121,17 @@ For Blog articles annotate the author with the author's about page as url.
 
 Also annotate the main topics the article is about as well as major mentions.
 
-### 4. Add a Breadcrumbs hierarchy to the Schema markup
+### 4. Add a Breadcrumbs Hierarchy to the Schema Markup
 
 Breadcrumbs are a common feature on many content management systems. They help users to navigate and search engines to understand the structure of the content.
 
 You can add the breadcrumb to a Webpage annotation.
 
-### 4. Annotation Should Match the Content on the Page
+### 4. Annotations Should Match the Content on the Page
 
 Don't make things up in the schema markup. You want the schema markup to confirm what is written on the page.
 
-### 5. Connect the Schema Markup to one Graph
+### 5. Connect the Schema Markup to a Single Graph
 
 It is important that you mark up the different entities but connect them either through nested schema and or through proper "@id" connections.
 
