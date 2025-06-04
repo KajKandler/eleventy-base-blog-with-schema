@@ -3,6 +3,68 @@ title: Why is Schema Markup important for any Website or Blog
 description: This articles describes the influence of structured data on SEO and optimizing your digital persona hub.
 date: "git Last Modified"
 tags: another tag
+eleventyComputed:
+  schemaorg:
+    "@graph":
+    - "@type": "Article"
+      "@id": "{{ page.url | constructID(metadata.baseURL, '#article') }}"
+      about:
+      - "@type": "Thing"
+        "@id": "https://entitygarden.com/glossary/schema_markup/"
+        name: "Schema Markup"
+        url: "https://entitygarden.com/glossary/schema_markup/"
+        sameAs:
+        - "https://entitygarden.com/glossary/schema_markup/"
+      - "@type": "Thing"
+        "@id": "https://en.wikipedia.org/wiki/Website"
+        name: "Website"
+        url: "https://en.wikipedia.org/wiki/Website"
+        sameAs:
+        - "https://en.wikipedia.org/wiki/Website"
+      - "@type": "Thing"
+        "@id": "https://www.11ty.dev/"
+        name: "Eleventy"
+        alternateName: 
+        - "11ty"
+        url: "https://www.11ty.dev/"
+        sameAs:
+        - "https://github.com/11ty/eleventy/"
+        - "https://www.youtube.com/c/EleventyVideo"
+        - "https://neighborhood.11ty.dev/@11ty"
+        - "https://bsky.app/profile/11ty.dev"
+      mentions:
+      - "@type": "Thing"
+        "@id": "https://schema.org/"
+        name: "schema.org"
+        description: "Schema.org is an initiative by the major search engines to collaboratively create and maintain structured data on the Internet."
+        url: "https://schema.org/"
+        sameAs:
+        - "https://schema.org/docs/about.html"
+      - "@type": "Thing"
+        "@id": "https://en.wikipedia.org/wiki/Search_engine_optimization"
+        name: "Search Engine Optimization"
+        alternateName:
+        - "SEO"
+        url: "https://en.wikipedia.org/wiki/Search_engine_optimization"
+        sameAs:
+        - "https://www.google.com/search?kgmid=/m/019qb_"
+        - "https://en.wikipedia.org/wiki/Search_engine_optimization"
+      - "@type": "Thing"
+        "@id": "https://entitygarden.com/glossary/digital_persona_optimization/"
+        name: "Digital Persona Optimization"
+        alternateName:
+        - "DPO"
+        url: "https://entitygarden.com/glossary/digital_persona_optimization/"
+        mainentityOfPage: "https://entitygarden.com/glossary/digital_persona_optimization/"
+        sameAs:
+        - "https://entitygarden.com/glossary/digital_persona_optimization/"
+      - "@type": "Thing"
+        "@id": "https://entitygarden.com/glossary/digital_persona_hub/"
+        name: "Digital Persona Hub"
+        url: "https://entitygarden.com/glossary/digital_persona_hub/"
+        mainEntityOfPage: "https://entitygarden.com/glossary/digital_persona_hub/"
+        sameAs:
+        - "https://entitygarden.com/glossary/digital_persona_hub/"
 ---
 Search engines like Google have evolved from matching words to matching based on meaning of the words. That way Google can distinguish apple the company from apple the fruit. It also allows a search engine to take semantics into account.
 
@@ -18,11 +80,13 @@ Google also emphasizes that it prefers helpful content and content that is publi
 
 ## Why are schema.org Annotations Important for Digital Persona Optimization?
 
-Digital Persona Optimization aims to connect all profiles and appearances of a single persona to a network of information. Schema markup makes it clear that a persona or organization has different profiles where content is  published. Schema.org annotations can further specify weather a person is the host or was a guest in a podcast. Such structured data can even specify if a person (or thing) is the subject of a podcast or merely mentioned in an episode.
+[Digital Persona Optimization](https://entitygarden.com/glossary/digital_persona_optimization/) is the process to educate search engines about profiles and appearances of a single persona. It aims to create a network of information, so search engines understand the entity. 
+
+Schema markup makes it clear that a persona or organization has different profiles where content is  published. Schema.org annotations can further specify weather a person is the host or was a guest in a podcast. Such structured data can even specify if a person (or thing) is the subject of a podcast or merely mentioned in an episode.
 
 Google, Bing, OpenAI, Anthropic, Grok, and other crawlers extract facts about people, organizations, locations, events and creative works. They want to understand the semantic relationships between them. Structured data in form of schema.org annotations helps them to build a knowledge graph. That knowledge graph grounds the current flavor of Large Language Models in reality.
 
-The most powerful tool to optimize your digital persona is a digital persona hub based on a personal website. On your own website, you can leverage  schema markup to make your links even more meaningful.
+The most powerful tool to optimize your digital persona is a [digital persona hub](https://entitygarden.com/glossary/digital_persona_hub/) based on a personal website. On your own website, you can leverage  schema markup to make your links even more meaningful.
 
 > "Image how much more powerful the [IndieWeb](https://indieweb.org/) would become when all links would be annotated with schema.org entity types."
 >
