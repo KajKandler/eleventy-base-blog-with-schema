@@ -3,6 +3,55 @@ title: How to Add Global Schema to a Website
 description: In this post you learn how to add schema and global objects to an eleventy website.
 date: "git Last Modified"
 tags: number 2
+eleventyComputed:
+  schemaorg:
+    "@graph":
+    - "@type": "Article"
+      "@id": "{{ page.url | constructID(metadata.url, '#article') }}"
+      about:
+      - "@type": "Thing"
+        "@id": "https://schema.org/WebSite"
+        name: "WebSite (schema.org)"
+        url: "https://schema.org/WebSite"
+        sameAs:
+        - "https://schema.org/WebSite"
+      - "@type": "Thing"
+        "@id": "https://schema.org/WebPage"
+        name: "WebPage (schema.org)"
+        url: "https://schema.org/WebPage"
+        sameAs:
+        - "https://schema.org/WebPage"
+      - "@type": "Thing"
+        "@id": "https://www.11ty.dev/"
+        name: "Eleventy"
+        alternateName: 
+        - "11ty"
+        url: "https://www.11ty.dev/"
+        sameAs:
+        - "https://github.com/11ty/eleventy/"
+        - "https://www.youtube.com/c/EleventyVideo"
+        - "https://neighborhood.11ty.dev/@11ty"
+        - "https://bsky.app/profile/11ty.dev"
+      mentions:
+      - "@type": "Thing"
+        "@id": "https://schema.org/publisher"
+        name: "Publisher - Property (schema.org)"
+        url: "https://schema.org/publisher"
+        sameAs:
+        - "https://schema.org/publisher"
+      - "@type": "Thing"
+        "@id": "https://schema.org/Person"
+        name: "Person (schema.org)"
+        url: "https://schema.org/Person"
+        sameAs:
+        - "https://schema.org/Person"
+      - "@type": "Thing"
+        "@id": "https://schema.org/Organization"
+        name: "Organization (schema.org)"
+        url: "https://schema.org/Organization"
+        sameAs:
+        - "https://schema.org/Organization"
+
 ---
 We can add schema markup in our global template so it is included in any page.
 
@@ -25,20 +74,20 @@ for example:
 {% raw %}
 ```js
 export default {
-	schemaorg: {
-		"@context": "https://schema.org",
-		"@graph": [
-			{
-				"@type": "WebSite",
-				"@id": (data) => `${data.metadata.url}#website`,
-				name: (data) => data.metadata.title,
-				description: (data) => data.metadata.description,
-				url: (data) => data.metadata.url,
-				publisher: {
-					"@type": "Person",
-					"@id": (data) => `${data.metadata.url}/#person_kaj_kandler`
-				},
-			}
+  schemaorg: {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": (data) => `${data.metadata.url}#website`,
+        name: (data) => data.metadata.title,
+        description: (data) => data.metadata.description,
+        url: (data) => data.metadata.url,
+        publisher: {
+          "@type": "Person",
+          "@id": (data) => `${data.metadata.url}/#person_kaj_kandler`
+        },
+      }
         ]
     }
 }
@@ -97,37 +146,37 @@ Here is my complete global data:
 {% raw %}
 ```js
 export default {
-	schemaorg: {
-		"@context": "https://schema.org",
-		"@graph": [
-			{
-				"@type": "WebSite",
-				"@id": (data) => `${data.metadata.url}#website`,
-				name: (data) => data.metadata.title,
-				description: (data) => data.metadata.description,
-				url: (data) => data.metadata.url,
-				publisher: {
-					"@type": "Person",
-					"@id": (data) => `${data.metadata.url}/#person_kaj_kandler`
-				},
-			},
-			{
-				"@type": "Person",
-				"@id": (data) => `${data.metadata.url}/#person_kaj_kandler`,
-				"name": "Kaj Kandler",
-				"url": "https://kajkandler.com/",
-				"givenName": "Kaj",
-				"familyName": "Kandler",
-				"jobTitle": "Entrepreneur",
-				"sameAs": [
-					"https://www.linkedin.com/in/kajkandler/",
-					"https://github.com/KajKandler",
-					"https://medium.com/@kajkandler",
-					"https://entitygarden.com/about_kaj_kandler/"
-				]
-			}
-		]
-	}
+  schemaorg: {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": (data) => `${data.metadata.url}#website`,
+        name: (data) => data.metadata.title,
+        description: (data) => data.metadata.description,
+        url: (data) => data.metadata.url,
+        publisher: {
+          "@type": "Person",
+          "@id": (data) => `${data.metadata.url}/#person_kaj_kandler`
+        },
+      },
+      {
+        "@type": "Person",
+        "@id": (data) => `${data.metadata.url}/#person_kaj_kandler`,
+        "name": "Kaj Kandler",
+        "url": "https://kajkandler.com/",
+        "givenName": "Kaj",
+        "familyName": "Kandler",
+        "jobTitle": "Entrepreneur",
+        "sameAs": [
+          "https://www.linkedin.com/in/kajkandler/",
+          "https://github.com/KajKandler",
+          "https://medium.com/@kajkandler",
+          "https://entitygarden.com/about_kaj_kandler/"
+        ]
+      }
+    ]
+  }
 }
 ```
 {% endraw %}

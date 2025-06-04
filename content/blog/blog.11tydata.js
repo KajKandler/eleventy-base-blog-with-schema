@@ -1,5 +1,3 @@
-import { constructID } from '../../_data/schemaOrg.js';
-
 export default {
 	tags: [
 		"posts"
@@ -10,18 +8,18 @@ export default {
 			"@graph": [
 				{
 				"@type": "Article",
-				"@id": (data) => constructID(data.page.url, data.metadata.baseURL, "#article"),
+				"@id": '{{ page.url | constructID(metadata.url, "#article") }}',
 				name: (data) => data.title,
 				headline: (data) => data.title,
 				abstract: (data) => data.description,
-				url: (data) => new URL(data.page.url, data.metadata.baseURL),
+				url: '{{ page.url | constructID(metadata.url, "") }}',
 				mainEntityOfPage: {
 					"@type": "WebPage",
-					"@id": (data) => constructID(data.page.url, data.metadata.baseURL, "#webpage"),
+					"@id": '{{ page.url | constructID(metadata.url, "#webpage") }}',
 				},
 				author: {
 					"@type": "Person",
-					"@id": (data) => constructID("/", data.metadata.baseURL, "#person_kaj_kandler")
+					"@id": '{{ "/" | constructID(metadata.url, "#person_kaj_kandler") }}'
 				},
 			}
 			]
