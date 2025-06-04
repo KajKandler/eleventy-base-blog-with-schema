@@ -3,6 +3,31 @@ title: How to Add WebPage Schema to All Pages on the Website
 description: Instructions how to add WebPage Schema globally and build a utility to construct schema '@id' URLs.
 date: "git Last Modified"
 tags: second tag
+eleventyComputed:
+  schemaorg:
+    "@graph":
+      - "@type": "Article"
+        "@id": "{{ page.url | constructID(metadata.url, '#article') }}"
+        about:
+          - "@type": "Thing"
+            "@id": "https://schema.org/Article"
+            name: "Article (schema.org)"
+            url: "https://schema.org/Article"
+            sameAs:
+              - "https://schema.org/Article"
+          - "@type": "Thing"
+            "@id": "https://www.11ty.dev/"
+            name: "Eleventy"
+            alternateName: 
+              - "11ty"
+            url: "https://www.11ty.dev/"
+            sameAs:
+              - "https://github.com/11ty/eleventy/"
+              - "https://www.youtube.com/c/EleventyVideo"
+              - "https://neighborhood.11ty.dev/@11ty"
+              - "https://bsky.app/profile/11ty.dev"
+        mentions:
+                  
 ---
 All pages on a website are WebPages. Let's reflect this in our schema.
 
@@ -32,7 +57,6 @@ For most IDs I use the URL that is the entity's "home" + a URL fragment indicati
 - An organization publishing a website gets the URL of the home page + "#organization", i.e. `https://example.com/#organization`
 - A person publishing the website or authoring an article gets the URL of the home page + "#person_<first-name>_<last-name>", i.e. `https://example.com/#person_kaj_kandler`
 - For external entities I use their about page or home page, i.e. `https://wikipedia.org/`
-
 I mix things up for entities that have an "About ..." page on the website. There I use for example `https://example.com/about_aaa_corp/#organization` or `https://example.com/authors/Kaj_kandler/#person`
 
 There is no hard rule, you can use what ever you want I just developed these as best practice and it served me well over many websites.
@@ -90,7 +114,7 @@ I added the WebPage schema into  `content/content.11data.js` as the most appropr
 ```
 {% endraw %}
 
-As you can see I connect all "WebPage" entities to the "WebSite" entity created as global schema.
+As you can see I connect all "WebPage" entities to the []"WebSite" entity created as global schema](/blog/adding_global_schema_to_eleventy.md).
 
 Furthermore, I reuse the person already declared globally as the author of all pages. You can adjust this to your needs.
 
