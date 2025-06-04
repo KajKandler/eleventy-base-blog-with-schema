@@ -4,18 +4,18 @@ export default {
 		"@graph": [
 			{
 				"@type": "WebSite",
-				"@id": (data) => `${data.metadata.url}#website`,
+				"@id": '{{ "/" | constructID(metadata.url, "#website") }}',
 				name: (data) => data.metadata.title,
 				description: (data) => data.metadata.description,
-				url: (data) => data.metadata.url,
+				url: '{{ "/" | constructID(metadata.url, "") }}',
 				publisher: {
 					"@type": "Person",
-					"@id": (data) => `${data.metadata.url}/#person_kaj_kandler`
+					"@id": '{{ "/" | constructID(metadata.url, "#person_kaj_kandler") }}'
 				},
 			},
 			{
 				"@type": "Person",
-				"@id": (data) => `${data.metadata.url}/#person_kaj_kandler`,
+				"@id": '{{ "/" | constructID(metadata.url, "#person_kaj_kandler") }}',
 				"name": "Kaj Kandler",
 				"url": "https://kajkandler.com/",
 				"givenName": "Kaj",
