@@ -1,3 +1,4 @@
+import { DateGitFirstAdded, DateGitLastUpdated } from "./gitDates.js";
 import { constructID } from './schemaOrg.js';
 
 export default {
@@ -21,6 +22,8 @@ export default {
 				name: (data) => data.title,
 				description: (data) => data.description,
 				url: (data) => new URL(data.page.url, data.metadata.baseURL),
+				datePublished: (data) => { return DateGitFirstAdded(data.page.inputPath) },
+				dateModified: (data) => { return DateGitLastUpdated(data.page.inputPath) },
 				isPartOf: {
 					"@type": "WebSite",
 					"@id": (data) => constructID("/", data.metadata.baseURL, "#website"),
