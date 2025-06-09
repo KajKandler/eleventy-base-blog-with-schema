@@ -1,8 +1,10 @@
+import { DateGitFirstAdded, DateGitLastUpdated } from "../../_data/gitDates.js";
+
 export default {
 	tags: [
 		"posts"
 	],
-	"layout": "layouts/post.njk",
+	layout: "layouts/post.njk",
 	eleventyComputed: {
 		schemaorg: {
 			"@graph": [
@@ -13,6 +15,8 @@ export default {
 				headline: (data) => data.title,
 				abstract: (data) => data.description,
 				url: '{{ page.url | constructID(metadata.url, "") }}',
+				datePublished: (data) => { return DateGitFirstAdded(data.page.inputPath) },
+				dateModified: (data) => { return DateGitLastUpdated(data.page.inputPath) },				
 				mainEntityOfPage: {
 					"@type": "WebPage",
 					"@id": '{{ page.url | constructID(metadata.url, "#webpage") }}',
