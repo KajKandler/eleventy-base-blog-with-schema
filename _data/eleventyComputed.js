@@ -1,3 +1,5 @@
+import { DateGitFirstAdded, DateGitLastUpdated } from "./gitDates.js";
+
 export default {
 	schemaorg: {
 		"@context": "https://schema.org",
