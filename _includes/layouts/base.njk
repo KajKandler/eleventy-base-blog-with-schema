@@ -49,10 +49,17 @@
 			<nav>
 				<h2 class="visually-hidden">Top level navigation menu</h2>
 				<ul class="nav">
-				{%- for entry in collections.all | eleventyNavigation %}
+					<li class="nav-item"><a href="/"{% if '/' == page.url %} aria-current="page"{% endif %}>Home</a></li>
+				{%- for entry in collections.all | eleventyNavigation("Home") %}
 					<li class="nav-item"><a href="{{ entry.url }}"{% if entry.url == page.url %} aria-current="page"{% endif %}>{{ entry.title }}</a></li>
 				{%- endfor %}
 				</ul>
+			</nav>
+			<nav>
+	            <div class="container" id="breadcrumb">
+					{% set breadcrumb = collections.all | eleventyNavigationBreadcrumb(eleventyNavigation.key, { allowMissing: true, includeSelf: true } ) %}
+					{{ breadcrumb | eleventyNavigationToHtml | safe }}    
+				</div>
 			</nav>
 		</header>
 

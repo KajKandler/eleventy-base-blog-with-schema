@@ -1,5 +1,5 @@
 export default {
-	title: "Eleventy Base Blog v9 + Schema.org Structured Data",
+	title: "Eleventy Base Blog v9 + Structured Data",
 	baseURL: "https://entitygarden.com",
 	url: "https://example.com/",
 	language: "en",
