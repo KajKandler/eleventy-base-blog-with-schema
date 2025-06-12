@@ -1,7 +1,7 @@
 ---
 title: How to Add Breadcrumbs with Schema to All Pages
 description: Instructions how to add Breadcrumbs as navigation with BreadcrumbList Schema globally. Build the navigation leveraging the eleventy Navigation plugin.
-date: "git Last Modified"
+date: "git Created"
 tags: 
 - Navigation
 - FolderLevel

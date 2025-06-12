@@ -1,7 +1,7 @@
 ---
 title: How to Add Global Schema to a Website
 description: In this post you learn how to add schema and global objects to an eleventy website.
-date: "git Last Modified"
+date: "git Created"
 tags: 
 - GlobalLevel
 - WebSite
