@@ -63,6 +63,7 @@ export default async function(eleventyConfig) {
 		templateData: {
 			eleventyNavigation: {
 				key: "Feed",
+				parent: "Home",
 				order: 4
 			}
 		},
