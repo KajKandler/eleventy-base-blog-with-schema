@@ -32,6 +32,10 @@ export default {
 					"@type": "Person",
 					"@id": (data) => constructID("/", data.metadata.baseURL, "#person_kaj_kandler")
 				},
+                breadcrumb: {
+                    "@type": "BreadcrumbList",
+                    "@id": (data) => constructID(data.page.url, data.metadata.baseURL, "#breadcrumb")
+                }
 			},
 			{
 				"@type": "Person",

@@ -1,6 +1,6 @@
 export default {
 	title: "Eleventy Base Blog v9 + Structured Data",
-	baseURL: "https://entitygarden.com",
+	baseURL: "https://example.com",
 	url: "https://example.com/",
 	language: "en",
 	description: "How Kaj Kandler added schema.org structured data to the base-blog starter project of eleventy (11ty)",
