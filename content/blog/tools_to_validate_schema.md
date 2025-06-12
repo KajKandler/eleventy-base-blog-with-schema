@@ -2,7 +2,9 @@
 title: My tools to validate schema markup.
 description: To verify that schema is applied correctly, you need tools.
 date: "2025-06-05T08:00:00+02:00"
-tags: ["second tag", "posts with two tags"]
+tags: 
+- Tools
+- Validation
 eleventyComputed:
   schemaorg:
     "@graph":

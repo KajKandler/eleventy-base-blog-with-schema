@@ -2,7 +2,10 @@
 title: How to Add WebPage Schema to All Pages on the Website
 description: Instructions how to add WebPage Schema globally and build a utility to construct schema '@id' URLs.
 date: "git Last Modified"
-tags: second tag
+tags: 
+- GlobalLevel
+- WebPage
+- Article
 eleventyComputed:
   schemaorg:
     "@graph":
