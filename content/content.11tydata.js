@@ -17,7 +17,11 @@ export default {
 					author: {
 						"@type": "Person",
 						"@id": '{{ "/" | constructID(metadata.url, "#person_kaj_kandler") }}'
-					}
+					},
+	                breadcrumb: {
+						"@type": "BreadcrumbList",
+						"@id": '{{ page.url | constructID(metadata.url, "#breadcrumb") }}'
+	                }
 				}
 			]
 		}

@@ -27,6 +27,11 @@ export default {
 				},
 			}
 			]
-		}
+		},
+		eleventyNavigation: {
+            key: (data) => { var title = data.title || "undefined"; return title.replace(' ', ''); },
+            parent: "Archive",
+            title: (data) => data.title
+        },
 	}
 };
