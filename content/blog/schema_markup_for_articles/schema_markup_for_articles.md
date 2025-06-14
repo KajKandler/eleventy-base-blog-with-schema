@@ -1,6 +1,7 @@
 ---js
 const title = "Schema Markup for blog Articles";
 const date = "git Last Modified";
+const tags = [ "Article", "FolderLevel" ]
 
 const schemaorg = { // no eleventy computed required, because we are working with JS directly
     "@graph": [
