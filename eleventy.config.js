@@ -161,5 +161,5 @@ export const config = {
 	// it will transform any absolute URLs in your HTML to include this
 	// folder name and does **not** affect where things go in the output folder.
 
-	// pathPrefix: "/",
+	pathPrefix: "eleventy-base-blog-with-schema/",
 };
