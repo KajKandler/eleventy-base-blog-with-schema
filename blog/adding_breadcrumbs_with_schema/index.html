@@ -1,0 +1,749 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>How to Add Breadcrumbs with Schema to All Pages</title>
+		<meta name="description" content="Instructions how to add Breadcrumbs as navigation with BreadcrumbList Schema globally. Build the navigation leveraging the eleventy Navigation plugin.">
+		<link rel="alternate" href="/eleventy-base-blog-with-schema/feed/feed.xml" type="application/atom+xml" title="Eleventy Base Blog v9 + Structured Data">
+		<meta name="generator" content="Eleventy v3.0.0">
+		
+		
+		
+		<style>/* This is an arbitrary CSS string added to the bundle */
+/* Defaults */
+:root {
+	--font-family: -apple-system, system-ui, sans-serif;
+	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
+}
+
+/* Theme colors */
+:root {
+	--color-gray-20: #e0e0e0;
+	--color-gray-50: #C0C0C0;
+	--color-gray-90: #333;
+
+	--background-color: #fff;
+
+	--text-color: var(--color-gray-90);
+	--text-color-link: #082840;
+	--text-color-link-active: #5f2b48;
+	--text-color-link-visited: #17050F;
+
+	--syntax-tab-size: 2;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-gray-20: #e0e0e0;
+		--color-gray-50: #C0C0C0;
+		--color-gray-90: #dad8d8;
+
+		/* --text-color is assigned to --color-gray-_ above */
+		--text-color-link: #1493fb;
+		--text-color-link-active: #6969f7;
+		--text-color-link-visited: #a6a6f8;
+
+		--background-color: #15202b;
+	}
+}
+
+
+/* Global stylesheet */
+* {
+	box-sizing: border-box;
+}
+
+@view-transition {
+	navigation: auto;
+}
+
+html,
+body {
+	padding: 0;
+	margin: 0 auto;
+	font-family: var(--font-family);
+	color: var(--text-color);
+	background-color: var(--background-color);
+}
+html {
+	overflow-y: scroll;
+}
+body {
+	max-width: 40em;
+}
+
+/* https://www.a11yproject.com/posts/how-to-hide-content/ */
+.visually-hidden:not(:focus):not(:active) {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+/* Fluid images via https://www.zachleat.com/web/fluid-images/ */
+img{
+  max-width: 100%;
+}
+img[width][height] {
+  height: auto;
+}
+img[src$=".svg"] {
+  width: 100%;
+  height: auto;
+  max-width: none;
+}
+video,
+iframe {
+	width: 100%;
+	height: auto;
+}
+iframe {
+	aspect-ratio: 16/9;
+}
+
+p:last-child {
+	margin-bottom: 0;
+}
+p {
+	line-height: 1.5;
+}
+
+li {
+	line-height: 1.5;
+}
+
+a[href] {
+	color: var(--text-color-link);
+}
+a[href]:visited {
+	color: var(--text-color-link-visited);
+}
+a[href]:hover,
+a[href]:active {
+	color: var(--text-color-link-active);
+}
+
+main,
+footer {
+	padding: 1rem;
+}
+main :first-child {
+	margin-top: 0;
+}
+
+header {
+	border-bottom: 1px dashed var(--color-gray-20);
+}
+
+#skip-link {
+	text-decoration: none;
+	background: var(--background-color);
+	color: var(--text-color);
+	padding: 0.5rem 1rem;
+	border: 1px solid var(--color-gray-90);
+	border-radius: 2px;
+}
+
+/* Prevent visually-hidden skip link fom pushing content around when focused */
+#skip-link.visually-hidden:focus {
+	position: absolute;
+	top: 1rem;
+	left: 1rem;
+	/* Ensure it is positioned on top of everything else when it is shown */
+	z-index: 999;
+}
+
+.links-nextprev {
+	display: flex;
+	justify-content: space-between;
+	gap: .5em 1em;
+	list-style: "";
+	border-top: 1px dashed var(--color-gray-20);
+	padding: 1em 0;
+}
+.links-nextprev > * {
+	flex-grow: 1;
+}
+.links-nextprev-next {
+	text-align: right;
+}
+
+table {
+	margin: 1em 0;
+}
+table td,
+table th {
+	padding-right: 1em;
+}
+
+pre,
+code {
+	font-family: var(--font-family-monospace);
+}
+pre:not([class*="language-"]) {
+	margin: .5em 0;
+	line-height: 1.375; /* 22px /16 */
+	-moz-tab-size: var(--syntax-tab-size);
+	-o-tab-size: var(--syntax-tab-size);
+	tab-size: var(--syntax-tab-size);
+	-webkit-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	overflow-x: auto;
+}
+code {
+	word-break: break-all;
+}
+
+/* Header */
+header {
+	display: flex;
+	gap: 1em;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1em;
+}
+.home-link {
+	flex-grow: 1;
+	font-size: 1em; /* 16px /16 */
+	font-weight: 700;
+}
+.home-link:link:not(:hover) {
+	text-decoration: none;
+}
+
+/* Nav */
+.nav {
+	display: flex;
+	gap: .5em 1em;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.nav-item {
+	display: inline-block;
+}
+.nav-item a[href]:not(:hover) {
+	text-decoration: none;
+}
+.nav a[href][aria-current="page"] {
+	text-decoration: underline;
+}
+
+/* Posts list */
+.postlist {
+	counter-reset: start-from var(--postlist-index);
+	list-style: none;
+	padding: 0;
+	padding-left: 1.5rem;
+}
+.postlist-item {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	counter-increment: start-from -1;
+	margin-bottom: 1em;
+}
+.postlist-item:before {
+	display: inline-block;
+	pointer-events: none;
+	content: "" counter(start-from, decimal-leading-zero) ". ";
+	line-height: 100%;
+	text-align: right;
+	margin-left: -1.5rem;
+}
+.postlist-date,
+.postlist-item:before {
+	font-size: 0.8125em; /* 13px /16 */
+	color: var(--color-gray-90);
+}
+.postlist-date {
+	word-spacing: -0.5px;
+}
+.postlist-link {
+	font-size: 1.1875em; /* 19px /16 */
+	font-weight: 700;
+	flex-basis: calc(100% - 1.5rem);
+	padding-left: .25em;
+	padding-right: .5em;
+	text-underline-position: from-font;
+	text-underline-offset: 0;
+	text-decoration-thickness: 1px;
+}
+.postlist-item-active .postlist-link {
+	font-weight: bold;
+}
+
+/* Tags */
+.post-tag {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-transform: capitalize;
+	font-style: italic;
+}
+.postlist-item > .post-tag {
+	align-self: center;
+}
+
+/* Tags list */
+.post-metadata {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: .5em;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.post-metadata time {
+	margin-right: 1em;
+}
+
+/* Breadcrumbs added by Kaj Kandler */
+.breadcrumb-item.active {
+  color: var(--primary-color);
+}
+
+#breadcrumb ol,ul {
+  margin: 0;
+  padding: 0;
+}
+
+#breadcrumb li {
+  display: inline;
+}
+
+#breadcrumb li:not(:last-child)::after {
+  content: " ˃"
+}
+/**
+ * okaidia theme for JavaScript, CSS and HTML
+ * Loosely based on Monokai textmate theme by http://www.monokai.nl/
+ * @author ocodia
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+	color: #f8f8f2;
+	background: none;
+	text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+	font-size: 1em;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	word-wrap: normal;
+	line-height: 1.5;
+
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+	padding: 1em;
+	margin: .5em 0;
+	overflow: auto;
+	border-radius: 0.3em;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+	background: #272822;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+	padding: .1em;
+	border-radius: .3em;
+	white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: #8292a2;
+}
+
+.token.punctuation {
+	color: #f8f8f2;
+}
+
+.token.namespace {
+	opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.constant,
+.token.symbol,
+.token.deleted {
+	color: #f92672;
+}
+
+.token.boolean,
+.token.number {
+	color: #ae81ff;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+	color: #a6e22e;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string,
+.token.variable {
+	color: #f8f8f2;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.function,
+.token.class-name {
+	color: #e6db74;
+}
+
+.token.keyword {
+	color: #66d9ef;
+}
+
+.token.regex,
+.token.important {
+	color: #fd971f;
+}
+
+.token.important,
+.token.bold {
+	font-weight: bold;
+}
+.token.italic {
+	font-style: italic;
+}
+
+.token.entity {
+	cursor: help;
+}
+/*
+ * New diff- syntax
+ */
+
+pre[class*="language-diff-"] {
+	--eleventy-code-padding: 1.25em;
+	padding-left: var(--eleventy-code-padding);
+	padding-right: var(--eleventy-code-padding);
+}
+.token.deleted {
+	background-color: hsl(0, 51%, 37%);
+	color: inherit;
+}
+.token.inserted {
+	background-color: hsl(126, 31%, 39%);
+	color: inherit;
+}
+
+/* Make the + and - characters unselectable for copy/paste */
+.token.prefix.unchanged,
+.token.prefix.inserted,
+.token.prefix.deleted {
+	-webkit-user-select: none;
+	user-select: none;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+.token.prefix.inserted,
+.token.prefix.deleted {
+	width: var(--eleventy-code-padding);
+	background-color: rgba(0,0,0,.2);
+}
+
+/* Optional: full-width background color */
+.token.inserted:not(.prefix),
+.token.deleted:not(.prefix) {
+	display: block;
+	margin-left: calc(-1 * var(--eleventy-code-padding));
+	margin-right: calc(-1 * var(--eleventy-code-padding));
+	text-decoration: none; /* override del, ins, mark defaults */
+	color: inherit; /* override del, ins, mark defaults */
+}</style>
+		
+
+		
+		<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://kajkandler.github.io/#website","name":"Eleventy Base Blog v9 + Structured Data","description":"The Eleventy (11ty) base-blog starter project enhanced with schema.org markup. Howto tutorial included!","url":"https://kajkandler.github.io/","publisher":{"@type":"Person","@id":"https://kajkandler.github.io/#person_kaj_kandler"}},{"@type":"WebPage","@id":"https://kajkandler.github.io/blog/adding_breadcrumbs_with_schema/#webpage","name":"How to Add Breadcrumbs with Schema to All Pages","description":"Instructions how to add Breadcrumbs as navigation with BreadcrumbList Schema globally. Build the navigation leveraging the eleventy Navigation plugin.","url":"https://kajkandler.github.io/blog/adding_breadcrumbs_with_schema/","datePublished":"2025-06-14T07:00:13.000Z","dateModified":"2025-06-14T07:00:13.000Z","isPartOf":{"@type":"WebSite","@id":"https://kajkandler.github.io/#website"},"author":{"@type":"Person","@id":"https://kajkandler.github.io/#person_kaj_kandler"},"breadcrumb":{"@type":"BreadcrumbList","@id":"https://kajkandler.github.io/blog/adding_breadcrumbs_with_schema/#breadcrumb"}},{"@type":"Person","@id":"https://kajkandler.github.io/#person_kaj_kandler","name":"Kaj Kandler","url":"https://kajkandler.com/","givenName":"Kaj","familyName":"Kandler","jobTitle":"Entrepreneur","sameAs":["https://www.linkedin.com/in/kajkandler/","https://github.com/KajKandler","https://medium.com/@kajkandler","https://entitygarden.com/about_kaj_kandler/"]},{"@type":"Article","@id":"https://kajkandler.github.io/blog/adding_breadcrumbs_with_schema/#article","name":"How to Add Breadcrumbs with Schema to All Pages","headline":"How to Add Breadcrumbs with Schema to All Pages","abstract":"Instructions how to add Breadcrumbs as navigation with BreadcrumbList Schema globally. Build the navigation leveraging the eleventy Navigation plugin.","url":"https://kajkandler.github.io/blog/adding_breadcrumbs_with_schema/","datePublished":"2025-06-14T07:00:13.000Z","dateModified":"2025-06-14T07:00:13.000Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://kajkandler.github.io/blog/adding_breadcrumbs_with_schema/#webpage"},"author":{"@type":"Person","@id":"https://kajkandler.github.io/#person_kaj_kandler"}},{"@type":"Article","@id":"https://kajkandler.github.io/blog/adding_breadcrumbs_with_schema/#article","about":[{"@type":"Thing","@id":"https://en.wikipedia.org/wiki/Breadcrumb_navigation","name":"Breadcrumb Navigation","url":"https://en.wikipedia.org/wiki/Breadcrumb_navigation","sameAs":["https://en.wikipedia.org/wiki/Breadcrumb_navigation"]},{"@type":"Thing","@id":"https://schema.org/BreadcrumbList","name":"BreadcrumbList (schema.org)","url":"https://schema.org/BreadcrumbList","sameAs":["https://schema.org/BreadcrumbList"]},{"@type":"Thing","@id":"https://www.11ty.dev/","name":"Eleventy","alternateName":["11ty"],"url":"https://www.11ty.dev/","sameAs":["https://github.com/11ty/eleventy/","https://www.youtube.com/c/EleventyVideo","https://neighborhood.11ty.dev/@11ty","https://bsky.app/profile/11ty.dev"]}],"mentions":null}]}</script>
+		
+        
+        
+        
+		<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","@id":"https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/adding_breadcrumbs_with_schema/#breadcrumb","name":"How to Add Breadcrumbs with Schema to All Pages Breadcrumb","numberOfItems":3,"itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":{"@type":"WebPage","@id":"https://kajkandler.github.io/eleventy-base-blog-with-schema/","name":"Home","url":"https://kajkandler.github.io/eleventy-base-blog-with-schema/"}},{"@type":"ListItem","position":2,"name":"Archive","item":{"@type":"WebPage","@id":"https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/","name":"Archive","url":"https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/"}},{"@type":"ListItem","position":3,"name":"How to Add Breadcrumbs with Schema to All Pages","item":{"@type":"WebPage","@id":"https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/adding_breadcrumbs_with_schema/","name":"How to Add Breadcrumbs with Schema to All Pages","url":"https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/adding_breadcrumbs_with_schema/"}}]}]}</script>
+
+	</head> 
+	<body>
+		<a href="#main" id="skip-link" class="visually-hidden">Skip to main content</a>
+
+		<header>
+			<a href="/eleventy-base-blog-with-schema/" class="home-link">Eleventy Base Blog v9 + Structured Data</a>
+			<nav>
+				<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
+				<ul class="nav">
+					<li class="nav-item"><a href="/eleventy-base-blog-with-schema/">Home</a></li>
+					<li class="nav-item"><a href="/eleventy-base-blog-with-schema/blog/">Archive</a></li>
+					<li class="nav-item"><a href="/eleventy-base-blog-with-schema/about/">About</a></li>
+					<li class="nav-item"><a href="/eleventy-base-blog-with-schema/feed/feed.xml">Feed</a></li>
+				</ul>
+			</nav>
+			<nav>
+	            <div class="container" id="breadcrumb">
+					
+					<ul><li><a href="/eleventy-base-blog-with-schema/">Home</a></li>
+<li><a href="/eleventy-base-blog-with-schema/blog/">Archive</a></li>
+<li><a href="/eleventy-base-blog-with-schema/blog/adding_breadcrumbs_with_schema/">How to Add Breadcrumbs with Schema to All Pages</a></li></ul>    
+				</div>
+			</nav>
+		</header>
+
+		<main id="main">
+			<heading-anchors>
+				
+
+
+<h1 id="how-to-add-breadcrumbs-with-schema-to-all-pages">How to Add Breadcrumbs with Schema to All Pages</h1>
+
+<ul class="post-metadata">
+	<li><time datetime="2025-06-14">14 June 2025</time></li>
+	<li><a href="/eleventy-base-blog-with-schema/tags/second-tag/" class="post-tag">second tag</a></li>
+</ul>
+
+<p>Breadcrumbs are a common form of navigation on Blogs and Websites.</p>
+<p>They help users to orient themselves with regards to the information hierarchy of the website.</p>
+<h2 id="adding-breadcrumb-navigation-based-on-the-eleventy-navigation-plugin">Adding Breadcrumb Navigation Based on the Eleventy Navigation Plugin</h2>
+<p>Eleventy maintains a navigation plugin, which we can leverage also for a breadcrumb trail.</p>
+<h3 id="1-add-parent-keys-to-the-eleventynavigation">1. Add Parent Keys to the eleventyNavigation</h3>
+<p>To form a hierarchy of pages, we need to add parent information to the front matter in the pages already tagged for navigation. Here is an example for the &quot;Bog Archive&quot; in file <code>blog.njk</code></p>
+<pre class="language-js" tabindex="0"><code class="language-js"><span class="token operator">--</span><span class="token operator">-</span>js
+<span class="token keyword">const</span> eleventyNavigation <span class="token operator">=</span> <span class="token punctuation">{</span>
+	<span class="token literal-property property">key</span><span class="token operator">:</span> <span class="token string">"Archive"</span><span class="token punctuation">,</span>
+	<span class="token literal-property property">parent</span><span class="token operator">:</span> <span class="token string">"Home"</span><span class="token punctuation">,</span>
+	<span class="token literal-property property">order</span><span class="token operator">:</span> <span class="token number">2</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token operator">--</span><span class="token operator">-</span>
+</code></pre>
+<h3 id="2-adjust-the-menu-navigation">2. Adjust the Menu Navigation</h3>
+<p>We need to make slight adjustments to the menu navigation, because we want to only have the Children that point to the &quot;Home&quot; page in the global menu. Here are the changes to <code>_includes/layouts/base.njk</code></p>
+<pre class="language-html" tabindex="0"><code class="language-html">{#- Read more about `eleventy-navigation` at https://www.11ty.dev/docs/plugins/navigation/ #}
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>nav</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h2</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>visually-hidden<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Top level navigation menu<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h2</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>nav<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>nav-item<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>&lt;a href="/"{% if '/' == page.url %} aria-current="page"{% endif %}>Home<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+    {%- for entry in collections.all | eleventyNavigation("Home") %}
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>nav-item<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>&lt;a href="{{ entry.url }}"{% if entry.url == page.url %} aria-current="page"{% endif %}>{{ entry.title }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+    {%- endfor %}
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>nav</span><span class="token punctuation">></span></span></code></pre>
+<h3 id="3-add-a-breadcrumb-to-the-navigation-header">3. Add A Breadcrumb to the Navigation Header</h3>
+<p>To make the changes visible we need to add a section to the navigation header. Apply this code to <code>_includes/layouts/base.njk</code></p>
+<pre class="language-html" tabindex="0"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>nav</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>container<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>breadcrumb<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        {% set breadcrumb = collections.all | eleventyNavigationBreadcrumb(eleventyNavigation.key, { allowMissing: true, includeSelf: true } ) %}
+        {{ breadcrumb | eleventyNavigationToHtml | safe }}    
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>nav</span><span class="token punctuation">></span></span></code></pre>
+<p>Also add corresponding CSS to <code>content/css/index.css</code></p>
+<pre class="language-css" tabindex="0"><code class="language-css"><span class="token comment">/* Breadcrumbs added by Kaj Kandler */</span>
+<span class="token selector">.breadcrumb-item.active</span> <span class="token punctuation">{</span>
+  <span class="token property">color</span><span class="token punctuation">:</span> <span class="token function">var</span><span class="token punctuation">(</span>--primary-color<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token selector">#breadcrumb ol,ul</span> <span class="token punctuation">{</span>
+  <span class="token property">margin</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
+  <span class="token property">padding</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token selector">#breadcrumb li</span> <span class="token punctuation">{</span>
+  <span class="token property">display</span><span class="token punctuation">:</span> inline<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token selector">#breadcrumb li:not(:last-child)::after</span> <span class="token punctuation">{</span>
+  <span class="token property">content</span><span class="token punctuation">:</span> <span class="token string">" ˃"</span>
+<span class="token punctuation">}</span></code></pre>
+<h3 id="4-add-page-level-to-the-breadcrumb-for-all-blog-posts">4. Add Page Level to the Breadcrumb for All Blog Posts</h3>
+<p>In the blog articles we want navigation items as well. Therefore we add this code to <code>content/blog/blog.11tydata.js</code></p>
+<pre class="language-js" tabindex="0"><code class="language-js"><span class="token literal-property property">eleventyComputed</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">schemaorg</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token operator">...</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">eleventyNavigation</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token function-variable function">key</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span> <span class="token keyword">var</span> title <span class="token operator">=</span> data<span class="token punctuation">.</span>title <span class="token operator">||</span> <span class="token string">"undefined"</span><span class="token punctuation">;</span> <span class="token keyword">return</span> title<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token string">' '</span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">parent</span><span class="token operator">:</span> <span class="token string">"Archive"</span><span class="token punctuation">,</span>
+        <span class="token function-variable function">title</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token operator">=></span> data<span class="token punctuation">.</span>title
+    <span class="token punctuation">}</span><span class="token punctuation">,</span></code></pre>
+<p>This constitutes the changes required to have breadcrumb navigation in your website.</p>
+<p>Better styling of the breadcrumbs and other details we leave up to the reader.</p>
+<h2 id="adding-breadcrumb-schema-based-on-the-eleventy-navigation">Adding Breadcrumb Schema Based on The Eleventy Navigation</h2>
+<p>Not only users like to understand the information hierarchy of a website but search engines find this useful too.</p>
+<p>While search engines can determine this from global menues or internal links on the website, they prefer to have help in form of breadcrumbs in the schema markup.</p>
+<h3 id="1-add-breadcrumb-schema-to-every-page">1. Add Breadcrumb Schema to Every Page</h3>
+<p>We will generate our breadcrumbs based on the navigation hierary we built with eleventy Navigation. For this we have to add some calculations and an output to the <code>_includes/layouts/base.njk</code> file</p>
+<pre class="language-html" tabindex="0"><code class="language-html">{# Add schema.org breadcrumb as JSON-LD #}
+{%- set breadcrumb = collections.all | eleventyNavigationBreadcrumb(eleventyNavigation.key, { allowMissing: true, includeSelf: true } ) %}
+
+{%- set breadcrumbSchema = [] %}
+{%- for b in breadcrumb %}
+    {%- set absolutePostUrl %}{{ b.url | htmlBaseUrl(metadata.url) }}{% endset %}
+    {%- set bb = { key: b.key, title: b.title, url: absolutePostUrl, pluginType: b.pluginType } %}
+    {%- set breadcrumbSchema = (breadcrumbSchema.push(bb), breadcrumbSchema) %}
+{% endfor %}
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name"><span class="token namespace">eleventy:</span>ignore</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>application/ld+json<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript"><span class="token punctuation">{</span><span class="token punctuation">{</span> breadcrumbSchema <span class="token operator">|</span> eleventyNavigationToSchemaOrg <span class="token operator">|</span> <span class="token function">dump</span><span class="token punctuation">(</span>\t<span class="token punctuation">)</span> <span class="token operator">|</span> safe <span class="token punctuation">}</span><span class="token punctuation">}</span></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span></code></pre>
+<p>In this code we use a custom filter <code>eleventyNavigationToSchemaOrg</code> which we defined in <code>_config/filters.js</code> as follows</p>
+<pre class="language-js" tabindex="0"><code class="language-js">	<span class="token keyword">function</span> <span class="token function">getUrlFilter</span><span class="token punctuation">(</span><span class="token parameter">eleventyConfig</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+		<span class="token comment">// eleventyConfig.pathPrefix was first available in Eleventy 2.0.0-canary.15</span>
+		<span class="token comment">// And in Eleventy 2.0.0-canary.15 we recommend the a built-in transform for pathPrefix</span>
+		<span class="token keyword">if</span> <span class="token punctuation">(</span>eleventyConfig<span class="token punctuation">.</span>pathPrefix <span class="token operator">!==</span> <span class="token keyword">undefined</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+			<span class="token keyword">return</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">url</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+				<span class="token keyword">return</span> url<span class="token punctuation">;</span>
+			<span class="token punctuation">}</span><span class="token punctuation">;</span>
+		<span class="token punctuation">}</span>
+
+		<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token string">"getFilter"</span> <span class="token keyword">in</span> eleventyConfig<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+			<span class="token comment">// v0.10.0 and above</span>
+			<span class="token keyword">return</span> eleventyConfig<span class="token punctuation">.</span><span class="token function">getFilter</span><span class="token punctuation">(</span><span class="token string">"url"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token string">"nunjucksFilters"</span> <span class="token keyword">in</span> eleventyConfig<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+			<span class="token comment">// backwards compat, hardcoded key</span>
+			<span class="token keyword">return</span> eleventyConfig<span class="token punctuation">.</span>nunjucksFilters<span class="token punctuation">.</span>url<span class="token punctuation">;</span>
+		<span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+			<span class="token comment">// Theoretically we could just move on here with a `url => url` but then `pathPrefix`</span>
+			<span class="token comment">// would not work and it wouldn’t be obvious why—so let’s fail loudly to avoid that.</span>
+			<span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token string">"Could not find a `url` filter for the eleventy-navigation plugin in eleventyNavigationToHtml filter."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token punctuation">}</span>
+	<span class="token punctuation">}</span>
+
+	<span class="token keyword">function</span> <span class="token function">breadcrumbToSchemaOrgElements</span><span class="token punctuation">(</span><span class="token parameter">breadcrumbs<span class="token punctuation">,</span> config</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+		<span class="token comment">// let childDepth = 1 + options.childDepth;</span>
+		<span class="token comment">// options.childDepth++;</span>
+
+		<span class="token keyword">let</span> urlFilter <span class="token operator">=</span> <span class="token function">getUrlFilter</span><span class="token punctuation">(</span>config<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+		<span class="token comment">// let indent = (new Array(childDepth)).join("  ") || "";</span>
+		<span class="token comment">// return pages.length ? `${pages.map(entry => {</span>
+		<span class="token comment">// 	return `[${entry.title}](${urlFilter(entry.url)})${options.showExcerpt &amp;&amp; entry.excerpt ? `: ${entry.excerpt}` : ""}\n${entry.children ? navigationToMarkdown.call(this, entry.children, options)</span>
+		<span class="token comment">// 		 : ""}`;</span>
+		<span class="token comment">// }).join("")}` : "";</span>
+		<span class="token keyword">let</span> elements <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+		breadcrumbs<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">element<span class="token punctuation">,</span> index</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+			elements<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+				<span class="token string-property property">"@type"</span><span class="token operator">:</span> <span class="token string">"ListItem"</span><span class="token punctuation">,</span>
+				<span class="token literal-property property">position</span><span class="token operator">:</span> index <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span>
+				<span class="token literal-property property">name</span><span class="token operator">:</span> element<span class="token punctuation">.</span>title<span class="token punctuation">,</span>
+				<span class="token literal-property property">item</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+					<span class="token string-property property">"@type"</span><span class="token operator">:</span> <span class="token string">"WebPage"</span><span class="token punctuation">,</span>
+					<span class="token string-property property">"@id"</span><span class="token operator">:</span> <span class="token function">urlFilter</span><span class="token punctuation">(</span>element<span class="token punctuation">.</span>url<span class="token punctuation">)</span><span class="token punctuation">,</span>
+					<span class="token literal-property property">name</span><span class="token operator">:</span> element<span class="token punctuation">.</span>title<span class="token punctuation">,</span>
+					<span class="token literal-property property">url</span><span class="token operator">:</span> <span class="token function">urlFilter</span><span class="token punctuation">(</span>element<span class="token punctuation">.</span>url<span class="token punctuation">)</span>
+				<span class="token punctuation">}</span>
+			<span class="token punctuation">}</span><span class="token punctuation">)</span>
+		<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token keyword">return</span> elements<span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+
+	eleventyConfig<span class="token punctuation">.</span><span class="token function">addFilter</span><span class="token punctuation">(</span><span class="token string">"eleventyNavigationToSchemaOrg"</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token function">navigationToSchemaOrg</span><span class="token punctuation">(</span><span class="token parameter">breadcrumbs<span class="token punctuation">,</span> website<span class="token punctuation">,</span> options <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+		options <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+			<span class="token literal-property property">showExcerpt</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+			<span class="token literal-property property">childDepth</span><span class="token operator">:</span> <span class="token number">0</span>
+		<span class="token punctuation">}</span><span class="token punctuation">,</span> options<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+		<span class="token keyword">let</span> childDepth <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">+</span> options<span class="token punctuation">.</span>childDepth<span class="token punctuation">;</span>
+		options<span class="token punctuation">.</span>childDepth<span class="token operator">++</span><span class="token punctuation">;</span>
+
+		<span class="token keyword">let</span> urlFilter <span class="token operator">=</span> <span class="token function">getUrlFilter</span><span class="token punctuation">(</span>eleventyConfig<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+		<span class="token keyword">if</span> <span class="token punctuation">(</span>breadcrumbs<span class="token punctuation">.</span>length <span class="token operator">&amp;&amp;</span> breadcrumbs<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>pluginType <span class="token operator">!==</span> <span class="token string">"eleventy-navigation"</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+			<span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token string">"Incorrect argument passed to eleventyNavigationToMarkdown filter. You must call `eleventyNavigation` or `eleventyNavigationBreadcrumb` first, like: `collection.all | eleventyNavigation | eleventyNavigationToMarkdown | safe`"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token punctuation">}</span>
+		<span class="token comment">// console.log(breadcrumbs);</span>
+		<span class="token comment">// let indent = (new Array(childDepth)).join("  ") || "";</span>
+		<span class="token comment">// return breadcrumbs.length ? `${breadcrumbs.map(entry => {</span>
+		<span class="token comment">// 	return `${indent}* [${entry.title}](${urlFilter(entry.url)})${options.showExcerpt &amp;&amp; entry.excerpt ? `: ${entry.excerpt}` : ""}\n${entry.children ? navigationToMarkdown.call(this, entry.children, options) : ""}`;</span>
+		<span class="token comment">// }).join("")}` : "";</span>
+		<span class="token comment">// console.log(eleventyConfig);</span>
+		<span class="token keyword">if</span> <span class="token punctuation">(</span>breadcrumbs<span class="token punctuation">.</span>length<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+			<span class="token keyword">let</span> id <span class="token operator">=</span> breadcrumbs<span class="token punctuation">[</span>breadcrumbs<span class="token punctuation">.</span>length <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>url <span class="token operator">+</span> <span class="token string">"#breadcrumb"</span><span class="token punctuation">;</span>
+			<span class="token keyword">let</span> name <span class="token operator">=</span> breadcrumbs<span class="token punctuation">[</span>breadcrumbs<span class="token punctuation">.</span>length <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>title <span class="token operator">+</span> <span class="token string">" Breadcrumb"</span><span class="token punctuation">;</span>
+			<span class="token keyword">return</span> <span class="token punctuation">{</span>
+				<span class="token string-property property">"@context"</span><span class="token operator">:</span> <span class="token string">"https://schema.org"</span><span class="token punctuation">,</span>
+				<span class="token string-property property">"@graph"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+					<span class="token punctuation">{</span>
+						<span class="token string-property property">"@type"</span><span class="token operator">:</span> <span class="token string">"BreadcrumbList"</span><span class="token punctuation">,</span>
+						<span class="token string-property property">"@id"</span><span class="token operator">:</span> id<span class="token punctuation">,</span>
+						<span class="token literal-property property">name</span><span class="token operator">:</span> name<span class="token punctuation">,</span>
+						<span class="token literal-property property">numberOfItems</span><span class="token operator">:</span> breadcrumbs<span class="token punctuation">.</span>length<span class="token punctuation">,</span>
+						<span class="token literal-property property">itemListElement</span><span class="token operator">:</span> <span class="token function">breadcrumbToSchemaOrgElements</span><span class="token punctuation">(</span>breadcrumbs<span class="token punctuation">,</span> eleventyConfig<span class="token punctuation">)</span>
+					<span class="token punctuation">}</span>
+				<span class="token punctuation">]</span>
+			<span class="token punctuation">}</span>
+		<span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+			<span class="token keyword">return</span> <span class="token string">""</span><span class="token punctuation">;</span>
+		<span class="token punctuation">}</span>
+	<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>You can already validate that the schema is generated. However in the SEO Schema Vizualizer it is obvious that there are two distinct graphs. They are not connected. We'll do this in the next step.</p>
+<h3 id="2-connect-the-breadcrumblist-to-every-page">2. Connect the BreadcrumbList to Every Page</h3>
+<p>To connect the <code>BreadcrumbList</code> entity with every page we need to add a property breadcrumb to the global <code>WebPage</code> definition in <code>_data/eleventyComputed.js</code></p>
+<pre class="language-js" tabindex="0"><code class="language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+	<span class="token literal-property property">schemaorg</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+		<span class="token string-property property">"@context"</span><span class="token operator">:</span> <span class="token string">"https://schema.org"</span><span class="token punctuation">,</span>
+		<span class="token string-property property">"@graph"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+            <span class="token operator">...</span>
+			<span class="token punctuation">{</span>
+				<span class="token string-property property">"@type"</span><span class="token operator">:</span> <span class="token string">"WebPage"</span><span class="token punctuation">,</span>
+				<span class="token string-property property">"@id"</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token function">constructID</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>page<span class="token punctuation">.</span>url<span class="token punctuation">,</span> data<span class="token punctuation">.</span>metadata<span class="token punctuation">.</span>baseURL<span class="token punctuation">,</span> <span class="token string">"#webpage"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+				<span class="token function-variable function">name</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token operator">=></span> data<span class="token punctuation">.</span>title<span class="token punctuation">,</span>
+				<span class="token function-variable function">description</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token operator">=></span> data<span class="token punctuation">.</span>description<span class="token punctuation">,</span>
+			    <span class="token operator">...</span>
+                <span class="token literal-property property">breadcrumb</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+                    <span class="token string-property property">"@type"</span><span class="token operator">:</span> <span class="token string">"BreadcrumbList"</span><span class="token punctuation">,</span>
+                    <span class="token string-property property">"@id"</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token function">constructID</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>page<span class="token punctuation">.</span>url<span class="token punctuation">,</span> data<span class="token punctuation">.</span>metadata<span class="token punctuation">.</span>baseURL<span class="token punctuation">,</span> <span class="token string">"#breadcrumb"</span><span class="token punctuation">)</span>
+                <span class="token punctuation">}</span>
+			<span class="token punctuation">}</span><span class="token punctuation">,</span></code></pre>
+<p>Now we can validate our schema on all pages and it will (hopefully) be one connected graph again.</p>
+
+<ul class="links-nextprev"><li class="links-nextprev-prev">← Previous<br> <a href="/eleventy-base-blog-with-schema/blog/tools_to_validate_schema/">My tools to validate schema markup.</a></li><li class="links-nextprev-next">Next →<br><a href="/eleventy-base-blog-with-schema/blog/adding_global_schema_to_eleventy/">How to Add Global Schema to a Website</a></li>
+</ul>
+
+			</heading-anchors>
+		</main>
+
+		<footer>
+			<p><em>Built with <a href="https://www.11ty.dev/">Eleventy v3.0.0</a>
+				by <a href="https://kajkandler.com/">Kaj Kandler</a></em></p>
+		</footer>
+
+		<!-- This page `/blog/adding_breadcrumbs_with_schema/` was built on 2025-06-14T09:03:22.748Z -->
+		<script type="module" src="/eleventy-base-blog-with-schema/dist/xbxy_EL6cU.js"></script>
+	</body>
+</html>

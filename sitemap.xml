@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+	
+	<url>
+		<loc>https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/tools_to_validate_schema/</loc>
+		<lastmod>2025-06-05</lastmod>
+	</url>
+	
+	<url>
+		<loc>https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/adding_breadcrumbs_with_schema/</loc>
+		<lastmod>2025-06-14</lastmod>
+	</url>
+	
+	<url>
+		<loc>https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/adding_global_schema_to_eleventy/</loc>
+		<lastmod>2025-06-14</lastmod>
+	</url>
+	
+	<url>
+		<loc>https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/adding_web_page_schema_globally/</loc>
+		<lastmod>2025-06-14</lastmod>
+	</url>
+	
+	<url>
+		<loc>https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/automating_dates_for_schema/</loc>
+		<lastmod>2025-06-14</lastmod>
+	</url>
+	
+	<url>
+		<loc>https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/importance_of_schema_markup/</loc>
+		<lastmod>2025-06-14</lastmod>
+	</url>
+	
+	<url>
+		<loc>https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/schema_markup_for_articles/</loc>
+		<lastmod>2025-06-14</lastmod>
+	</url>
+	
+	<url>
+		<loc>https://kajkandler.github.io/eleventy-base-blog-with-schema/about/</loc>
+		<lastmod>2025-06-14</lastmod>
+	</url>
+	
+	<url>
+		<loc>https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/</loc>
+		<lastmod>2025-06-14</lastmod>
+	</url>
+	
+	<url>
+		<loc>https://kajkandler.github.io/eleventy-base-blog-with-schema/</loc>
+		<lastmod>2025-06-14</lastmod>
+	</url>
+	
+	<url>
+		<loc>https://kajkandler.github.io/eleventy-base-blog-with-schema/tags/</loc>
+		<lastmod>2025-06-14</lastmod>
+	</url>
+	
+	<url>
+		<loc>https://kajkandler.github.io/eleventy-base-blog-with-schema/feed/feed.xml</loc>
+		<lastmod>2025-06-14</lastmod>
+	</url>
+</urlset>

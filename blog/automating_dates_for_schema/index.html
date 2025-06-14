@@ -1,0 +1,668 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>How to Automate &#39;datePublished&#39; and &#39;dateModified&#39; in Eleventy</title>
+		<meta name="description" content="DatePublished and dateModified are a pain to keep updated correctly in schema. This automation takes out the chore and reduces work to publish content.">
+		<link rel="alternate" href="/eleventy-base-blog-with-schema/feed/feed.xml" type="application/atom+xml" title="Eleventy Base Blog v9 + Structured Data">
+		<meta name="generator" content="Eleventy v3.0.0">
+		
+		
+		
+		<style>/* This is an arbitrary CSS string added to the bundle */
+/* Defaults */
+:root {
+	--font-family: -apple-system, system-ui, sans-serif;
+	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
+}
+
+/* Theme colors */
+:root {
+	--color-gray-20: #e0e0e0;
+	--color-gray-50: #C0C0C0;
+	--color-gray-90: #333;
+
+	--background-color: #fff;
+
+	--text-color: var(--color-gray-90);
+	--text-color-link: #082840;
+	--text-color-link-active: #5f2b48;
+	--text-color-link-visited: #17050F;
+
+	--syntax-tab-size: 2;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-gray-20: #e0e0e0;
+		--color-gray-50: #C0C0C0;
+		--color-gray-90: #dad8d8;
+
+		/* --text-color is assigned to --color-gray-_ above */
+		--text-color-link: #1493fb;
+		--text-color-link-active: #6969f7;
+		--text-color-link-visited: #a6a6f8;
+
+		--background-color: #15202b;
+	}
+}
+
+
+/* Global stylesheet */
+* {
+	box-sizing: border-box;
+}
+
+@view-transition {
+	navigation: auto;
+}
+
+html,
+body {
+	padding: 0;
+	margin: 0 auto;
+	font-family: var(--font-family);
+	color: var(--text-color);
+	background-color: var(--background-color);
+}
+html {
+	overflow-y: scroll;
+}
+body {
+	max-width: 40em;
+}
+
+/* https://www.a11yproject.com/posts/how-to-hide-content/ */
+.visually-hidden:not(:focus):not(:active) {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+/* Fluid images via https://www.zachleat.com/web/fluid-images/ */
+img{
+  max-width: 100%;
+}
+img[width][height] {
+  height: auto;
+}
+img[src$=".svg"] {
+  width: 100%;
+  height: auto;
+  max-width: none;
+}
+video,
+iframe {
+	width: 100%;
+	height: auto;
+}
+iframe {
+	aspect-ratio: 16/9;
+}
+
+p:last-child {
+	margin-bottom: 0;
+}
+p {
+	line-height: 1.5;
+}
+
+li {
+	line-height: 1.5;
+}
+
+a[href] {
+	color: var(--text-color-link);
+}
+a[href]:visited {
+	color: var(--text-color-link-visited);
+}
+a[href]:hover,
+a[href]:active {
+	color: var(--text-color-link-active);
+}
+
+main,
+footer {
+	padding: 1rem;
+}
+main :first-child {
+	margin-top: 0;
+}
+
+header {
+	border-bottom: 1px dashed var(--color-gray-20);
+}
+
+#skip-link {
+	text-decoration: none;
+	background: var(--background-color);
+	color: var(--text-color);
+	padding: 0.5rem 1rem;
+	border: 1px solid var(--color-gray-90);
+	border-radius: 2px;
+}
+
+/* Prevent visually-hidden skip link fom pushing content around when focused */
+#skip-link.visually-hidden:focus {
+	position: absolute;
+	top: 1rem;
+	left: 1rem;
+	/* Ensure it is positioned on top of everything else when it is shown */
+	z-index: 999;
+}
+
+.links-nextprev {
+	display: flex;
+	justify-content: space-between;
+	gap: .5em 1em;
+	list-style: "";
+	border-top: 1px dashed var(--color-gray-20);
+	padding: 1em 0;
+}
+.links-nextprev > * {
+	flex-grow: 1;
+}
+.links-nextprev-next {
+	text-align: right;
+}
+
+table {
+	margin: 1em 0;
+}
+table td,
+table th {
+	padding-right: 1em;
+}
+
+pre,
+code {
+	font-family: var(--font-family-monospace);
+}
+pre:not([class*="language-"]) {
+	margin: .5em 0;
+	line-height: 1.375; /* 22px /16 */
+	-moz-tab-size: var(--syntax-tab-size);
+	-o-tab-size: var(--syntax-tab-size);
+	tab-size: var(--syntax-tab-size);
+	-webkit-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	overflow-x: auto;
+}
+code {
+	word-break: break-all;
+}
+
+/* Header */
+header {
+	display: flex;
+	gap: 1em;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1em;
+}
+.home-link {
+	flex-grow: 1;
+	font-size: 1em; /* 16px /16 */
+	font-weight: 700;
+}
+.home-link:link:not(:hover) {
+	text-decoration: none;
+}
+
+/* Nav */
+.nav {
+	display: flex;
+	gap: .5em 1em;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.nav-item {
+	display: inline-block;
+}
+.nav-item a[href]:not(:hover) {
+	text-decoration: none;
+}
+.nav a[href][aria-current="page"] {
+	text-decoration: underline;
+}
+
+/* Posts list */
+.postlist {
+	counter-reset: start-from var(--postlist-index);
+	list-style: none;
+	padding: 0;
+	padding-left: 1.5rem;
+}
+.postlist-item {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	counter-increment: start-from -1;
+	margin-bottom: 1em;
+}
+.postlist-item:before {
+	display: inline-block;
+	pointer-events: none;
+	content: "" counter(start-from, decimal-leading-zero) ". ";
+	line-height: 100%;
+	text-align: right;
+	margin-left: -1.5rem;
+}
+.postlist-date,
+.postlist-item:before {
+	font-size: 0.8125em; /* 13px /16 */
+	color: var(--color-gray-90);
+}
+.postlist-date {
+	word-spacing: -0.5px;
+}
+.postlist-link {
+	font-size: 1.1875em; /* 19px /16 */
+	font-weight: 700;
+	flex-basis: calc(100% - 1.5rem);
+	padding-left: .25em;
+	padding-right: .5em;
+	text-underline-position: from-font;
+	text-underline-offset: 0;
+	text-decoration-thickness: 1px;
+}
+.postlist-item-active .postlist-link {
+	font-weight: bold;
+}
+
+/* Tags */
+.post-tag {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-transform: capitalize;
+	font-style: italic;
+}
+.postlist-item > .post-tag {
+	align-self: center;
+}
+
+/* Tags list */
+.post-metadata {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: .5em;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.post-metadata time {
+	margin-right: 1em;
+}
+
+/* Breadcrumbs added by Kaj Kandler */
+.breadcrumb-item.active {
+  color: var(--primary-color);
+}
+
+#breadcrumb ol,ul {
+  margin: 0;
+  padding: 0;
+}
+
+#breadcrumb li {
+  display: inline;
+}
+
+#breadcrumb li:not(:last-child)::after {
+  content: " ˃"
+}
+/**
+ * okaidia theme for JavaScript, CSS and HTML
+ * Loosely based on Monokai textmate theme by http://www.monokai.nl/
+ * @author ocodia
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+	color: #f8f8f2;
+	background: none;
+	text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+	font-size: 1em;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	word-wrap: normal;
+	line-height: 1.5;
+
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+	padding: 1em;
+	margin: .5em 0;
+	overflow: auto;
+	border-radius: 0.3em;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+	background: #272822;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+	padding: .1em;
+	border-radius: .3em;
+	white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: #8292a2;
+}
+
+.token.punctuation {
+	color: #f8f8f2;
+}
+
+.token.namespace {
+	opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.constant,
+.token.symbol,
+.token.deleted {
+	color: #f92672;
+}
+
+.token.boolean,
+.token.number {
+	color: #ae81ff;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+	color: #a6e22e;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string,
+.token.variable {
+	color: #f8f8f2;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.function,
+.token.class-name {
+	color: #e6db74;
+}
+
+.token.keyword {
+	color: #66d9ef;
+}
+
+.token.regex,
+.token.important {
+	color: #fd971f;
+}
+
+.token.important,
+.token.bold {
+	font-weight: bold;
+}
+.token.italic {
+	font-style: italic;
+}
+
+.token.entity {
+	cursor: help;
+}
+/*
+ * New diff- syntax
+ */
+
+pre[class*="language-diff-"] {
+	--eleventy-code-padding: 1.25em;
+	padding-left: var(--eleventy-code-padding);
+	padding-right: var(--eleventy-code-padding);
+}
+.token.deleted {
+	background-color: hsl(0, 51%, 37%);
+	color: inherit;
+}
+.token.inserted {
+	background-color: hsl(126, 31%, 39%);
+	color: inherit;
+}
+
+/* Make the + and - characters unselectable for copy/paste */
+.token.prefix.unchanged,
+.token.prefix.inserted,
+.token.prefix.deleted {
+	-webkit-user-select: none;
+	user-select: none;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+.token.prefix.inserted,
+.token.prefix.deleted {
+	width: var(--eleventy-code-padding);
+	background-color: rgba(0,0,0,.2);
+}
+
+/* Optional: full-width background color */
+.token.inserted:not(.prefix),
+.token.deleted:not(.prefix) {
+	display: block;
+	margin-left: calc(-1 * var(--eleventy-code-padding));
+	margin-right: calc(-1 * var(--eleventy-code-padding));
+	text-decoration: none; /* override del, ins, mark defaults */
+	color: inherit; /* override del, ins, mark defaults */
+}</style>
+		
+
+		
+		<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://kajkandler.github.io/#website","name":"Eleventy Base Blog v9 + Structured Data","description":"The Eleventy (11ty) base-blog starter project enhanced with schema.org markup. Howto tutorial included!","url":"https://kajkandler.github.io/","publisher":{"@type":"Person","@id":"https://kajkandler.github.io/#person_kaj_kandler"}},{"@type":"WebPage","@id":"https://kajkandler.github.io/blog/automating_dates_for_schema/#webpage","name":"How to Automate 'datePublished' and 'dateModified' in Eleventy","description":"DatePublished and dateModified are a pain to keep updated correctly in schema. This automation takes out the chore and reduces work to publish content.","url":"https://kajkandler.github.io/blog/automating_dates_for_schema/","datePublished":"2025-06-14T07:00:13.000Z","dateModified":"2025-06-14T07:00:13.000Z","isPartOf":{"@type":"WebSite","@id":"https://kajkandler.github.io/#website"},"author":{"@type":"Person","@id":"https://kajkandler.github.io/#person_kaj_kandler"},"breadcrumb":{"@type":"BreadcrumbList","@id":"https://kajkandler.github.io/blog/automating_dates_for_schema/#breadcrumb"}},{"@type":"Person","@id":"https://kajkandler.github.io/#person_kaj_kandler","name":"Kaj Kandler","url":"https://kajkandler.com/","givenName":"Kaj","familyName":"Kandler","jobTitle":"Entrepreneur","sameAs":["https://www.linkedin.com/in/kajkandler/","https://github.com/KajKandler","https://medium.com/@kajkandler","https://entitygarden.com/about_kaj_kandler/"]},{"@type":"Article","@id":"https://kajkandler.github.io/blog/automating_dates_for_schema/#article","name":"How to Automate 'datePublished' and 'dateModified' in Eleventy","headline":"How to Automate 'datePublished' and 'dateModified' in Eleventy","abstract":"DatePublished and dateModified are a pain to keep updated correctly in schema. This automation takes out the chore and reduces work to publish content.","url":"https://kajkandler.github.io/blog/automating_dates_for_schema/","datePublished":"2025-06-14T07:00:13.000Z","dateModified":"2025-06-14T07:00:13.000Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://kajkandler.github.io/blog/automating_dates_for_schema/#webpage"},"author":{"@type":"Person","@id":"https://kajkandler.github.io/#person_kaj_kandler"}},{"@type":"Article","@id":"https://kajkandler.github.io/blog/automating_dates_for_schema/#article","about":[{"@type":"Thing","@id":"https://schema.org/WebSite","name":"WebSite (schema.org)","url":"https://schema.org/WebSite","sameAs":["https://schema.org/WebSite"]},{"@type":"Thing","@id":"https://schema.org/WebPage","name":"WebPage (schema.org)","url":"https://schema.org/WebPage","sameAs":["https://schema.org/WebPage"]},{"@type":"Thing","@id":"https://www.11ty.dev/","name":"Eleventy","alternateName":["11ty"],"url":"https://www.11ty.dev/","sameAs":["https://github.com/11ty/eleventy/","https://www.youtube.com/c/EleventyVideo","https://neighborhood.11ty.dev/@11ty","https://bsky.app/profile/11ty.dev"]}],"mentions":[{"@type":"Thing","@id":"https://schema.org/publisher","name":"Publisher - Property (schema.org)","url":"https://schema.org/publisher","sameAs":["https://schema.org/publisher"]},{"@type":"Thing","@id":"https://schema.org/Person","name":"Person (schema.org)","url":"https://schema.org/Person","sameAs":["https://schema.org/Person"]},{"@type":"Thing","@id":"https://schema.org/Organization","name":"Organization (schema.org)","url":"https://schema.org/Organization","sameAs":["https://schema.org/Organization"]}]}]}</script>
+		
+        
+        
+        
+		<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","@id":"https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/automating_dates_for_schema/#breadcrumb","name":"How to Automate 'datePublished' and 'dateModified' in Eleventy Breadcrumb","numberOfItems":3,"itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":{"@type":"WebPage","@id":"https://kajkandler.github.io/eleventy-base-blog-with-schema/","name":"Home","url":"https://kajkandler.github.io/eleventy-base-blog-with-schema/"}},{"@type":"ListItem","position":2,"name":"Archive","item":{"@type":"WebPage","@id":"https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/","name":"Archive","url":"https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/"}},{"@type":"ListItem","position":3,"name":"How to Automate 'datePublished' and 'dateModified' in Eleventy","item":{"@type":"WebPage","@id":"https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/automating_dates_for_schema/","name":"How to Automate 'datePublished' and 'dateModified' in Eleventy","url":"https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/automating_dates_for_schema/"}}]}]}</script>
+
+	</head> 
+	<body>
+		<a href="#main" id="skip-link" class="visually-hidden">Skip to main content</a>
+
+		<header>
+			<a href="/eleventy-base-blog-with-schema/" class="home-link">Eleventy Base Blog v9 + Structured Data</a>
+			<nav>
+				<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
+				<ul class="nav">
+					<li class="nav-item"><a href="/eleventy-base-blog-with-schema/">Home</a></li>
+					<li class="nav-item"><a href="/eleventy-base-blog-with-schema/blog/">Archive</a></li>
+					<li class="nav-item"><a href="/eleventy-base-blog-with-schema/about/">About</a></li>
+					<li class="nav-item"><a href="/eleventy-base-blog-with-schema/feed/feed.xml">Feed</a></li>
+				</ul>
+			</nav>
+			<nav>
+	            <div class="container" id="breadcrumb">
+					
+					<ul><li><a href="/eleventy-base-blog-with-schema/">Home</a></li>
+<li><a href="/eleventy-base-blog-with-schema/blog/">Archive</a></li>
+<li><a href="/eleventy-base-blog-with-schema/blog/automating_dates_for_schema/">How to Automate 'datePublished' and 'dateModified' in Eleventy</a></li></ul>    
+				</div>
+			</nav>
+		</header>
+
+		<main id="main">
+			<heading-anchors>
+				
+
+
+<h1 id="how-to-automate-datepublished-and-datemodified-in-eleventy">How to Automate &#39;datePublished&#39; and &#39;dateModified&#39; in Eleventy</h1>
+
+<ul class="post-metadata">
+	<li><time datetime="2025-06-14">14 June 2025</time></li>
+	<li><a href="/eleventy-base-blog-with-schema/tags/number-2/" class="post-tag">number 2</a></li>
+</ul>
+
+<p>The schema of WebPages and Articles have two important attributes datePublished and dateModified.</p>
+<p>I it is all too easy to forget updating these attributes with the final publish or any update. Therefore I set out to reasonably automate setting these attributes.</p>
+<h2 id="how-to-update-datepublished-automatically">How to Update 'datePublished' Automatically?</h2>
+<p>In eleventy the first commit of a file into git roughly corresponds with datePublished for WebPages and Articles.</p>
+<blockquote>
+<p>Note: <a href="https://www.apleasantview.com/">Cris from A Pleasant View</a> on the <a href="https://www.11ty.dev/blog/discord/">eleventy discord server</a> suggested to import the eleventy internal function(s) that allow to <a href="https://www.11ty.dev/docs/dates/#setting-a-content-date-in-front-matter">setting date: in the front matter</a> to &quot;git Created&quot;, etc.</p>
+<p>However, eleventy does not export these functions.</p>
+</blockquote>
+<p>Hence, I copied the code into a global file <code>_data/gitDates.js</code></p>
+<pre class="language-js" tabindex="0"><code class="language-js"><span class="token comment">/** Copied this from "@11ty/eleventy/src/Util/DateGitFirstAdded.js" because
+ * it was not exported there, Thanks to Cris for pointing me to this Idea.
+ * MIT license: https://github.com/11ty/eleventy/blob/main/LICENSE
+ */</span>
+
+<span class="token keyword">import</span> spawn <span class="token keyword">from</span> <span class="token string">"cross-spawn"</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">getGitFirstAddedTimeStamp</span><span class="token punctuation">(</span><span class="token parameter">filePath</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span>
+        <span class="token function">parseInt</span><span class="token punctuation">(</span>
+            spawn
+                <span class="token punctuation">.</span><span class="token function">sync</span><span class="token punctuation">(</span>
+                    <span class="token string">"git"</span><span class="token punctuation">,</span>
+                    <span class="token comment">// Formats https://www.git-scm.com/docs/git-log#_pretty_formats</span>
+                    <span class="token comment">// %at author date, UNIX timestamp</span>
+                    <span class="token punctuation">[</span><span class="token string">"log"</span><span class="token punctuation">,</span> <span class="token string">"--diff-filter=A"</span><span class="token punctuation">,</span> <span class="token string">"--follow"</span><span class="token punctuation">,</span> <span class="token string">"-1"</span><span class="token punctuation">,</span> <span class="token string">"--format=%at"</span><span class="token punctuation">,</span> filePath<span class="token punctuation">]</span><span class="token punctuation">,</span>
+                <span class="token punctuation">)</span>
+                <span class="token punctuation">.</span>stdout<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token string">"utf-8"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">1000</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// return a Date a file was first committed</span>
+<span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">DateGitFirstAdded</span><span class="token punctuation">(</span><span class="token parameter">inputPath</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> timestamp <span class="token operator">=</span> <span class="token function">getGitFirstAddedTimeStamp</span><span class="token punctuation">(</span>inputPath<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>timestamp<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span>timestamp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p>You can use this in <code>_data/eleventycomputed.js</code> to compute the datePublished property on every WebPage.</p>
+<pre class="language-js" tabindex="0"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> DateGitFirstAdded<span class="token punctuation">,</span> DateGitLastUpdated <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"./gitDates.js"</span><span class="token punctuation">;</span>
+
+<span class="token operator">...</span>
+				<span class="token function-variable function">datePublished</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token function">DateGitFirstAdded</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>page<span class="token punctuation">.</span>inputPath<span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token operator">...</span></code></pre>
+<p>To add it to an Article you'd add the corresponding code to the <code>blog/blog.11tydata.js</code> file with an adjusted relative import.</p>
+<pre class="language-js" tabindex="0"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> constructID <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'../../_data/schemaOrg.js'</span><span class="token punctuation">;</span>
+
+<span class="token operator">...</span>
+				<span class="token function-variable function">datePublished</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token function">DateGitFirstAdded</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>page<span class="token punctuation">.</span>inputPath<span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token operator">...</span></code></pre>
+<h3 id="when-not-to-set-the-published-date-based-on-git">When Not to Set the Published Date Based on Git?</h3>
+<p>There are cases where the first commit may not correspond with the published date.</p>
+<p>For example if you create many drafts and only finish much later your articles for publishing.</p>
+<p>In those cases you can still overwrite your published date.</p>
+<h2 id="how-to-set-the-datemodified-property-automatically">How to Set the dateModified property Automatically?</h2>
+<p>In eleventy the last commit of a file in git roughly corresponds with dateModified for WebPages and Articles.</p>
+<p>Google values freshness of content. Stating the lastModified date may be beneficial for your SEO game.</p>
+<p>To capture the last commit date I copied the internal function to my <code>_data/gitDates.js</code></p>
+<pre class="language-js" tabindex="0"><code class="language-js"><span class="token comment">/* Thank you to Vuepress!
+ * https://github.com/vuejs/vuepress/blob/89440ce552675859189ed4ab254ce19c4bba5447/packages/%40vuepress/plugin-last-updated/index.js
+ * MIT licensed: https://github.com/vuejs/vuepress/blob/89440ce552675859189ed4ab254ce19c4bba5447/LICENSE
+ */</span>
+<span class="token keyword">function</span> <span class="token function">getGitLastUpdatedTimeStamp</span><span class="token punctuation">(</span><span class="token parameter">filePath</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span>
+        <span class="token function">parseInt</span><span class="token punctuation">(</span>
+            spawn
+                <span class="token punctuation">.</span><span class="token function">sync</span><span class="token punctuation">(</span>
+                    <span class="token string">"git"</span><span class="token punctuation">,</span>
+                    <span class="token comment">// Formats https://www.git-scm.com/docs/git-log#_pretty_formats</span>
+                    <span class="token comment">// %at author date, UNIX timestamp</span>
+                    <span class="token punctuation">[</span><span class="token string">"log"</span><span class="token punctuation">,</span> <span class="token string">"-1"</span><span class="token punctuation">,</span> <span class="token string">"--format=%at"</span><span class="token punctuation">,</span> filePath<span class="token punctuation">]</span><span class="token punctuation">,</span>
+                <span class="token punctuation">)</span>
+                <span class="token punctuation">.</span>stdout<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token string">"utf-8"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">1000</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// return a Date a file was last committed to git</span>
+<span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">DateGitLastUpdated</span><span class="token punctuation">(</span><span class="token parameter">inputPath</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> timestamp <span class="token operator">=</span> <span class="token function">getGitLastUpdatedTimeStamp</span><span class="token punctuation">(</span>inputPath<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>timestamp<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span>timestamp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p>Then I use it in <code>_data/eleventycomputed.js</code> to compute the dateModified on the WebPage entity.</p>
+<pre class="language-js" tabindex="0"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> DateGitFirstAdded<span class="token punctuation">,</span> DateGitLastUpdated <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"./gitDates.js"</span><span class="token punctuation">;</span>
+
+<span class="token operator">...</span>
+				<span class="token function-variable function">datePublished</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token function">DateGitFirstAdded</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>page<span class="token punctuation">.</span>inputPath<span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+				<span class="token function-variable function">dateModified</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token function">DateGitLastUpdated</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>page<span class="token punctuation">.</span>inputPath<span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token operator">...</span></code></pre>
+<p>You can also use it to compute dateModified: on the the Article schema in <code>blog/blog.11tydata.js</code>.</p>
+<pre class="language-js" tabindex="0"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> constructID <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'../../_data/schemaOrg.js'</span><span class="token punctuation">;</span>
+<span class="token operator">...</span>
+				<span class="token function-variable function">datePublished</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token function">DateGitFirstAdded</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>page<span class="token punctuation">.</span>inputPath<span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+				<span class="token function-variable function">dateModified</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token function">DateGitLastUpdated</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>page<span class="token punctuation">.</span>inputPath<span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token operator">...</span></code></pre>
+<h2 id="should-you-include-both-dates-in-the-html">Should You Include Both Dates in the HTML?</h2>
+<p>The word on the street is that Google gets confused by two dates on a WebPage. It considers any (or the first) date on  page as the last modified date.</p>
+<p>So if you modify your page you should adjust your date. It does not matter whether you call it &quot;date:&quot;, &quot;published:&quot;, or &quot;last updated:&quot; in the HTML for your readers.</p>
+<p>I'd highly recommend to make the date on the page the same date as the lastModified in your schema.</p>
+<h3 id="when-not-to-set-the-modifieddate-based-on-the-last-git-commit">When Not to set the modifiedDate based on the last git commit?</h3>
+<p>If you edit pages often with minor edits, Google might not like you to also change the dateModified. However, that happens usually not too often.</p>
+<p>Also, pages that depend heavily on data feeds may change in content, but not at the time of the template commit, but when data feed changes or the page gets regenerated.</p>
+<p>However, for my purposes of a few static pages and a blog the first commit is close enough to the actual publishDate. Also, the last commit to the template is close enough to stand in for the lastModified date in the schema.</p>
+<h2 id="setting-the-dates-on-webpages-vs-blog-articles">Setting the dates on WebPages vs (Blog-) Articles?</h2>
+<p>In my schema annotations all pages are WebPages. Even my HomePage or the AboutPage gets a Webpage annotation. Yet these pages don't show a modification date in the HTML.</p>
+<p>In contrast, Blog Article are WebPages soi it seems a duplication of information between the WebPage schema and the Article schema.</p>
+<p>I personally decided to set them on both, especially as they are the same thanks to the automation implemented here.</p>
+
+<ul class="links-nextprev"><li class="links-nextprev-prev">← Previous<br> <a href="/eleventy-base-blog-with-schema/blog/adding_web_page_schema_globally/">How to Add WebPage Schema to All Pages on the Website</a></li><li class="links-nextprev-next">Next →<br><a href="/eleventy-base-blog-with-schema/blog/importance_of_schema_markup/">Why is Schema Markup important for any Website or Blog</a></li>
+</ul>
+
+			</heading-anchors>
+		</main>
+
+		<footer>
+			<p><em>Built with <a href="https://www.11ty.dev/">Eleventy v3.0.0</a>
+				by <a href="https://kajkandler.com/">Kaj Kandler</a></em></p>
+		</footer>
+
+		<!-- This page `/blog/automating_dates_for_schema/` was built on 2025-06-14T09:03:22.749Z -->
+		<script type="module" src="/eleventy-base-blog-with-schema/dist/xbxy_EL6cU.js"></script>
+	</body>
+</html>

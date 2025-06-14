@@ -1,0 +1,599 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Why is Schema Markup important for any Website or Blog</title>
+		<meta name="description" content="This articles describes the influence of structured data on SEO and optimizing your digital persona hub.">
+		<link rel="alternate" href="/eleventy-base-blog-with-schema/feed/feed.xml" type="application/atom+xml" title="Eleventy Base Blog v9 + Structured Data">
+		<meta name="generator" content="Eleventy v3.0.0">
+		
+		
+		
+		<style>/* This is an arbitrary CSS string added to the bundle */
+/* Defaults */
+:root {
+	--font-family: -apple-system, system-ui, sans-serif;
+	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
+}
+
+/* Theme colors */
+:root {
+	--color-gray-20: #e0e0e0;
+	--color-gray-50: #C0C0C0;
+	--color-gray-90: #333;
+
+	--background-color: #fff;
+
+	--text-color: var(--color-gray-90);
+	--text-color-link: #082840;
+	--text-color-link-active: #5f2b48;
+	--text-color-link-visited: #17050F;
+
+	--syntax-tab-size: 2;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-gray-20: #e0e0e0;
+		--color-gray-50: #C0C0C0;
+		--color-gray-90: #dad8d8;
+
+		/* --text-color is assigned to --color-gray-_ above */
+		--text-color-link: #1493fb;
+		--text-color-link-active: #6969f7;
+		--text-color-link-visited: #a6a6f8;
+
+		--background-color: #15202b;
+	}
+}
+
+
+/* Global stylesheet */
+* {
+	box-sizing: border-box;
+}
+
+@view-transition {
+	navigation: auto;
+}
+
+html,
+body {
+	padding: 0;
+	margin: 0 auto;
+	font-family: var(--font-family);
+	color: var(--text-color);
+	background-color: var(--background-color);
+}
+html {
+	overflow-y: scroll;
+}
+body {
+	max-width: 40em;
+}
+
+/* https://www.a11yproject.com/posts/how-to-hide-content/ */
+.visually-hidden:not(:focus):not(:active) {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+/* Fluid images via https://www.zachleat.com/web/fluid-images/ */
+img{
+  max-width: 100%;
+}
+img[width][height] {
+  height: auto;
+}
+img[src$=".svg"] {
+  width: 100%;
+  height: auto;
+  max-width: none;
+}
+video,
+iframe {
+	width: 100%;
+	height: auto;
+}
+iframe {
+	aspect-ratio: 16/9;
+}
+
+p:last-child {
+	margin-bottom: 0;
+}
+p {
+	line-height: 1.5;
+}
+
+li {
+	line-height: 1.5;
+}
+
+a[href] {
+	color: var(--text-color-link);
+}
+a[href]:visited {
+	color: var(--text-color-link-visited);
+}
+a[href]:hover,
+a[href]:active {
+	color: var(--text-color-link-active);
+}
+
+main,
+footer {
+	padding: 1rem;
+}
+main :first-child {
+	margin-top: 0;
+}
+
+header {
+	border-bottom: 1px dashed var(--color-gray-20);
+}
+
+#skip-link {
+	text-decoration: none;
+	background: var(--background-color);
+	color: var(--text-color);
+	padding: 0.5rem 1rem;
+	border: 1px solid var(--color-gray-90);
+	border-radius: 2px;
+}
+
+/* Prevent visually-hidden skip link fom pushing content around when focused */
+#skip-link.visually-hidden:focus {
+	position: absolute;
+	top: 1rem;
+	left: 1rem;
+	/* Ensure it is positioned on top of everything else when it is shown */
+	z-index: 999;
+}
+
+.links-nextprev {
+	display: flex;
+	justify-content: space-between;
+	gap: .5em 1em;
+	list-style: "";
+	border-top: 1px dashed var(--color-gray-20);
+	padding: 1em 0;
+}
+.links-nextprev > * {
+	flex-grow: 1;
+}
+.links-nextprev-next {
+	text-align: right;
+}
+
+table {
+	margin: 1em 0;
+}
+table td,
+table th {
+	padding-right: 1em;
+}
+
+pre,
+code {
+	font-family: var(--font-family-monospace);
+}
+pre:not([class*="language-"]) {
+	margin: .5em 0;
+	line-height: 1.375; /* 22px /16 */
+	-moz-tab-size: var(--syntax-tab-size);
+	-o-tab-size: var(--syntax-tab-size);
+	tab-size: var(--syntax-tab-size);
+	-webkit-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	overflow-x: auto;
+}
+code {
+	word-break: break-all;
+}
+
+/* Header */
+header {
+	display: flex;
+	gap: 1em;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1em;
+}
+.home-link {
+	flex-grow: 1;
+	font-size: 1em; /* 16px /16 */
+	font-weight: 700;
+}
+.home-link:link:not(:hover) {
+	text-decoration: none;
+}
+
+/* Nav */
+.nav {
+	display: flex;
+	gap: .5em 1em;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.nav-item {
+	display: inline-block;
+}
+.nav-item a[href]:not(:hover) {
+	text-decoration: none;
+}
+.nav a[href][aria-current="page"] {
+	text-decoration: underline;
+}
+
+/* Posts list */
+.postlist {
+	counter-reset: start-from var(--postlist-index);
+	list-style: none;
+	padding: 0;
+	padding-left: 1.5rem;
+}
+.postlist-item {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	counter-increment: start-from -1;
+	margin-bottom: 1em;
+}
+.postlist-item:before {
+	display: inline-block;
+	pointer-events: none;
+	content: "" counter(start-from, decimal-leading-zero) ". ";
+	line-height: 100%;
+	text-align: right;
+	margin-left: -1.5rem;
+}
+.postlist-date,
+.postlist-item:before {
+	font-size: 0.8125em; /* 13px /16 */
+	color: var(--color-gray-90);
+}
+.postlist-date {
+	word-spacing: -0.5px;
+}
+.postlist-link {
+	font-size: 1.1875em; /* 19px /16 */
+	font-weight: 700;
+	flex-basis: calc(100% - 1.5rem);
+	padding-left: .25em;
+	padding-right: .5em;
+	text-underline-position: from-font;
+	text-underline-offset: 0;
+	text-decoration-thickness: 1px;
+}
+.postlist-item-active .postlist-link {
+	font-weight: bold;
+}
+
+/* Tags */
+.post-tag {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-transform: capitalize;
+	font-style: italic;
+}
+.postlist-item > .post-tag {
+	align-self: center;
+}
+
+/* Tags list */
+.post-metadata {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: .5em;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.post-metadata time {
+	margin-right: 1em;
+}
+
+/* Breadcrumbs added by Kaj Kandler */
+.breadcrumb-item.active {
+  color: var(--primary-color);
+}
+
+#breadcrumb ol,ul {
+  margin: 0;
+  padding: 0;
+}
+
+#breadcrumb li {
+  display: inline;
+}
+
+#breadcrumb li:not(:last-child)::after {
+  content: " ˃"
+}
+/**
+ * okaidia theme for JavaScript, CSS and HTML
+ * Loosely based on Monokai textmate theme by http://www.monokai.nl/
+ * @author ocodia
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+	color: #f8f8f2;
+	background: none;
+	text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+	font-size: 1em;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	word-wrap: normal;
+	line-height: 1.5;
+
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+	padding: 1em;
+	margin: .5em 0;
+	overflow: auto;
+	border-radius: 0.3em;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+	background: #272822;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+	padding: .1em;
+	border-radius: .3em;
+	white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: #8292a2;
+}
+
+.token.punctuation {
+	color: #f8f8f2;
+}
+
+.token.namespace {
+	opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.constant,
+.token.symbol,
+.token.deleted {
+	color: #f92672;
+}
+
+.token.boolean,
+.token.number {
+	color: #ae81ff;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+	color: #a6e22e;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string,
+.token.variable {
+	color: #f8f8f2;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.function,
+.token.class-name {
+	color: #e6db74;
+}
+
+.token.keyword {
+	color: #66d9ef;
+}
+
+.token.regex,
+.token.important {
+	color: #fd971f;
+}
+
+.token.important,
+.token.bold {
+	font-weight: bold;
+}
+.token.italic {
+	font-style: italic;
+}
+
+.token.entity {
+	cursor: help;
+}
+/*
+ * New diff- syntax
+ */
+
+pre[class*="language-diff-"] {
+	--eleventy-code-padding: 1.25em;
+	padding-left: var(--eleventy-code-padding);
+	padding-right: var(--eleventy-code-padding);
+}
+.token.deleted {
+	background-color: hsl(0, 51%, 37%);
+	color: inherit;
+}
+.token.inserted {
+	background-color: hsl(126, 31%, 39%);
+	color: inherit;
+}
+
+/* Make the + and - characters unselectable for copy/paste */
+.token.prefix.unchanged,
+.token.prefix.inserted,
+.token.prefix.deleted {
+	-webkit-user-select: none;
+	user-select: none;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+.token.prefix.inserted,
+.token.prefix.deleted {
+	width: var(--eleventy-code-padding);
+	background-color: rgba(0,0,0,.2);
+}
+
+/* Optional: full-width background color */
+.token.inserted:not(.prefix),
+.token.deleted:not(.prefix) {
+	display: block;
+	margin-left: calc(-1 * var(--eleventy-code-padding));
+	margin-right: calc(-1 * var(--eleventy-code-padding));
+	text-decoration: none; /* override del, ins, mark defaults */
+	color: inherit; /* override del, ins, mark defaults */
+}</style>
+		
+
+		
+		<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://kajkandler.github.io/#website","name":"Eleventy Base Blog v9 + Structured Data","description":"The Eleventy (11ty) base-blog starter project enhanced with schema.org markup. Howto tutorial included!","url":"https://kajkandler.github.io/","publisher":{"@type":"Person","@id":"https://kajkandler.github.io/#person_kaj_kandler"}},{"@type":"WebPage","@id":"https://kajkandler.github.io/blog/importance_of_schema_markup/#webpage","name":"Why is Schema Markup important for any Website or Blog","description":"This articles describes the influence of structured data on SEO and optimizing your digital persona hub.","url":"https://kajkandler.github.io/blog/importance_of_schema_markup/","datePublished":"2025-06-14T07:00:13.000Z","dateModified":"2025-06-14T07:00:13.000Z","isPartOf":{"@type":"WebSite","@id":"https://kajkandler.github.io/#website"},"author":{"@type":"Person","@id":"https://kajkandler.github.io/#person_kaj_kandler"},"breadcrumb":{"@type":"BreadcrumbList","@id":"https://kajkandler.github.io/blog/importance_of_schema_markup/#breadcrumb"}},{"@type":"Person","@id":"https://kajkandler.github.io/#person_kaj_kandler","name":"Kaj Kandler","url":"https://kajkandler.com/","givenName":"Kaj","familyName":"Kandler","jobTitle":"Entrepreneur","sameAs":["https://www.linkedin.com/in/kajkandler/","https://github.com/KajKandler","https://medium.com/@kajkandler","https://entitygarden.com/about_kaj_kandler/"]},{"@type":"Article","@id":"https://kajkandler.github.io/blog/importance_of_schema_markup/#article","name":"Why is Schema Markup important for any Website or Blog","headline":"Why is Schema Markup important for any Website or Blog","abstract":"This articles describes the influence of structured data on SEO and optimizing your digital persona hub.","url":"https://kajkandler.github.io/blog/importance_of_schema_markup/","datePublished":"2025-06-14T07:00:13.000Z","dateModified":"2025-06-14T07:00:13.000Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://kajkandler.github.io/blog/importance_of_schema_markup/#webpage"},"author":{"@type":"Person","@id":"https://kajkandler.github.io/#person_kaj_kandler"}},{"@type":"Article","@id":"https://kajkandler.github.io/blog/importance_of_schema_markup/#article","about":[{"@type":"Thing","@id":"https://entitygarden.com/glossary/schema_markup/","name":"Schema Markup","url":"https://entitygarden.com/glossary/schema_markup/","sameAs":["https://entitygarden.com/glossary/schema_markup/"]},{"@type":"Thing","@id":"https://en.wikipedia.org/wiki/Website","name":"Website","url":"https://en.wikipedia.org/wiki/Website","sameAs":["https://en.wikipedia.org/wiki/Website"]},{"@type":"Thing","@id":"https://www.11ty.dev/","name":"Eleventy","alternateName":["11ty"],"url":"https://www.11ty.dev/","sameAs":["https://github.com/11ty/eleventy/","https://www.youtube.com/c/EleventyVideo","https://neighborhood.11ty.dev/@11ty","https://bsky.app/profile/11ty.dev"]}],"mentions":[{"@type":"Thing","@id":"https://schema.org/","name":"schema.org","description":"Schema.org is an initiative by the major search engines to collaboratively create and maintain structured data on the Internet.","url":"https://schema.org/","sameAs":["https://schema.org/docs/about.html"]},{"@type":"Thing","@id":"https://en.wikipedia.org/wiki/Search_engine_optimization","name":"Search Engine Optimization","alternateName":["SEO"],"url":"https://en.wikipedia.org/wiki/Search_engine_optimization","sameAs":["https://www.google.com/search?kgmid=/m/019qb_","https://en.wikipedia.org/wiki/Search_engine_optimization"]},{"@type":"Thing","@id":"https://entitygarden.com/glossary/digital_persona_optimization/","name":"Digital Persona Optimization","alternateName":["DPO"],"url":"https://entitygarden.com/glossary/digital_persona_optimization/","mainentityOfPage":"https://entitygarden.com/glossary/digital_persona_optimization/","sameAs":["https://entitygarden.com/glossary/digital_persona_optimization/"]},{"@type":"Thing","@id":"https://entitygarden.com/glossary/digital_persona_hub/","name":"Digital Persona Hub","url":"https://entitygarden.com/glossary/digital_persona_hub/","mainEntityOfPage":"https://entitygarden.com/glossary/digital_persona_hub/","sameAs":["https://entitygarden.com/glossary/digital_persona_hub/"]}]}]}</script>
+		
+        
+        
+        
+		<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","@id":"https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/importance_of_schema_markup/#breadcrumb","name":"Why is Schema Markup important for any Website or Blog Breadcrumb","numberOfItems":3,"itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":{"@type":"WebPage","@id":"https://kajkandler.github.io/eleventy-base-blog-with-schema/","name":"Home","url":"https://kajkandler.github.io/eleventy-base-blog-with-schema/"}},{"@type":"ListItem","position":2,"name":"Archive","item":{"@type":"WebPage","@id":"https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/","name":"Archive","url":"https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/"}},{"@type":"ListItem","position":3,"name":"Why is Schema Markup important for any Website or Blog","item":{"@type":"WebPage","@id":"https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/importance_of_schema_markup/","name":"Why is Schema Markup important for any Website or Blog","url":"https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/importance_of_schema_markup/"}}]}]}</script>
+
+	</head> 
+	<body>
+		<a href="#main" id="skip-link" class="visually-hidden">Skip to main content</a>
+
+		<header>
+			<a href="/eleventy-base-blog-with-schema/" class="home-link">Eleventy Base Blog v9 + Structured Data</a>
+			<nav>
+				<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
+				<ul class="nav">
+					<li class="nav-item"><a href="/eleventy-base-blog-with-schema/">Home</a></li>
+					<li class="nav-item"><a href="/eleventy-base-blog-with-schema/blog/">Archive</a></li>
+					<li class="nav-item"><a href="/eleventy-base-blog-with-schema/about/">About</a></li>
+					<li class="nav-item"><a href="/eleventy-base-blog-with-schema/feed/feed.xml">Feed</a></li>
+				</ul>
+			</nav>
+			<nav>
+	            <div class="container" id="breadcrumb">
+					
+					<ul><li><a href="/eleventy-base-blog-with-schema/">Home</a></li>
+<li><a href="/eleventy-base-blog-with-schema/blog/">Archive</a></li>
+<li><a href="/eleventy-base-blog-with-schema/blog/importance_of_schema_markup/">Why is Schema Markup important for any Website or Blog</a></li></ul>    
+				</div>
+			</nav>
+		</header>
+
+		<main id="main">
+			<heading-anchors>
+				
+
+
+<h1 id="why-is-schema-markup-important-for-any-website-or-blog">Why is Schema Markup important for any Website or Blog</h1>
+
+<ul class="post-metadata">
+	<li><time datetime="2025-06-14">14 June 2025</time></li>
+	<li><a href="/eleventy-base-blog-with-schema/tags/another-tag/" class="post-tag">another tag</a></li>
+</ul>
+
+<p>Search engines like Google have evolved from matching words to matching based on meaning of the words. That way Google can distinguish apple the company from apple the fruit. It also allows a search engine to take semantics into account.</p>
+<p>Starting in 2012, the largest search engines in the world asked website publishers to mark up their semantic entities. They founded schema.org to build a common vocabulary of &quot;things&quot;. Things can be classified in a taxonomy, such as &quot;Organization&quot;, &quot;Corporation&quot;, &quot;Person&quot;, &quot;Creative Work&quot;, &quot;Book&quot;, &quot;Website&quot;, &quot;Webapge&quot;, or &quot;Article&quot;.</p>
+<h2 id="why-are-schema-org-annotations-important-for-seo">Why are schema.org annotations important for SEO?</h2>
+<p>Schema.org annotations are important for SEO because Google admittedly supports some of its rich results with structured data.</p>
+<p>For its rich results, such as Featured Snippet or Knowledge Panel, Google uses a subset of the schema.org defined entity types and properties.</p>
+<p>Google also emphasizes that it prefers helpful content and content that is published by reputable people or organizations (EEAT). Schema.org annotations can make it clear who is responsible for the content, as well as how to contact the publisher.</p>
+<h2 id="why-are-schema-org-annotations-important-for-digital-persona-optimization">Why are schema.org Annotations Important for Digital Persona Optimization?</h2>
+<p><a href="https://entitygarden.com/glossary/digital_persona_optimization/">Digital Persona Optimization</a> is the process to educate search engines about profiles and appearances of a single persona. It aims to create a network of information, so search engines understand the entity.</p>
+<p>Schema markup makes it clear that a persona or organization has different profiles where content is  published. Schema.org annotations can further specify weather a person is the host or was a guest in a podcast. Such structured data can even specify if a person (or thing) is the subject of a podcast or merely mentioned in an episode.</p>
+<p>Google, Bing, OpenAI, Anthropic, Grok, and other crawlers extract facts about people, organizations, locations, events and creative works. They want to understand the semantic relationships between them. Structured data in form of schema.org annotations helps them to build a knowledge graph. That knowledge graph grounds the current flavor of Large Language Models in reality.</p>
+<p>The most powerful tool to optimize your digital persona is a <a href="https://entitygarden.com/glossary/digital_persona_hub/">digital persona hub</a> based on a personal website. On your own website, you can leverage  schema markup to make your links even more meaningful.</p>
+<blockquote>
+<p>&quot;Image how much more powerful the <a href="https://indieweb.org/">IndieWeb</a> would become when all links would be annotated with schema.org entity types.&quot;</p>
+<p>— Kaj Kandler</p>
+</blockquote>
+<h2 id="best-practices-for-schema-markup">Best Practices for Schema Markup</h2>
+<h3 id="1-annotate-your-website-with-global-information">1. Annotate your Website with Global Information</h3>
+<p>Annotate your website with information such as who is the publisher and how can the publisher be contacted.</p>
+<p>Use the entities Website, Webpage together with Organization or Person as the publisher. Include information how to contact the publisher. Either per form, email or phone address. The more contact information the better it is for your reputation in Google's eyes.</p>
+<p>Further more, add any public identifier of your organization, such as tax IDs or industry classifications.</p>
+<p>Post this global information on all pages of the website.</p>
+<h3 id="2-annotate-the-about-page-s">2. Annotate the About Page(s)</h3>
+<p>Create About pages for the publisher and describe the organization or person and the purpose of the website. Publish all the identifiable information mentioned above.</p>
+<p>Describe more details than in the global information, such as former employment or affiliation with other organizations.</p>
+<p>Publish in the text what the annotations say. When possible link to the things you describe and annotate.</p>
+<p>If you have authors separate from the author, create About pages for the authors as well. Don't just have the author and the list of his or her articles. Use the opportunity to have an extended author bio with a photo and links to social profiles.</p>
+<h3 id="3-annotate-articles-in-a-blog">3. Annotate Articles in a Blog</h3>
+<p>For Blog articles annotate the author with the author's about page as url.</p>
+<p>Also annotate the main topics the article is about as well as major mentions.</p>
+<h3 id="4-add-a-breadcrumbs-hierarchy-to-the-schema-markup">4. Add a Breadcrumbs hierarchy to the Schema markup</h3>
+<p>Breadcrumbs are a common feature on many content management systems. They help users to navigate and search engines to understand the structure of the content.</p>
+<p>You can add the breadcrumb to a Webpage annotation.</p>
+<h3 id="4-annotation-should-match-the-content-on-the-page">4. Annotation Should Match the Content on the Page</h3>
+<p>Don't make things up in the schema markup. You want the schema markup to confirm what is written on the page.</p>
+<h3 id="5-connect-the-schema-markup-to-one-graph">5. Connect the Schema Markup to one Graph</h3>
+<p>It is important that you mark up the different entities but connect them either through nested schema and or through proper &quot;@id&quot; connections.</p>
+<p>Three or four disconnected graphs erode the power of the schema markup.</p>
+<h2 id="final-thoughts">Final Thoughts</h2>
+<p>Schema Markup helps search engines and modern AI Models to understand the content of your website with more precision. If you want to rank your content, schema markup is an easy addition to your website.</p>
+<p>Schema Markup also raises the search engines' trust in your content. Because you can declare who you are and what business you stand for. Schema Markup is necessary for many rich results in the Google Search results. Schema Markup is particularly powerful for triggering knowledge panels for your name or brand.</p>
+
+<ul class="links-nextprev"><li class="links-nextprev-prev">← Previous<br> <a href="/eleventy-base-blog-with-schema/blog/automating_dates_for_schema/">How to Automate &#39;datePublished&#39; and &#39;dateModified&#39; in Eleventy</a></li><li class="links-nextprev-next">Next →<br><a href="/eleventy-base-blog-with-schema/blog/schema_markup_for_articles/">Schema Markup for blog Articles</a></li>
+</ul>
+
+			</heading-anchors>
+		</main>
+
+		<footer>
+			<p><em>Built with <a href="https://www.11ty.dev/">Eleventy v3.0.0</a>
+				by <a href="https://kajkandler.com/">Kaj Kandler</a></em></p>
+		</footer>
+
+		<!-- This page `/blog/importance_of_schema_markup/` was built on 2025-06-14T09:03:22.747Z -->
+		<script type="module" src="/eleventy-base-blog-with-schema/dist/xbxy_EL6cU.js"></script>
+	</body>
+</html>

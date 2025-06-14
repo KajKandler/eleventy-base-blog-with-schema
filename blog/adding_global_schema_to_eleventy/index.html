@@ -1,0 +1,650 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>How to Add Global Schema to a Website</title>
+		<meta name="description" content="In this post you learn how to add schema and global objects to an eleventy website.">
+		<link rel="alternate" href="/eleventy-base-blog-with-schema/feed/feed.xml" type="application/atom+xml" title="Eleventy Base Blog v9 + Structured Data">
+		<meta name="generator" content="Eleventy v3.0.0">
+		
+		
+		
+		<style>/* This is an arbitrary CSS string added to the bundle */
+/* Defaults */
+:root {
+	--font-family: -apple-system, system-ui, sans-serif;
+	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
+}
+
+/* Theme colors */
+:root {
+	--color-gray-20: #e0e0e0;
+	--color-gray-50: #C0C0C0;
+	--color-gray-90: #333;
+
+	--background-color: #fff;
+
+	--text-color: var(--color-gray-90);
+	--text-color-link: #082840;
+	--text-color-link-active: #5f2b48;
+	--text-color-link-visited: #17050F;
+
+	--syntax-tab-size: 2;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-gray-20: #e0e0e0;
+		--color-gray-50: #C0C0C0;
+		--color-gray-90: #dad8d8;
+
+		/* --text-color is assigned to --color-gray-_ above */
+		--text-color-link: #1493fb;
+		--text-color-link-active: #6969f7;
+		--text-color-link-visited: #a6a6f8;
+
+		--background-color: #15202b;
+	}
+}
+
+
+/* Global stylesheet */
+* {
+	box-sizing: border-box;
+}
+
+@view-transition {
+	navigation: auto;
+}
+
+html,
+body {
+	padding: 0;
+	margin: 0 auto;
+	font-family: var(--font-family);
+	color: var(--text-color);
+	background-color: var(--background-color);
+}
+html {
+	overflow-y: scroll;
+}
+body {
+	max-width: 40em;
+}
+
+/* https://www.a11yproject.com/posts/how-to-hide-content/ */
+.visually-hidden:not(:focus):not(:active) {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+/* Fluid images via https://www.zachleat.com/web/fluid-images/ */
+img{
+  max-width: 100%;
+}
+img[width][height] {
+  height: auto;
+}
+img[src$=".svg"] {
+  width: 100%;
+  height: auto;
+  max-width: none;
+}
+video,
+iframe {
+	width: 100%;
+	height: auto;
+}
+iframe {
+	aspect-ratio: 16/9;
+}
+
+p:last-child {
+	margin-bottom: 0;
+}
+p {
+	line-height: 1.5;
+}
+
+li {
+	line-height: 1.5;
+}
+
+a[href] {
+	color: var(--text-color-link);
+}
+a[href]:visited {
+	color: var(--text-color-link-visited);
+}
+a[href]:hover,
+a[href]:active {
+	color: var(--text-color-link-active);
+}
+
+main,
+footer {
+	padding: 1rem;
+}
+main :first-child {
+	margin-top: 0;
+}
+
+header {
+	border-bottom: 1px dashed var(--color-gray-20);
+}
+
+#skip-link {
+	text-decoration: none;
+	background: var(--background-color);
+	color: var(--text-color);
+	padding: 0.5rem 1rem;
+	border: 1px solid var(--color-gray-90);
+	border-radius: 2px;
+}
+
+/* Prevent visually-hidden skip link fom pushing content around when focused */
+#skip-link.visually-hidden:focus {
+	position: absolute;
+	top: 1rem;
+	left: 1rem;
+	/* Ensure it is positioned on top of everything else when it is shown */
+	z-index: 999;
+}
+
+.links-nextprev {
+	display: flex;
+	justify-content: space-between;
+	gap: .5em 1em;
+	list-style: "";
+	border-top: 1px dashed var(--color-gray-20);
+	padding: 1em 0;
+}
+.links-nextprev > * {
+	flex-grow: 1;
+}
+.links-nextprev-next {
+	text-align: right;
+}
+
+table {
+	margin: 1em 0;
+}
+table td,
+table th {
+	padding-right: 1em;
+}
+
+pre,
+code {
+	font-family: var(--font-family-monospace);
+}
+pre:not([class*="language-"]) {
+	margin: .5em 0;
+	line-height: 1.375; /* 22px /16 */
+	-moz-tab-size: var(--syntax-tab-size);
+	-o-tab-size: var(--syntax-tab-size);
+	tab-size: var(--syntax-tab-size);
+	-webkit-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	overflow-x: auto;
+}
+code {
+	word-break: break-all;
+}
+
+/* Header */
+header {
+	display: flex;
+	gap: 1em;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1em;
+}
+.home-link {
+	flex-grow: 1;
+	font-size: 1em; /* 16px /16 */
+	font-weight: 700;
+}
+.home-link:link:not(:hover) {
+	text-decoration: none;
+}
+
+/* Nav */
+.nav {
+	display: flex;
+	gap: .5em 1em;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.nav-item {
+	display: inline-block;
+}
+.nav-item a[href]:not(:hover) {
+	text-decoration: none;
+}
+.nav a[href][aria-current="page"] {
+	text-decoration: underline;
+}
+
+/* Posts list */
+.postlist {
+	counter-reset: start-from var(--postlist-index);
+	list-style: none;
+	padding: 0;
+	padding-left: 1.5rem;
+}
+.postlist-item {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	counter-increment: start-from -1;
+	margin-bottom: 1em;
+}
+.postlist-item:before {
+	display: inline-block;
+	pointer-events: none;
+	content: "" counter(start-from, decimal-leading-zero) ". ";
+	line-height: 100%;
+	text-align: right;
+	margin-left: -1.5rem;
+}
+.postlist-date,
+.postlist-item:before {
+	font-size: 0.8125em; /* 13px /16 */
+	color: var(--color-gray-90);
+}
+.postlist-date {
+	word-spacing: -0.5px;
+}
+.postlist-link {
+	font-size: 1.1875em; /* 19px /16 */
+	font-weight: 700;
+	flex-basis: calc(100% - 1.5rem);
+	padding-left: .25em;
+	padding-right: .5em;
+	text-underline-position: from-font;
+	text-underline-offset: 0;
+	text-decoration-thickness: 1px;
+}
+.postlist-item-active .postlist-link {
+	font-weight: bold;
+}
+
+/* Tags */
+.post-tag {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-transform: capitalize;
+	font-style: italic;
+}
+.postlist-item > .post-tag {
+	align-self: center;
+}
+
+/* Tags list */
+.post-metadata {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: .5em;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.post-metadata time {
+	margin-right: 1em;
+}
+
+/* Breadcrumbs added by Kaj Kandler */
+.breadcrumb-item.active {
+  color: var(--primary-color);
+}
+
+#breadcrumb ol,ul {
+  margin: 0;
+  padding: 0;
+}
+
+#breadcrumb li {
+  display: inline;
+}
+
+#breadcrumb li:not(:last-child)::after {
+  content: " ˃"
+}
+/**
+ * okaidia theme for JavaScript, CSS and HTML
+ * Loosely based on Monokai textmate theme by http://www.monokai.nl/
+ * @author ocodia
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+	color: #f8f8f2;
+	background: none;
+	text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+	font-size: 1em;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	word-wrap: normal;
+	line-height: 1.5;
+
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+	padding: 1em;
+	margin: .5em 0;
+	overflow: auto;
+	border-radius: 0.3em;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+	background: #272822;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+	padding: .1em;
+	border-radius: .3em;
+	white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: #8292a2;
+}
+
+.token.punctuation {
+	color: #f8f8f2;
+}
+
+.token.namespace {
+	opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.constant,
+.token.symbol,
+.token.deleted {
+	color: #f92672;
+}
+
+.token.boolean,
+.token.number {
+	color: #ae81ff;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+	color: #a6e22e;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string,
+.token.variable {
+	color: #f8f8f2;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.function,
+.token.class-name {
+	color: #e6db74;
+}
+
+.token.keyword {
+	color: #66d9ef;
+}
+
+.token.regex,
+.token.important {
+	color: #fd971f;
+}
+
+.token.important,
+.token.bold {
+	font-weight: bold;
+}
+.token.italic {
+	font-style: italic;
+}
+
+.token.entity {
+	cursor: help;
+}
+/*
+ * New diff- syntax
+ */
+
+pre[class*="language-diff-"] {
+	--eleventy-code-padding: 1.25em;
+	padding-left: var(--eleventy-code-padding);
+	padding-right: var(--eleventy-code-padding);
+}
+.token.deleted {
+	background-color: hsl(0, 51%, 37%);
+	color: inherit;
+}
+.token.inserted {
+	background-color: hsl(126, 31%, 39%);
+	color: inherit;
+}
+
+/* Make the + and - characters unselectable for copy/paste */
+.token.prefix.unchanged,
+.token.prefix.inserted,
+.token.prefix.deleted {
+	-webkit-user-select: none;
+	user-select: none;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+.token.prefix.inserted,
+.token.prefix.deleted {
+	width: var(--eleventy-code-padding);
+	background-color: rgba(0,0,0,.2);
+}
+
+/* Optional: full-width background color */
+.token.inserted:not(.prefix),
+.token.deleted:not(.prefix) {
+	display: block;
+	margin-left: calc(-1 * var(--eleventy-code-padding));
+	margin-right: calc(-1 * var(--eleventy-code-padding));
+	text-decoration: none; /* override del, ins, mark defaults */
+	color: inherit; /* override del, ins, mark defaults */
+}</style>
+		
+
+		
+		<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://kajkandler.github.io/#website","name":"Eleventy Base Blog v9 + Structured Data","description":"The Eleventy (11ty) base-blog starter project enhanced with schema.org markup. Howto tutorial included!","url":"https://kajkandler.github.io/","publisher":{"@type":"Person","@id":"https://kajkandler.github.io/#person_kaj_kandler"}},{"@type":"WebPage","@id":"https://kajkandler.github.io/blog/adding_global_schema_to_eleventy/#webpage","name":"How to Add Global Schema to a Website","description":"In this post you learn how to add schema and global objects to an eleventy website.","url":"https://kajkandler.github.io/blog/adding_global_schema_to_eleventy/","datePublished":"2025-06-14T07:00:13.000Z","dateModified":"2025-06-14T07:00:13.000Z","isPartOf":{"@type":"WebSite","@id":"https://kajkandler.github.io/#website"},"author":{"@type":"Person","@id":"https://kajkandler.github.io/#person_kaj_kandler"},"breadcrumb":{"@type":"BreadcrumbList","@id":"https://kajkandler.github.io/blog/adding_global_schema_to_eleventy/#breadcrumb"}},{"@type":"Person","@id":"https://kajkandler.github.io/#person_kaj_kandler","name":"Kaj Kandler","url":"https://kajkandler.com/","givenName":"Kaj","familyName":"Kandler","jobTitle":"Entrepreneur","sameAs":["https://www.linkedin.com/in/kajkandler/","https://github.com/KajKandler","https://medium.com/@kajkandler","https://entitygarden.com/about_kaj_kandler/"]},{"@type":"Article","@id":"https://kajkandler.github.io/blog/adding_global_schema_to_eleventy/#article","name":"How to Add Global Schema to a Website","headline":"How to Add Global Schema to a Website","abstract":"In this post you learn how to add schema and global objects to an eleventy website.","url":"https://kajkandler.github.io/blog/adding_global_schema_to_eleventy/","datePublished":"2025-06-14T07:00:13.000Z","dateModified":"2025-06-14T07:00:13.000Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://kajkandler.github.io/blog/adding_global_schema_to_eleventy/#webpage"},"author":{"@type":"Person","@id":"https://kajkandler.github.io/#person_kaj_kandler"}},{"@type":"Article","@id":"https://kajkandler.github.io/blog/adding_global_schema_to_eleventy/#article","about":[{"@type":"Thing","@id":"https://schema.org/WebSite","name":"WebSite (schema.org)","url":"https://schema.org/WebSite","sameAs":["https://schema.org/WebSite"]},{"@type":"Thing","@id":"https://schema.org/WebPage","name":"WebPage (schema.org)","url":"https://schema.org/WebPage","sameAs":["https://schema.org/WebPage"]},{"@type":"Thing","@id":"https://www.11ty.dev/","name":"Eleventy","alternateName":["11ty"],"url":"https://www.11ty.dev/","sameAs":["https://github.com/11ty/eleventy/","https://www.youtube.com/c/EleventyVideo","https://neighborhood.11ty.dev/@11ty","https://bsky.app/profile/11ty.dev"]}],"mentions":[{"@type":"Thing","@id":"https://schema.org/publisher","name":"Publisher - Property (schema.org)","url":"https://schema.org/publisher","sameAs":["https://schema.org/publisher"]},{"@type":"Thing","@id":"https://schema.org/Person","name":"Person (schema.org)","url":"https://schema.org/Person","sameAs":["https://schema.org/Person"]},{"@type":"Thing","@id":"https://schema.org/Organization","name":"Organization (schema.org)","url":"https://schema.org/Organization","sameAs":["https://schema.org/Organization"]}]}]}</script>
+		
+        
+        
+        
+		<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","@id":"https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/adding_global_schema_to_eleventy/#breadcrumb","name":"How to Add Global Schema to a Website Breadcrumb","numberOfItems":3,"itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":{"@type":"WebPage","@id":"https://kajkandler.github.io/eleventy-base-blog-with-schema/","name":"Home","url":"https://kajkandler.github.io/eleventy-base-blog-with-schema/"}},{"@type":"ListItem","position":2,"name":"Archive","item":{"@type":"WebPage","@id":"https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/","name":"Archive","url":"https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/"}},{"@type":"ListItem","position":3,"name":"How to Add Global Schema to a Website","item":{"@type":"WebPage","@id":"https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/adding_global_schema_to_eleventy/","name":"How to Add Global Schema to a Website","url":"https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/adding_global_schema_to_eleventy/"}}]}]}</script>
+
+	</head> 
+	<body>
+		<a href="#main" id="skip-link" class="visually-hidden">Skip to main content</a>
+
+		<header>
+			<a href="/eleventy-base-blog-with-schema/" class="home-link">Eleventy Base Blog v9 + Structured Data</a>
+			<nav>
+				<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
+				<ul class="nav">
+					<li class="nav-item"><a href="/eleventy-base-blog-with-schema/">Home</a></li>
+					<li class="nav-item"><a href="/eleventy-base-blog-with-schema/blog/">Archive</a></li>
+					<li class="nav-item"><a href="/eleventy-base-blog-with-schema/about/">About</a></li>
+					<li class="nav-item"><a href="/eleventy-base-blog-with-schema/feed/feed.xml">Feed</a></li>
+				</ul>
+			</nav>
+			<nav>
+	            <div class="container" id="breadcrumb">
+					
+					<ul><li><a href="/eleventy-base-blog-with-schema/">Home</a></li>
+<li><a href="/eleventy-base-blog-with-schema/blog/">Archive</a></li>
+<li><a href="/eleventy-base-blog-with-schema/blog/adding_global_schema_to_eleventy/">How to Add Global Schema to a Website</a></li></ul>    
+				</div>
+			</nav>
+		</header>
+
+		<main id="main">
+			<heading-anchors>
+				
+
+
+<h1 id="how-to-add-global-schema-to-a-website">How to Add Global Schema to a Website</h1>
+
+<ul class="post-metadata">
+	<li><time datetime="2025-06-14">14 June 2025</time></li>
+	<li><a href="/eleventy-base-blog-with-schema/tags/number-2/" class="post-tag">number 2</a></li>
+</ul>
+
+<p>We can add schema markup in our global template so it is included in any page.</p>
+<h2 id="why-not-use-a-plugin-for-schema-markup">Why not use a Plugin for Schema Markup</h2>
+<p>You could add schema to your website using the &quot;<a href="https://github.com/quasibit/eleventy-plugin-schema">eleventy-plugin-schema</a>&quot; but I did not find it too useful. The plugin restricts me to predefined Entity types and properties. My needs for schema are comprehensive and I want to stay flexible.</p>
+<p>The Plugin &quot;<a href="https://github.com/PauTym/simply-schema-eleventy/">simply-schema-eleventy</a>&quot; removes the restrictions, yet it still overly complicates things in my view.</p>
+<h2 id="strategy-to-add-schema-to-the-website-no-plugin-required">Strategy to Add Schema to the Website - no Plugin required</h2>
+<p>My approach simply adds the schema to the front matter and dumps it as JSON into the base layout.</p>
+<h3 id="define-global-schema-as-global-data">Define Global Schema as Global Data</h3>
+<p>In a global data file at <code>_data/eleventyComputed.js</code> I build up a tree under <code>schemaorg</code> with the raw schema I need.</p>
+<p>for example:</p>
+<pre class="language-js" tabindex="0"><code class="language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  <span class="token literal-property property">schemaorg</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token string-property property">"@context"</span><span class="token operator">:</span> <span class="token string">"https://schema.org"</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"@graph"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span>
+        <span class="token string-property property">"@type"</span><span class="token operator">:</span> <span class="token string">"WebSite"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"@id"</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>data<span class="token punctuation">.</span>metadata<span class="token punctuation">.</span>url<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">#website</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
+        <span class="token function-variable function">name</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token operator">=></span> data<span class="token punctuation">.</span>metadata<span class="token punctuation">.</span>title<span class="token punctuation">,</span>
+        <span class="token function-variable function">description</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token operator">=></span> data<span class="token punctuation">.</span>metadata<span class="token punctuation">.</span>description<span class="token punctuation">,</span>
+        <span class="token function-variable function">url</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token operator">=></span> data<span class="token punctuation">.</span>metadata<span class="token punctuation">.</span>url<span class="token punctuation">,</span>
+        <span class="token literal-property property">publisher</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+          <span class="token string-property property">"@type"</span><span class="token operator">:</span> <span class="token string">"Person"</span><span class="token punctuation">,</span>
+          <span class="token string-property property">"@id"</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>data<span class="token punctuation">.</span>metadata<span class="token punctuation">.</span>url<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/#person_kaj_kandler</span><span class="token template-punctuation string">`</span></span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p>Add the graph under eleventyComputed because I want to integrate with the metadata structure already defined by the base-blog starter project.</p>
+<h4 id="why-use-a-graph-collection-for-the-schema">Why use a &quot;@graph&quot; collection for the schema?</h4>
+<p>If you use a &quot;@graph&quot; you can assemble the schema nicely at various levels. The eleventy data cascade merges the data from global, folder level and file level nicely into something that you want.</p>
+<p>If you would start with a top level object you would have to inject nested objects into the tree, making the entire structure much more ridged and opinionated. See also <a href="https://academy.yoast.com/app/uploads/sites/4/2020/11/2-1-the-yoast-seo-graph-structured-data-for-beginners.pdf">the explanation by Yoast</a>, a well known Schema Plugin for Wordpress.</p>
+<h2 id="inject-schema-into-all-pages-at-the-base-template">Inject Schema into All Pages at the Base Template</h2>
+<p>We want the schema to go into the header of all pages. Therefore we inject it into your base layout template.</p>
+<p>If we build the schema graph with simple front matter, we can dump it as JSON into the header of our <code>_includes/layouts/base.njk</code> template like this:</p>
+<pre class="language-html" tabindex="0"><code class="language-html">		{# Add schema.org structured data as JSON-LD #}
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name"><span class="token namespace">eleventy:</span>ignore</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>application/ld+json<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript"><span class="token punctuation">{</span><span class="token punctuation">{</span> schemaorg <span class="token operator">|</span> <span class="token function">dump</span><span class="token punctuation">(</span>\t<span class="token punctuation">)</span> <span class="token operator">|</span> safe <span class="token punctuation">}</span><span class="token punctuation">}</span></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span></code></pre>
+<blockquote>
+<p>Note: We must use the <code>eleventy:ignore</code> attribution or the script will be combined with other java script.</p>
+<p>This behavior is caused by the config in the eleventy.config.js</p>
+</blockquote>
+<blockquote>
+<pre class="language-js" tabindex="0"><code class="language-js">	<span class="token comment">// Bundle &lt;script> content and adds a {\% js %} paired shortcode</span>
+	eleventyConfig<span class="token punctuation">.</span><span class="token function">addBundle</span><span class="token punctuation">(</span><span class="token string">"js"</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+		<span class="token literal-property property">toFileDirectory</span><span class="token operator">:</span> <span class="token string">"dist"</span><span class="token punctuation">,</span>
+		<span class="token comment">// Add all &lt;script> content to the `js` bundle (use eleventy:ignore to opt-out)</span>
+		<span class="token comment">// supported selectors: https://www.npmjs.com/package/posthtml-match-helper</span>
+		<span class="token literal-property property">bundleHtmlContentFromSelector</span><span class="token operator">:</span> <span class="token string">"script"</span><span class="token punctuation">,</span>
+	<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+</blockquote>
+<h2 id="what-entities-to-generate-globally">What Entities to Generate Globally?</h2>
+<p>An entities in Schema is anything that has an ID. Most entities also have a &quot;@type&quot; from the schema.org vocabulary.</p>
+<p>Any Website has an object of type Website, i.e. <code>&quot;@type&quot;: &quot;Website&quot;</code></p>
+<p>Also a website has a publisher. This may be a person for a personal blog or an organization.</p>
+<p>Here is myu complete global data:</p>
+<pre class="language-js" tabindex="0"><code class="language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  <span class="token literal-property property">schemaorg</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token string-property property">"@context"</span><span class="token operator">:</span> <span class="token string">"https://schema.org"</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"@graph"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span>
+        <span class="token string-property property">"@type"</span><span class="token operator">:</span> <span class="token string">"WebSite"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"@id"</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>data<span class="token punctuation">.</span>metadata<span class="token punctuation">.</span>url<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">#website</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
+        <span class="token function-variable function">name</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token operator">=></span> data<span class="token punctuation">.</span>metadata<span class="token punctuation">.</span>title<span class="token punctuation">,</span>
+        <span class="token function-variable function">description</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token operator">=></span> data<span class="token punctuation">.</span>metadata<span class="token punctuation">.</span>description<span class="token punctuation">,</span>
+        <span class="token function-variable function">url</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token operator">=></span> data<span class="token punctuation">.</span>metadata<span class="token punctuation">.</span>url<span class="token punctuation">,</span>
+        <span class="token literal-property property">publisher</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+          <span class="token string-property property">"@type"</span><span class="token operator">:</span> <span class="token string">"Person"</span><span class="token punctuation">,</span>
+          <span class="token string-property property">"@id"</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>data<span class="token punctuation">.</span>metadata<span class="token punctuation">.</span>url<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/#person_kaj_kandler</span><span class="token template-punctuation string">`</span></span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span>
+        <span class="token string-property property">"@type"</span><span class="token operator">:</span> <span class="token string">"Person"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"@id"</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>data<span class="token punctuation">.</span>metadata<span class="token punctuation">.</span>url<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/#person_kaj_kandler</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
+        <span class="token string-property property">"name"</span><span class="token operator">:</span> <span class="token string">"Kaj Kandler"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"url"</span><span class="token operator">:</span> <span class="token string">"https://kajkandler.com/"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"givenName"</span><span class="token operator">:</span> <span class="token string">"Kaj"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"familyName"</span><span class="token operator">:</span> <span class="token string">"Kandler"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"jobTitle"</span><span class="token operator">:</span> <span class="token string">"Entrepreneur"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"sameAs"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+          <span class="token string">"https://www.linkedin.com/in/kajkandler/"</span><span class="token punctuation">,</span>
+          <span class="token string">"https://github.com/KajKandler"</span><span class="token punctuation">,</span>
+          <span class="token string">"https://medium.com/@kajkandler"</span><span class="token punctuation">,</span>
+          <span class="token string">"https://entitygarden.com/about_kaj_kandler/"</span>
+        <span class="token punctuation">]</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<h3 id="connect-the-entities-to-a-single-graph">Connect the Entities to a Single Graph</h3>
+<p>Take not how the <code>Website</code> has a property <code>publisher</code>, which is a reference to an entity of type &quot;Person&quot; and an &quot;@id&quot;.</p>
+<p>These two properties are exactly the same as the second entity in the graph, the <code>Person</code> entity.</p>
+<p>This is the way how to connect two entities.</p>
+
+<ul class="links-nextprev"><li class="links-nextprev-prev">← Previous<br> <a href="/eleventy-base-blog-with-schema/blog/adding_breadcrumbs_with_schema/">How to Add Breadcrumbs with Schema to All Pages</a></li><li class="links-nextprev-next">Next →<br><a href="/eleventy-base-blog-with-schema/blog/adding_web_page_schema_globally/">How to Add WebPage Schema to All Pages on the Website</a></li>
+</ul>
+
+			</heading-anchors>
+		</main>
+
+		<footer>
+			<p><em>Built with <a href="https://www.11ty.dev/">Eleventy v3.0.0</a>
+				by <a href="https://kajkandler.com/">Kaj Kandler</a></em></p>
+		</footer>
+
+		<!-- This page `/blog/adding_global_schema_to_eleventy/` was built on 2025-06-14T09:03:22.746Z -->
+		<script type="module" src="/eleventy-base-blog-with-schema/dist/xbxy_EL6cU.js"></script>
+	</body>
+</html>

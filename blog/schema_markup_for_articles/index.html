@@ -1,0 +1,652 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Schema Markup for blog Articles</title>
+		<meta name="description" content="The Eleventy (11ty) base-blog starter project enhanced with schema.org markup. Howto tutorial included!">
+		<link rel="alternate" href="/eleventy-base-blog-with-schema/feed/feed.xml" type="application/atom+xml" title="Eleventy Base Blog v9 + Structured Data">
+		<meta name="generator" content="Eleventy v3.0.0">
+		
+		
+		
+		<style>/* This is an arbitrary CSS string added to the bundle */
+/* Defaults */
+:root {
+	--font-family: -apple-system, system-ui, sans-serif;
+	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
+}
+
+/* Theme colors */
+:root {
+	--color-gray-20: #e0e0e0;
+	--color-gray-50: #C0C0C0;
+	--color-gray-90: #333;
+
+	--background-color: #fff;
+
+	--text-color: var(--color-gray-90);
+	--text-color-link: #082840;
+	--text-color-link-active: #5f2b48;
+	--text-color-link-visited: #17050F;
+
+	--syntax-tab-size: 2;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-gray-20: #e0e0e0;
+		--color-gray-50: #C0C0C0;
+		--color-gray-90: #dad8d8;
+
+		/* --text-color is assigned to --color-gray-_ above */
+		--text-color-link: #1493fb;
+		--text-color-link-active: #6969f7;
+		--text-color-link-visited: #a6a6f8;
+
+		--background-color: #15202b;
+	}
+}
+
+
+/* Global stylesheet */
+* {
+	box-sizing: border-box;
+}
+
+@view-transition {
+	navigation: auto;
+}
+
+html,
+body {
+	padding: 0;
+	margin: 0 auto;
+	font-family: var(--font-family);
+	color: var(--text-color);
+	background-color: var(--background-color);
+}
+html {
+	overflow-y: scroll;
+}
+body {
+	max-width: 40em;
+}
+
+/* https://www.a11yproject.com/posts/how-to-hide-content/ */
+.visually-hidden:not(:focus):not(:active) {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+/* Fluid images via https://www.zachleat.com/web/fluid-images/ */
+img{
+  max-width: 100%;
+}
+img[width][height] {
+  height: auto;
+}
+img[src$=".svg"] {
+  width: 100%;
+  height: auto;
+  max-width: none;
+}
+video,
+iframe {
+	width: 100%;
+	height: auto;
+}
+iframe {
+	aspect-ratio: 16/9;
+}
+
+p:last-child {
+	margin-bottom: 0;
+}
+p {
+	line-height: 1.5;
+}
+
+li {
+	line-height: 1.5;
+}
+
+a[href] {
+	color: var(--text-color-link);
+}
+a[href]:visited {
+	color: var(--text-color-link-visited);
+}
+a[href]:hover,
+a[href]:active {
+	color: var(--text-color-link-active);
+}
+
+main,
+footer {
+	padding: 1rem;
+}
+main :first-child {
+	margin-top: 0;
+}
+
+header {
+	border-bottom: 1px dashed var(--color-gray-20);
+}
+
+#skip-link {
+	text-decoration: none;
+	background: var(--background-color);
+	color: var(--text-color);
+	padding: 0.5rem 1rem;
+	border: 1px solid var(--color-gray-90);
+	border-radius: 2px;
+}
+
+/* Prevent visually-hidden skip link fom pushing content around when focused */
+#skip-link.visually-hidden:focus {
+	position: absolute;
+	top: 1rem;
+	left: 1rem;
+	/* Ensure it is positioned on top of everything else when it is shown */
+	z-index: 999;
+}
+
+.links-nextprev {
+	display: flex;
+	justify-content: space-between;
+	gap: .5em 1em;
+	list-style: "";
+	border-top: 1px dashed var(--color-gray-20);
+	padding: 1em 0;
+}
+.links-nextprev > * {
+	flex-grow: 1;
+}
+.links-nextprev-next {
+	text-align: right;
+}
+
+table {
+	margin: 1em 0;
+}
+table td,
+table th {
+	padding-right: 1em;
+}
+
+pre,
+code {
+	font-family: var(--font-family-monospace);
+}
+pre:not([class*="language-"]) {
+	margin: .5em 0;
+	line-height: 1.375; /* 22px /16 */
+	-moz-tab-size: var(--syntax-tab-size);
+	-o-tab-size: var(--syntax-tab-size);
+	tab-size: var(--syntax-tab-size);
+	-webkit-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	overflow-x: auto;
+}
+code {
+	word-break: break-all;
+}
+
+/* Header */
+header {
+	display: flex;
+	gap: 1em;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1em;
+}
+.home-link {
+	flex-grow: 1;
+	font-size: 1em; /* 16px /16 */
+	font-weight: 700;
+}
+.home-link:link:not(:hover) {
+	text-decoration: none;
+}
+
+/* Nav */
+.nav {
+	display: flex;
+	gap: .5em 1em;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.nav-item {
+	display: inline-block;
+}
+.nav-item a[href]:not(:hover) {
+	text-decoration: none;
+}
+.nav a[href][aria-current="page"] {
+	text-decoration: underline;
+}
+
+/* Posts list */
+.postlist {
+	counter-reset: start-from var(--postlist-index);
+	list-style: none;
+	padding: 0;
+	padding-left: 1.5rem;
+}
+.postlist-item {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	counter-increment: start-from -1;
+	margin-bottom: 1em;
+}
+.postlist-item:before {
+	display: inline-block;
+	pointer-events: none;
+	content: "" counter(start-from, decimal-leading-zero) ". ";
+	line-height: 100%;
+	text-align: right;
+	margin-left: -1.5rem;
+}
+.postlist-date,
+.postlist-item:before {
+	font-size: 0.8125em; /* 13px /16 */
+	color: var(--color-gray-90);
+}
+.postlist-date {
+	word-spacing: -0.5px;
+}
+.postlist-link {
+	font-size: 1.1875em; /* 19px /16 */
+	font-weight: 700;
+	flex-basis: calc(100% - 1.5rem);
+	padding-left: .25em;
+	padding-right: .5em;
+	text-underline-position: from-font;
+	text-underline-offset: 0;
+	text-decoration-thickness: 1px;
+}
+.postlist-item-active .postlist-link {
+	font-weight: bold;
+}
+
+/* Tags */
+.post-tag {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-transform: capitalize;
+	font-style: italic;
+}
+.postlist-item > .post-tag {
+	align-self: center;
+}
+
+/* Tags list */
+.post-metadata {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: .5em;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.post-metadata time {
+	margin-right: 1em;
+}
+
+/* Breadcrumbs added by Kaj Kandler */
+.breadcrumb-item.active {
+  color: var(--primary-color);
+}
+
+#breadcrumb ol,ul {
+  margin: 0;
+  padding: 0;
+}
+
+#breadcrumb li {
+  display: inline;
+}
+
+#breadcrumb li:not(:last-child)::after {
+  content: " ˃"
+}
+/**
+ * okaidia theme for JavaScript, CSS and HTML
+ * Loosely based on Monokai textmate theme by http://www.monokai.nl/
+ * @author ocodia
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+	color: #f8f8f2;
+	background: none;
+	text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+	font-size: 1em;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	word-wrap: normal;
+	line-height: 1.5;
+
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+	padding: 1em;
+	margin: .5em 0;
+	overflow: auto;
+	border-radius: 0.3em;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+	background: #272822;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+	padding: .1em;
+	border-radius: .3em;
+	white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: #8292a2;
+}
+
+.token.punctuation {
+	color: #f8f8f2;
+}
+
+.token.namespace {
+	opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.constant,
+.token.symbol,
+.token.deleted {
+	color: #f92672;
+}
+
+.token.boolean,
+.token.number {
+	color: #ae81ff;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+	color: #a6e22e;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string,
+.token.variable {
+	color: #f8f8f2;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.function,
+.token.class-name {
+	color: #e6db74;
+}
+
+.token.keyword {
+	color: #66d9ef;
+}
+
+.token.regex,
+.token.important {
+	color: #fd971f;
+}
+
+.token.important,
+.token.bold {
+	font-weight: bold;
+}
+.token.italic {
+	font-style: italic;
+}
+
+.token.entity {
+	cursor: help;
+}
+/*
+ * New diff- syntax
+ */
+
+pre[class*="language-diff-"] {
+	--eleventy-code-padding: 1.25em;
+	padding-left: var(--eleventy-code-padding);
+	padding-right: var(--eleventy-code-padding);
+}
+.token.deleted {
+	background-color: hsl(0, 51%, 37%);
+	color: inherit;
+}
+.token.inserted {
+	background-color: hsl(126, 31%, 39%);
+	color: inherit;
+}
+
+/* Make the + and - characters unselectable for copy/paste */
+.token.prefix.unchanged,
+.token.prefix.inserted,
+.token.prefix.deleted {
+	-webkit-user-select: none;
+	user-select: none;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+.token.prefix.inserted,
+.token.prefix.deleted {
+	width: var(--eleventy-code-padding);
+	background-color: rgba(0,0,0,.2);
+}
+
+/* Optional: full-width background color */
+.token.inserted:not(.prefix),
+.token.deleted:not(.prefix) {
+	display: block;
+	margin-left: calc(-1 * var(--eleventy-code-padding));
+	margin-right: calc(-1 * var(--eleventy-code-padding));
+	text-decoration: none; /* override del, ins, mark defaults */
+	color: inherit; /* override del, ins, mark defaults */
+}</style>
+		
+
+		
+		<script type="application/ld+json">{"@graph":[{"@type":"WebSite","@id":"https://kajkandler.github.io/#website","about":[{"@type":"Thing","name":"Article (schema.org)","url":"https://schema.org/Article","sameAs":["https://schema.org/Article"]},{"@type":"Thing","@id":"https://www.11ty.dev/","name":"Eleventy","alternateName":["11ty"],"url":"https://www.11ty.dev/","sameAs":["https://github.com/11ty/eleventy/","https://www.youtube.com/c/EleventyVideo","https://neighborhood.11ty.dev/@11ty","https://bsky.app/profile/11ty.dev"]}],"mentions":[{"@type":"Person","@id":"https://www.zachleat.com/","name":"Zach Leatherman","description":"Zach is the creator and maintainer of the Eleventy (11ty) static site generator","url":"https://www.zachleat.com/","mainEntityOfPage":"https://www.zachleat.com/about/","sameAs":["https://www.zachleat.com/about/","https://www.google.com/search?kgmid=/g/11gbhswntq","https://github.com/zachleat/","https://fediverse.zachleat.com/@zachleat","https://bsky.app/profile/zachleat.com"]}],"name":"Eleventy Base Blog v9 + Structured Data","description":"The Eleventy (11ty) base-blog starter project enhanced with schema.org markup. Howto tutorial included!","url":"https://kajkandler.github.io/","publisher":{"@type":"Person","@id":"https://kajkandler.github.io/#person_kaj_kandler"}},{"@type":"WebPage","@id":"https://kajkandler.github.io/blog/schema_markup_for_articles/#webpage","name":"Schema Markup for blog Articles","url":"https://kajkandler.github.io/blog/schema_markup_for_articles/","datePublished":"2025-06-14T07:00:13.000Z","dateModified":"2025-06-14T07:00:13.000Z","isPartOf":{"@type":"WebSite","@id":"https://kajkandler.github.io/#website"},"author":{"@type":"Person","@id":"https://kajkandler.github.io/#person_kaj_kandler"},"breadcrumb":{"@type":"BreadcrumbList","@id":"https://kajkandler.github.io/blog/schema_markup_for_articles/#breadcrumb"}},{"@type":"Person","@id":"https://kajkandler.github.io/#person_kaj_kandler","name":"Kaj Kandler","url":"https://kajkandler.com/","givenName":"Kaj","familyName":"Kandler","jobTitle":"Entrepreneur","sameAs":["https://www.linkedin.com/in/kajkandler/","https://github.com/KajKandler","https://medium.com/@kajkandler","https://entitygarden.com/about_kaj_kandler/"]},{"@type":"Article","@id":"https://kajkandler.github.io/blog/schema_markup_for_articles/#article","name":"Schema Markup for blog Articles","headline":"Schema Markup for blog Articles","url":"https://kajkandler.github.io/blog/schema_markup_for_articles/","datePublished":"2025-06-14T07:00:13.000Z","dateModified":"2025-06-14T07:00:13.000Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://kajkandler.github.io/blog/schema_markup_for_articles/#webpage"},"author":{"@type":"Person","@id":"https://kajkandler.github.io/#person_kaj_kandler"}}],"@context":"https://schema.org"}</script>
+		
+        
+        
+        
+		<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","@id":"https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/schema_markup_for_articles/#breadcrumb","name":"Schema Markup for blog Articles Breadcrumb","numberOfItems":3,"itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":{"@type":"WebPage","@id":"https://kajkandler.github.io/eleventy-base-blog-with-schema/","name":"Home","url":"https://kajkandler.github.io/eleventy-base-blog-with-schema/"}},{"@type":"ListItem","position":2,"name":"Archive","item":{"@type":"WebPage","@id":"https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/","name":"Archive","url":"https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/"}},{"@type":"ListItem","position":3,"name":"Schema Markup for blog Articles","item":{"@type":"WebPage","@id":"https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/schema_markup_for_articles/","name":"Schema Markup for blog Articles","url":"https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/schema_markup_for_articles/"}}]}]}</script>
+
+	</head> 
+	<body>
+		<a href="#main" id="skip-link" class="visually-hidden">Skip to main content</a>
+
+		<header>
+			<a href="/eleventy-base-blog-with-schema/" class="home-link">Eleventy Base Blog v9 + Structured Data</a>
+			<nav>
+				<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
+				<ul class="nav">
+					<li class="nav-item"><a href="/eleventy-base-blog-with-schema/">Home</a></li>
+					<li class="nav-item"><a href="/eleventy-base-blog-with-schema/blog/">Archive</a></li>
+					<li class="nav-item"><a href="/eleventy-base-blog-with-schema/about/">About</a></li>
+					<li class="nav-item"><a href="/eleventy-base-blog-with-schema/feed/feed.xml">Feed</a></li>
+				</ul>
+			</nav>
+			<nav>
+	            <div class="container" id="breadcrumb">
+					
+					<ul><li><a href="/eleventy-base-blog-with-schema/">Home</a></li>
+<li><a href="/eleventy-base-blog-with-schema/blog/">Archive</a></li>
+<li><a href="/eleventy-base-blog-with-schema/blog/schema_markup_for_articles/">Schema Markup for blog Articles</a></li></ul>    
+				</div>
+			</nav>
+		</header>
+
+		<main id="main">
+			<heading-anchors>
+				
+
+
+<h1 id="schema-markup-for-blog-articles">Schema Markup for blog Articles</h1>
+
+<ul class="post-metadata">
+	<li><time datetime="2025-06-14">14 June 2025</time></li>
+</ul>
+
+<p>Every blog post is best marked up as an article.</p>
+<h2 id="adding-article-schema-to-all-posts-in-the-blog">Adding Article Schema to All Posts in the Blog</h2>
+<p>To add <code>Article</code> schema to all blog posts we add the section under <code>eleventyComputed</code> in the <code>content/blog/blog.11tydata.js</code> file</p>
+<pre class="language-js" tabindex="0"><code class="language-js"><span class="token literal-property property">eleventyComputed</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">schemaorg</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token string-property property">"@graph"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+            <span class="token punctuation">{</span>
+                <span class="token string-property property">"@type"</span><span class="token operator">:</span> <span class="token string">"Article"</span><span class="token punctuation">,</span>
+                <span class="token string-property property">"@id"</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token function">constructID</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>page<span class="token punctuation">.</span>url<span class="token punctuation">,</span> data<span class="token punctuation">.</span>metadata<span class="token punctuation">.</span>baseURL<span class="token punctuation">,</span> <span class="token string">"#article"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                <span class="token function-variable function">name</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token operator">=></span> data<span class="token punctuation">.</span>title<span class="token punctuation">,</span>
+                <span class="token function-variable function">headline</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token operator">=></span> data<span class="token punctuation">.</span>title<span class="token punctuation">,</span>
+                <span class="token function-variable function">abstract</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token operator">=></span> data<span class="token punctuation">.</span>description<span class="token punctuation">,</span>
+                <span class="token function-variable function">url</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token keyword">new</span> <span class="token class-name">URL</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>page<span class="token punctuation">.</span>url<span class="token punctuation">,</span> data<span class="token punctuation">.</span>metadata<span class="token punctuation">.</span>baseURL<span class="token punctuation">)</span><span class="token punctuation">,</span>
+                <span class="token literal-property property">mainEntityOf</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+                    <span class="token string-property property">"@type"</span><span class="token operator">:</span> <span class="token string">"WebPage"</span><span class="token punctuation">,</span>
+                    <span class="token string-property property">"@id"</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token function">constructID</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>page<span class="token punctuation">.</span>url<span class="token punctuation">,</span> data<span class="token punctuation">.</span>metadata<span class="token punctuation">.</span>baseURL<span class="token punctuation">,</span> <span class="token string">"#webpage"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                <span class="token punctuation">}</span><span class="token punctuation">,</span>
+                <span class="token literal-property property">author</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+                    <span class="token string-property property">"@type"</span><span class="token operator">:</span> <span class="token string">"Person"</span><span class="token punctuation">,</span>
+                    <span class="token string-property property">"@id"</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token function">constructID</span><span class="token punctuation">(</span><span class="token string">"/"</span><span class="token punctuation">,</span> data<span class="token punctuation">.</span>metadata<span class="token punctuation">.</span>baseURL<span class="token punctuation">,</span> <span class="token string">"#person_kaj_kandler"</span><span class="token punctuation">)</span>
+                <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<blockquote>
+<p>Note: Don't forget to import the <code>constructID</code> utility function.</p>
+</blockquote>
+<blockquote>
+<p>Note: I added the <code>author</code> here, because I'm the sole author of this blog.</p>
+<p>With multiple authors, you may want to only define the author in the article</p>
+</blockquote>
+<h2 id="adding-markup-in-the-front-matter-of-the-article">Adding Markup in the Front Matter of the Article</h2>
+<p>Some information is specific to this article and can't be abstracted away. Therefore we'll add this to the front matter of the article, for example:</p>
+<h3 id="what-schmea-markup-should-i-add-to-an-article">What Schmea Markup should I Add to an Article?</h3>
+<p>To an Article you should add the headline, the abstract, the URL, the reference of the webpage as <code>mainEntityOf</code> and the author.</p>
+<p>I highly recommend to add <code>about</code> and <code>mentions</code>. For these you can nest the topics with type and id. Most importantly add <code>sameAs</code> as an array of URLs to pages that represent the same topic. These URLs should be authoritative, such as Wikipedia, Wikidata, or home pages of organizations or people.</p>
+<pre class="language-js" tabindex="0"><code class="language-js"><span class="token keyword">const</span> schemaorg <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token string-property property">"@graph"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+            <span class="token string-property property">"@type"</span><span class="token operator">:</span> <span class="token string">"Article"</span><span class="token punctuation">,</span>
+            <span class="token string-property property">"@id"</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token function">constructID</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>page<span class="token punctuation">.</span>url<span class="token punctuation">,</span> data<span class="token punctuation">.</span>metadata<span class="token punctuation">.</span>baseURL<span class="token punctuation">,</span> <span class="token string">"#article"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token literal-property property">dateModified</span><span class="token operator">:</span> <span class="token string">"git Last Modified"</span><span class="token punctuation">,</span>
+            <span class="token literal-property property">about</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token punctuation">{</span>
+                    <span class="token string-property property">"@type"</span><span class="token operator">:</span> <span class="token string">"Thing"</span><span class="token punctuation">,</span>
+                    <span class="token string-property property">"@id"</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token function">constructID</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>page<span class="token punctuation">.</span>url<span class="token punctuation">,</span> data<span class="token punctuation">.</span>metadata<span class="token punctuation">.</span>baseURL<span class="token punctuation">,</span> <span class="token string">"#concept_article_schema"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                    <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Article (schema.org)"</span><span class="token punctuation">,</span>
+                    <span class="token literal-property property">url</span><span class="token operator">:</span> <span class="token string">"https://schema.org/Article"</span><span class="token punctuation">,</span>
+                    <span class="token literal-property property">sameAs</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                        <span class="token string">"https://schema.org/Article"</span>
+                    <span class="token punctuation">]</span>
+                <span class="token punctuation">}</span><span class="token punctuation">,</span>
+                <span class="token punctuation">{</span>
+                    <span class="token string-property property">"@type"</span><span class="token operator">:</span> <span class="token string">"Thing"</span><span class="token punctuation">,</span>
+                    <span class="token string-property property">"@id"</span><span class="token operator">:</span> <span class="token string">"https://www.11ty.dev/"</span><span class="token punctuation">,</span>
+                    <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Eleventy"</span><span class="token punctuation">,</span>
+                    <span class="token literal-property property">alternateName</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                        <span class="token string">"11ty"</span>
+                    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+                    <span class="token literal-property property">url</span><span class="token operator">:</span> <span class="token string">"https://www.11ty.dev/"</span><span class="token punctuation">,</span>
+                    <span class="token literal-property property">sameAs</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                        <span class="token string">"https://github.com/11ty/eleventy/"</span><span class="token punctuation">,</span>
+                        <span class="token string">"https://www.youtube.com/c/EleventyVideo"</span><span class="token punctuation">,</span>
+                        <span class="token string">"https://neighborhood.11ty.dev/@11ty"</span><span class="token punctuation">,</span>
+                        <span class="token string">"https://bsky.app/profile/11ty.dev"</span>
+                    <span class="token punctuation">]</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token literal-property property">mentions</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token punctuation">{</span>
+                    <span class="token string-property property">"@type"</span><span class="token operator">:</span> <span class="token string">"Person"</span><span class="token punctuation">,</span>
+                    <span class="token string-property property">"@id"</span><span class="token operator">:</span> <span class="token string">"https://www.zachleat.com/"</span><span class="token punctuation">,</span>
+                    <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Zach Leatherman"</span><span class="token punctuation">,</span>
+                    <span class="token literal-property property">description</span><span class="token operator">:</span> <span class="token string">"Zach is the creator and maintainer of the Eleventy (11ty) static site generator"</span><span class="token punctuation">,</span>
+                    <span class="token literal-property property">url</span><span class="token operator">:</span> <span class="token string">"https://www.zachleat.com/"</span><span class="token punctuation">,</span>
+                    <span class="token literal-property property">mainEntityOfPage</span><span class="token operator">:</span> <span class="token string">"https://www.zachleat.com/about/"</span><span class="token punctuation">,</span>
+                    <span class="token literal-property property">sameAs</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                        <span class="token string">"https://www.zachleat.com/about/"</span><span class="token punctuation">,</span>
+                        <span class="token string">"https://www.google.com/search?kgmid=/g/11gbhswntq"</span><span class="token punctuation">,</span>
+                        <span class="token string">"https://github.com/zachleat/"</span><span class="token punctuation">,</span>
+                        <span class="token string">"https://fediverse.zachleat.com/@zachleat"</span><span class="token punctuation">,</span>
+                        <span class="token string">"https://bsky.app/profile/zachleat.com"</span>
+                    <span class="token punctuation">]</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">]</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span>
+<span class="token punctuation">}</span></code></pre>
+<h2 id="a-thank-you-to-zach-leatherman">A Thank You to Zach Leatherman</h2>
+<p>At this place it is appropriate for me to thank <a href="https://www.zachleat.com/">Zach Leatherman</a> for creating <a href="https://github.com/11ty/eleventy/">eleventy</a>. My gratitude to him for incorporating this great concept of the Data Cascade which dovetails nicely with how schema markup in JSON-LD works.</p>
+<p>This also gives me a chance to markup Zach as a mention in the article schema above.</p>
+<p>Besides, did you see <a href="https://www.google.com/search?kgmid=/g/11gbhswntq&amp;hl=en&amp;gl=US">Zach's impressive Google Knowledge Panel</a></p>
+<p><picture><source type="image/avif" srcset="/eleventy-base-blog-with-schema/blog/schema_markup_for_articles/T2JLD2Z1kN-5464.avif 5464w"><source type="image/webp" srcset="/eleventy-base-blog-with-schema/blog/schema_markup_for_articles/T2JLD2Z1kN-5464.webp 5464w"><img loading="lazy" decoding="async" src="/eleventy-base-blog-with-schema/blog/schema_markup_for_articles/T2JLD2Z1kN-5464.png" alt="A screenshot of Zach Leatherman's Google Knowledge Panel in the US" width="5464" height="4320"></picture></p>
+
+<ul class="links-nextprev"><li class="links-nextprev-prev">← Previous<br> <a href="/eleventy-base-blog-with-schema/blog/importance_of_schema_markup/">Why is Schema Markup important for any Website or Blog</a></li>
+</ul>
+
+			</heading-anchors>
+		</main>
+
+		<footer>
+			<p><em>Built with <a href="https://www.11ty.dev/">Eleventy v3.0.0</a>
+				by <a href="https://kajkandler.com/">Kaj Kandler</a></em></p>
+		</footer>
+
+		<!-- This page `/blog/schema_markup_for_articles/` was built on 2025-06-14T09:03:22.749Z -->
+		<script type="module" src="/eleventy-base-blog-with-schema/dist/xbxy_EL6cU.js"></script>
+	</body>
+</html>
