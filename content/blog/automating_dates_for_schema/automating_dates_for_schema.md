@@ -1,7 +1,7 @@
 ---
 title: "How to Automate 'datePublished' and 'dateModified' in Eleventy"
 description: DatePublished and dateModified are a pain to keep updated correctly in schema. This automation takes out the chore and reduces work to publish content.
-date: "git Last Modified"
+date: "git Created"
 tags:
 - WebPage
 - Article

@@ -1,7 +1,7 @@
 ---
-title: My tools to validate schema markup.
-description: To verify that schema is applied correctly, you need tools.
-date: "2025-06-05T08:00:00+02:00"
+title: My Tools to Validate Schema Markup
+description: To verify that schema is applied correctly, you need tools. I like the visualizer the most.
+date: "git Created"
 tags: 
 - Tools
 - Validation

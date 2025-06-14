@@ -1,7 +1,7 @@
 ---
 title: How to Add WebPage Schema to All Pages on the Website
 description: Instructions how to add WebPage Schema globally and build a utility to construct schema '@id' URLs.
-date: "git Last Modified"
+date: "git Created"
 tags: 
 - GlobalLevel
 - WebPage
