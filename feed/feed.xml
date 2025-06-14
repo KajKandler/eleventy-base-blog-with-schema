@@ -5,15 +5,57 @@
   <subtitle>The Eleventy (11ty) base-blog starter project enhanced with schema.org markup. Howto tutorial included!</subtitle>
   <link href="https://kajkandler.github.io/eleventy-base-blog-with-schema/feed/feed.xml" rel="self" />
   <link href="https://kajkandler.github.io/eleventy-base-blog-with-schema/" />
-  <updated>2025-06-14T07:00:13Z</updated>
+  <updated>2025-06-14T10:08:13Z</updated>
   <id>https://kajkandler.github.io/eleventy-base-blog-with-schema/</id>
   <author>
     <name>Kaj Kandler</name>
   </author>
   <entry>
-    <title>Schema Markup for blog Articles</title>
+    <title>My Tools to Validate Schema Markup</title>
+    <link href="https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/tools_to_validate_schema/" />
+    <updated>2025-06-14T10:08:13Z</updated>
+    <id>https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/tools_to_validate_schema/</id>
+    <content type="html">&lt;p&gt;When applying schema, we want to validate that is appears and is correct.&lt;/p&gt;
+&lt;h2 id=&quot;validate-with-the-browser-developer-tools&quot;&gt;Validate with the Browser Developer Tools&lt;/h2&gt;
+&lt;p&gt;The simplest method is to validate the existence of your schema tags by looking at the source code of the page.&lt;/p&gt;
+&lt;p&gt;Right click anywhere in your page and select &amp;quot;View Page Source.&amp;quot;&lt;/p&gt;
+&lt;p&gt;In the new tab search for the &lt;code&gt;type=&amp;quot;application/ld+json&amp;quot;&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;use-the-schema-org-validator&quot;&gt;Use the schema.org Validator&lt;/h2&gt;
+&lt;p&gt;The schema.org website offers a &lt;a href=&quot;https://validator.schema.org/&quot;&gt;schema validator&lt;/a&gt; for testing your schema.&lt;/p&gt;
+&lt;p&gt;As we are working on a local development site, we can paste a URL into the validator.&lt;/p&gt;
+&lt;p&gt;Therefore we&#39;ll have to copy the entire source code and pas it into the snippet tab. Then click &amp;quot;Run Test&amp;quot;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Note: Make sure you see only one entity with nested entities inside.
+If that is not the case, you are missing some connections between the entities in the graph.&lt;/p&gt;
+&lt;p&gt;You want to double check your &lt;code&gt;&amp;quot;@id&amp;quot;&lt;/code&gt; attributes if they are corresponding with each other.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;schema-markup-valdiator-bookmarklet&quot;&gt;Schema Markup Valdiator Bookmarklet&lt;/h3&gt;
+&lt;p&gt;To valdiate schema markup on public websites, you can use the &lt;a href=&quot;https://sitebulb.com/resources/guides/schema-markup-validator-bookmarklet/&quot;&gt;Schema Markup Validator Bookmarklet&lt;/a&gt; by Sitebulb.&lt;/p&gt;
+&lt;p&gt;It offers one click validation of the schema on the current page. The bookmarklet takes the URL of the current page as input to the schema.org validator tool.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Note: Unfortunately, you can not use this for local development.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;use-google-rich-results-tester&quot;&gt;Use Google Rich Results Tester&lt;/h2&gt;
+&lt;p&gt;Google offers a schema validator that is more opinionated than the schema.org validator. You should use it if you are aiming for rich results in Google&#39;s results.&lt;/p&gt;
+&lt;h3 id=&quot;how-to-use-the-rich-results-tester&quot;&gt;How to use the Rich Results Tester&lt;/h3&gt;
+&lt;p&gt;First of all, &lt;a href=&quot;https://search.google.com/test/rich-results&quot;&gt;Google&#39;s Rich Results Tester (RTT)&lt;/a&gt; only shows entities that it is interested in. That includes sometimes sub-entities of such as &amp;quot;MedicalOrganization&amp;quot; which is by definition also an &amp;quot;Organization&amp;quot;, but Google chooses to ignore this.&lt;/p&gt;
+&lt;p&gt;Yet, Google also shows errors, such as required properties within an entity. Schema.org does not define such things, but Google apparently cares.&lt;/p&gt;
+&lt;h2 id=&quot;use-the-seo-schema-visualizer-for-development&quot;&gt;Use the SEO Schema Visualizer for Development&lt;/h2&gt;
+&lt;p&gt;To me the most useful tool in development is the &lt;a href=&quot;https://www.shtros.com/seo-schema-visualizer/&quot;&gt;SEO Schema Visualizer&lt;/a&gt; by &lt;a href=&quot;https://www.shtros.com/&quot;&gt;Ziggy Shtrosberg&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;This tool quickly draws a graph of your schema entities. That way you can easily see of they are connected the way you want them to be. It also offers a clear display of the JSON-LD content in a nice format.&lt;/p&gt;
+&lt;p&gt;It is my day to day tool, despite the fact that I tried my hand on a &lt;a href=&quot;https://entitygarden.com/tools/chrome_extension_eg_sidebar/&quot;&gt;Chrome Markup Sidebar&lt;/a&gt;. Maybe some day I get around to fix that thing.&lt;/p&gt;
+&lt;h2 id=&quot;other-chrome-extensions&quot;&gt;Other Chrome Extensions&lt;/h2&gt;
+&lt;p&gt;There are many Chrome extensions that also show schema. However, non is as useful and reliable as the SEO Schema Visualizer.&lt;/p&gt;
+&lt;h2 id=&quot;my-recommendations-for-schema-validation&quot;&gt;My Recommendations for Schema Validation&lt;/h2&gt;
+&lt;p&gt;Use all the tools available.&lt;/p&gt;
+&lt;p&gt;For development I recommend the SEO Schema Visualizer Extension&lt;/p&gt;
+&lt;p&gt;For validating published websites I recommend to use both the schema.org validator and the Google Rich Results Tester as they show different omissions and errors.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Schema Markup for Blog Articles</title>
     <link href="https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/schema_markup_for_articles/" />
-    <updated>2025-06-14T07:00:13Z</updated>
+    <updated>2025-06-14T10:08:13Z</updated>
     <id>https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/schema_markup_for_articles/</id>
     <content type="html">&lt;p&gt;Every blog post is best marked up as an article.&lt;/p&gt;
 &lt;h2 id=&quot;adding-article-schema-to-all-posts-in-the-blog&quot;&gt;Adding Article Schema to All Posts in the Blog&lt;/h2&gt;
@@ -57,7 +99,7 @@
         &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
             &lt;span class=&quot;token string-property property&quot;&gt;&quot;@type&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;Article&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
             &lt;span class=&quot;token string-property property&quot;&gt;&quot;@id&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;constructID&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;data&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;page&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;url&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; data&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;metadata&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;baseURL&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;#article&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-            &lt;span class=&quot;token literal-property property&quot;&gt;dateModified&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;git Last Modified&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;token literal-property property&quot;&gt;dateModified&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;git Created&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
             &lt;span class=&quot;token literal-property property&quot;&gt;about&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;
                 &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
                     &lt;span class=&quot;token string-property property&quot;&gt;&quot;@type&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;Thing&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
@@ -112,18 +154,18 @@
 </content>
   </entry>
   <entry>
-    <title>Why is Schema Markup important for any Website or Blog</title>
+    <title>Why is Schema Markup Important for any Website or Blog</title>
     <link href="https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/importance_of_schema_markup/" />
-    <updated>2025-06-14T07:00:13Z</updated>
+    <updated>2025-06-14T10:08:13Z</updated>
     <id>https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/importance_of_schema_markup/</id>
     <content type="html">&lt;p&gt;Search engines like Google have evolved from matching words to matching based on meaning of the words. That way Google can distinguish apple the company from apple the fruit. It also allows a search engine to take semantics into account.&lt;/p&gt;
 &lt;p&gt;Starting in 2012, the largest search engines in the world asked website publishers to mark up their semantic entities. They founded schema.org to build a common vocabulary of &amp;quot;things&amp;quot;. Things can be classified in a taxonomy, such as &amp;quot;Organization&amp;quot;, &amp;quot;Corporation&amp;quot;, &amp;quot;Person&amp;quot;, &amp;quot;Creative Work&amp;quot;, &amp;quot;Book&amp;quot;, &amp;quot;Website&amp;quot;, &amp;quot;Webapge&amp;quot;, or &amp;quot;Article&amp;quot;.&lt;/p&gt;
-&lt;h2 id=&quot;why-are-schema-org-annotations-important-for-seo&quot;&gt;Why are schema.org annotations important for SEO?&lt;/h2&gt;
+&lt;h2 id=&quot;why-are-schema-org-annotations-important-for-seo&quot;&gt;Why are schema.org Annotations Important for SEO?&lt;/h2&gt;
 &lt;p&gt;Schema.org annotations are important for SEO because Google admittedly supports some of its rich results with structured data.&lt;/p&gt;
 &lt;p&gt;For its rich results, such as Featured Snippet or Knowledge Panel, Google uses a subset of the schema.org defined entity types and properties.&lt;/p&gt;
 &lt;p&gt;Google also emphasizes that it prefers helpful content and content that is published by reputable people or organizations (EEAT). Schema.org annotations can make it clear who is responsible for the content, as well as how to contact the publisher.&lt;/p&gt;
 &lt;h2 id=&quot;why-are-schema-org-annotations-important-for-digital-persona-optimization&quot;&gt;Why are schema.org Annotations Important for Digital Persona Optimization?&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;https://entitygarden.com/glossary/digital_persona_optimization/&quot;&gt;Digital Persona Optimization&lt;/a&gt; is the process to educate search engines about profiles and appearances of a single persona. It aims to create a network of information, so search engines understand the entity.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://entitygarden.com/glossary/digital_persona_optimization/&quot;&gt;Digital Persona Optimization&lt;/a&gt; is the process to educate search engines about profiles and appearances of a single &lt;a href=&quot;https://entitygarden.com/glossary/digital_persona/&quot;&gt;digital persona&lt;/a&gt;. It aims to create a network of information, so search engines understand the entity.&lt;/p&gt;
 &lt;p&gt;Schema markup makes it clear that a persona or organization has different profiles where content is  published. Schema.org annotations can further specify weather a person is the host or was a guest in a podcast. Such structured data can even specify if a person (or thing) is the subject of a podcast or merely mentioned in an episode.&lt;/p&gt;
 &lt;p&gt;Google, Bing, OpenAI, Anthropic, Grok, and other crawlers extract facts about people, organizations, locations, events and creative works. They want to understand the semantic relationships between them. Structured data in form of schema.org annotations helps them to build a knowledge graph. That knowledge graph grounds the current flavor of Large Language Models in reality.&lt;/p&gt;
 &lt;p&gt;The most powerful tool to optimize your digital persona is a &lt;a href=&quot;https://entitygarden.com/glossary/digital_persona_hub/&quot;&gt;digital persona hub&lt;/a&gt; based on a personal website. On your own website, you can leverage  schema markup to make your links even more meaningful.&lt;/p&gt;
@@ -132,7 +174,7 @@
 &lt;p&gt;— Kaj Kandler&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h2 id=&quot;best-practices-for-schema-markup&quot;&gt;Best Practices for Schema Markup&lt;/h2&gt;
-&lt;h3 id=&quot;1-annotate-your-website-with-global-information&quot;&gt;1. Annotate your Website with Global Information&lt;/h3&gt;
+&lt;h3 id=&quot;1-annotate-your-website-with-global-information&quot;&gt;1. Annotate Your Website with Global Information&lt;/h3&gt;
 &lt;p&gt;Annotate your website with information such as who is the publisher and how can the publisher be contacted.&lt;/p&gt;
 &lt;p&gt;Use the entities Website, Webpage together with Organization or Person as the publisher. Include information how to contact the publisher. Either per form, email or phone address. The more contact information the better it is for your reputation in Google&#39;s eyes.&lt;/p&gt;
 &lt;p&gt;Further more, add any public identifier of your organization, such as tax IDs or industry classifications.&lt;/p&gt;
@@ -145,12 +187,12 @@
 &lt;h3 id=&quot;3-annotate-articles-in-a-blog&quot;&gt;3. Annotate Articles in a Blog&lt;/h3&gt;
 &lt;p&gt;For Blog articles annotate the author with the author&#39;s about page as url.&lt;/p&gt;
 &lt;p&gt;Also annotate the main topics the article is about as well as major mentions.&lt;/p&gt;
-&lt;h3 id=&quot;4-add-a-breadcrumbs-hierarchy-to-the-schema-markup&quot;&gt;4. Add a Breadcrumbs hierarchy to the Schema markup&lt;/h3&gt;
+&lt;h3 id=&quot;4-add-a-breadcrumbs-hierarchy-to-the-schema-markup&quot;&gt;4. Add a Breadcrumbs Hierarchy to the Schema Markup&lt;/h3&gt;
 &lt;p&gt;Breadcrumbs are a common feature on many content management systems. They help users to navigate and search engines to understand the structure of the content.&lt;/p&gt;
 &lt;p&gt;You can add the breadcrumb to a Webpage annotation.&lt;/p&gt;
-&lt;h3 id=&quot;4-annotation-should-match-the-content-on-the-page&quot;&gt;4. Annotation Should Match the Content on the Page&lt;/h3&gt;
+&lt;h3 id=&quot;4-annotations-should-match-the-content-on-the-page&quot;&gt;4. Annotations Should Match the Content on the Page&lt;/h3&gt;
 &lt;p&gt;Don&#39;t make things up in the schema markup. You want the schema markup to confirm what is written on the page.&lt;/p&gt;
-&lt;h3 id=&quot;5-connect-the-schema-markup-to-one-graph&quot;&gt;5. Connect the Schema Markup to one Graph&lt;/h3&gt;
+&lt;h3 id=&quot;5-connect-the-schema-markup-to-a-single-graph&quot;&gt;5. Connect the Schema Markup to a Single Graph&lt;/h3&gt;
 &lt;p&gt;It is important that you mark up the different entities but connect them either through nested schema and or through proper &amp;quot;@id&amp;quot; connections.&lt;/p&gt;
 &lt;p&gt;Three or four disconnected graphs erode the power of the schema markup.&lt;/p&gt;
 &lt;h2 id=&quot;final-thoughts&quot;&gt;Final Thoughts&lt;/h2&gt;
@@ -161,7 +203,7 @@
   <entry>
     <title>How to Automate &#39;datePublished&#39; and &#39;dateModified&#39; in Eleventy</title>
     <link href="https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/automating_dates_for_schema/" />
-    <updated>2025-06-14T07:00:13Z</updated>
+    <updated>2025-06-14T10:08:13Z</updated>
     <id>https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/automating_dates_for_schema/</id>
     <content type="html">&lt;p&gt;The schema of WebPages and Articles have two important attributes datePublished and dateModified.&lt;/p&gt;
 &lt;p&gt;I it is all too easy to forget updating these attributes with the final publish or any update. Therefore I set out to reasonably automate setting these attributes.&lt;/p&gt;
@@ -277,7 +319,7 @@
   <entry>
     <title>How to Add WebPage Schema to All Pages on the Website</title>
     <link href="https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/adding_web_page_schema_globally/" />
-    <updated>2025-06-14T07:00:13Z</updated>
+    <updated>2025-06-14T10:08:13Z</updated>
     <id>https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/adding_web_page_schema_globally/</id>
     <content type="html">&lt;p&gt;All pages on a Website are WebPages. Let&#39;s reflect this in our schema.&lt;/p&gt;
 &lt;p&gt;But first lets talk about how to generate systematically URLs for &lt;code&gt;&amp;quot;@id&amp;quot;&lt;/code&gt; attributes.&lt;/p&gt;
@@ -399,7 +441,7 @@ Best practice is to copy paste the &lt;code&gt;&amp;quot;@type&amp;quot;&lt;/cod
   <entry>
     <title>How to Add Global Schema to a Website</title>
     <link href="https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/adding_global_schema_to_eleventy/" />
-    <updated>2025-06-14T07:00:13Z</updated>
+    <updated>2025-06-14T10:08:13Z</updated>
     <id>https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/adding_global_schema_to_eleventy/</id>
     <content type="html">&lt;p&gt;We can add schema markup in our global template so it is included in any page.&lt;/p&gt;
 &lt;h2 id=&quot;why-not-use-a-plugin-for-schema-markup&quot;&gt;Why not use a Plugin for Schema Markup&lt;/h2&gt;
@@ -497,7 +539,7 @@ Best practice is to copy paste the &lt;code&gt;&amp;quot;@type&amp;quot;&lt;/cod
   <entry>
     <title>How to Add Breadcrumbs with Schema to All Pages</title>
     <link href="https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/adding_breadcrumbs_with_schema/" />
-    <updated>2025-06-14T07:00:13Z</updated>
+    <updated>2025-06-14T10:08:13Z</updated>
     <id>https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/adding_breadcrumbs_with_schema/</id>
     <content type="html">&lt;p&gt;Breadcrumbs are a common form of navigation on Blogs and Websites.&lt;/p&gt;
 &lt;p&gt;They help users to orient themselves with regards to the information hierarchy of the website.&lt;/p&gt;
@@ -689,48 +731,6 @@ Best practice is to copy paste the &lt;code&gt;&amp;quot;@type&amp;quot;&lt;/cod
                 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
 			&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Now we can validate our schema on all pages and it will (hopefully) be one connected graph again.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>My tools to validate schema markup.</title>
-    <link href="https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/tools_to_validate_schema/" />
-    <updated>2025-06-05T06:00:00Z</updated>
-    <id>https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/tools_to_validate_schema/</id>
-    <content type="html">&lt;p&gt;When applying schema, we want to validate that is appears and is correct.&lt;/p&gt;
-&lt;h2 id=&quot;validate-with-the-browser-developer-tools&quot;&gt;Validate with the Browser Developer Tools&lt;/h2&gt;
-&lt;p&gt;The simplest method is to validate the existence of your schema tags by looking at the source code of the page.&lt;/p&gt;
-&lt;p&gt;Right click anywhere in your page and select &amp;quot;View Page Source.&amp;quot;&lt;/p&gt;
-&lt;p&gt;In the new tab search for the &lt;code&gt;type=&amp;quot;application/ld+json&amp;quot;&lt;/code&gt;.&lt;/p&gt;
-&lt;h2 id=&quot;use-the-schema-org-validator&quot;&gt;Use the schema.org Validator&lt;/h2&gt;
-&lt;p&gt;The schema.org website offers a &lt;a href=&quot;https://validator.schema.org/&quot;&gt;schema validator&lt;/a&gt; for testing your schema.&lt;/p&gt;
-&lt;p&gt;As we are working on a local development site, we can paste a URL into the validator.&lt;/p&gt;
-&lt;p&gt;Therefore we&#39;ll have to copy the entire source code and pas it into the snippet tab. Then click &amp;quot;Run Test&amp;quot;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Note: Make sure you see only one entity with nested entities inside.
-If that is not the case, you are missing some connections between the entities in the graph.&lt;/p&gt;
-&lt;p&gt;You want to double check your &lt;code&gt;&amp;quot;@id&amp;quot;&lt;/code&gt; attributes if they are corresponding with each other.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id=&quot;schema-markup-valdiator-bookmarklet&quot;&gt;Schema Markup Valdiator Bookmarklet&lt;/h3&gt;
-&lt;p&gt;To valdiate schema markup on public websites, you can use the &lt;a href=&quot;https://sitebulb.com/resources/guides/schema-markup-validator-bookmarklet/&quot;&gt;Schema Markup Validator Bookmarklet&lt;/a&gt; by Sitebulb.&lt;/p&gt;
-&lt;p&gt;It offers one click validation of the schema on the current page. The bookmarklet takes the URL of the current page as input to the schema.org validator tool.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Note: Unfortunately, you can not use this for local development.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&quot;use-google-rich-results-tester&quot;&gt;Use Google Rich Results Tester&lt;/h2&gt;
-&lt;p&gt;Google offers a schema validator that is more opinionated than the schema.org validator. You should use it if you are aiming for rich results in Google&#39;s results.&lt;/p&gt;
-&lt;h3 id=&quot;how-to-use-the-rich-results-tester&quot;&gt;How to use the Rich Results Tester&lt;/h3&gt;
-&lt;p&gt;First of all, &lt;a href=&quot;https://search.google.com/test/rich-results&quot;&gt;Google&#39;s Rich Results Tester (RTT)&lt;/a&gt; only shows entities that it is interested in. That includes sometimes sub-entities of such as &amp;quot;MedicalOrganization&amp;quot; which is by definition also an &amp;quot;Organization&amp;quot;, but Google chooses to ignore this.&lt;/p&gt;
-&lt;p&gt;Yet, Google also shows errors, such as required properties within an entity. Schema.org does not define such things, but Google apparently cares.&lt;/p&gt;
-&lt;h2 id=&quot;use-the-seo-schema-visualizer-for-development&quot;&gt;Use the SEO Schema Visualizer for Development&lt;/h2&gt;
-&lt;p&gt;To me the most useful tool in development is the &lt;a href=&quot;https://www.shtros.com/seo-schema-visualizer/&quot;&gt;SEO Schema Visualizer&lt;/a&gt; by &lt;a href=&quot;https://www.shtros.com/&quot;&gt;Ziggy Shtrosberg&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;This tool quickly draws a graph of your schema entities. That way you can easily see of they are connected the way you want them to be. It also offers a clear display of the JSON-LD content in a nice format.&lt;/p&gt;
-&lt;p&gt;It is my day to day tool, despite the fact that I tried my hand on a &lt;a href=&quot;https://entitygarden.com/tools/chrome_extension_eg_sidebar/&quot;&gt;Chrome Markup Sidebar&lt;/a&gt;. Maybe some day I get around to fix that thing.&lt;/p&gt;
-&lt;h2 id=&quot;other-chrome-extensions&quot;&gt;Other Chrome Extensions&lt;/h2&gt;
-&lt;p&gt;There are many Chrome extensions that also show schema. However, non is as useful and reliable as the SEO Schema Visualizer.&lt;/p&gt;
-&lt;h2 id=&quot;my-recommendations-for-schema-validation&quot;&gt;My Recommendations for Schema Validation&lt;/h2&gt;
-&lt;p&gt;Use all the tools available.&lt;/p&gt;
-&lt;p&gt;For development I recommend the SEO Schema Visualizer Extension&lt;/p&gt;
-&lt;p&gt;For validating published websites I recommend to use both the schema.org validator and the Google Rich Results Tester as they show different omissions and errors.&lt;/p&gt;
 </content>
   </entry>
 </feed>

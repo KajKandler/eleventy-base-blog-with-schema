@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Eleventy Base Blog v9 + Structured Data</title>
+		<title>About Eleventy + Schema Markup</title>
 		<meta name="description" content="The Eleventy (11ty) base-blog starter project enhanced with schema.org markup. Howto tutorial included!">
 		<link rel="alternate" href="/eleventy-base-blog-with-schema/feed/feed.xml" type="application/atom+xml" title="Eleventy Base Blog v9 + Structured Data">
 		<meta name="generator" content="Eleventy v3.0.0">
@@ -347,7 +347,7 @@ header {
 		
 
 		
-		<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://kajkandler.github.io/#website","name":"Eleventy Base Blog v9 + Structured Data","description":"The Eleventy (11ty) base-blog starter project enhanced with schema.org markup. Howto tutorial included!","url":"https://kajkandler.github.io/","publisher":{"@type":"Person","@id":"https://kajkandler.github.io/#person_kaj_kandler"}},{"@type":"WebPage","@id":"https://kajkandler.github.io/about/#webpage","url":"https://kajkandler.github.io/about/","datePublished":"2025-06-14T07:00:13.000Z","dateModified":"2025-06-14T07:00:13.000Z","isPartOf":{"@type":"WebSite","@id":"https://kajkandler.github.io/#website"},"author":{"@type":"Person","@id":"https://kajkandler.github.io/#person_kaj_kandler"},"breadcrumb":{"@type":"BreadcrumbList","@id":"https://kajkandler.github.io/about/#breadcrumb"}},{"@type":"Person","@id":"https://kajkandler.github.io/#person_kaj_kandler","name":"Kaj Kandler","url":"https://kajkandler.com/","givenName":"Kaj","familyName":"Kandler","jobTitle":"Entrepreneur","sameAs":["https://www.linkedin.com/in/kajkandler/","https://github.com/KajKandler","https://medium.com/@kajkandler","https://entitygarden.com/about_kaj_kandler/"]}]}</script>
+		<script type="application/ld+json">{"@graph":[{"@type":"WebSite","@id":"https://kajkandler.github.io/#website","about":[{"@type":"Thing","@id":"https://www.11ty.dev/","name":"Eleventy","alternateName":["11ty"],"url":"https://www.11ty.dev/","sameAs":["https://github.com/11ty/eleventy/","https://www.youtube.com/c/EleventyVideo","https://neighborhood.11ty.dev/@11ty","https://bsky.app/profile/11ty.dev"]},{"@type":"EventSeries","@id":"https://11tymeetup.dev/","name":"Eleventy Meetup","alternateName":["11ty Meetup"],"url":"https://11tymeetup.dev/","sameAs":["https://www.youtube.com/channel/UC1QVD9VQPteu0E5Qq5vZAQA"],"about":[{"@type":"Thing","@id":"https://www.11ty.dev/"}],"organizer":{"@type":"Person","@id":"https://sia.codes/about/","name":"Sia Karamalegos","description":"Sia Karamalegos builds fast, resilient websites. She specializes in optimizing web performance. Sia Karamalegos is a public speaker and organizes the Eleventy Meetup.","url":"https://sia.codes/about/","mainEntityOfPage":"https://sia.codes/about/","sameAs":["https://sia.codes/about/","https://www.google.com/search?kgmid=/g/11gbhswntq","https://github.com/siakaramalegos","https://bsky.app/profile/sia.codes","https://front-end.social/@sia","https://www.linkedin.com/in/karamalegos/"]}}],"mentions":[{"@type":"Person","@id":"https://kajkandler.com/"},{"@type":"Thing","@id":"https://schema.org/","name":"schema.org","description":"Schema.org is an initiative by the major search engines to collaboratively create and maintain structured data on the Internet.","url":"https://schema.org/","sameAs":["https://schema.org/docs/about.html"]},{"@type":"WebSite","@id":"https://entitygarden.com/","name":"Entity Garden","description":"Entity Garden is a digital persona optimization agency. They help solo professionals and public speakers to become visible in Google and LLM chat bots.","url":"https://entitygarden.com/","publisher":{"@type":"Organization"}},{"@type":"Organization","name":"Entity Garden","alternateName":["Entity Garden by Kaj Kandler"],"url":"https://entitygarden.com/about_entity_garden/","sameAs":["https://entitygarden.com/","https://www.linkedin.com/company/entity-garden/","https://www.crunchbase.com/organization/entity-garden"],"address":{"@type":"PostalAddress","name":"Entity Garden Address","streetAddress":"Sangestr. 22","addressCountry":"DE","addressLocality":"Berlin","postalCode":"13437"},"founder":{"@type":"Person","@id":"https://kajkandler.com/"}}],"name":"Eleventy Base Blog v9 + Structured Data","description":"The Eleventy (11ty) base-blog starter project enhanced with schema.org markup. Howto tutorial included!","url":"https://kajkandler.github.io/","publisher":{"@type":"Person","@id":"https://kajkandler.github.io/#person_kaj_kandler"}},{"@type":"WebPage","@id":"https://kajkandler.github.io/about/#webpage","name":"About Eleventy + Schema Markup","url":"https://kajkandler.github.io/about/","datePublished":"2025-06-14T10:08:13.000Z","dateModified":"2025-06-14T10:08:13.000Z","isPartOf":{"@type":"WebSite","@id":"https://kajkandler.github.io/#website"},"author":{"@type":"Person","@id":"https://kajkandler.github.io/#person_kaj_kandler"},"breadcrumb":{"@type":"BreadcrumbList","@id":"https://kajkandler.github.io/about/#breadcrumb"}},{"@type":"Person","@id":"https://kajkandler.github.io/#person_kaj_kandler","name":"Kaj Kandler","url":"https://kajkandler.com/","givenName":"Kaj","familyName":"Kandler","jobTitle":"Entrepreneur","sameAs":["https://www.linkedin.com/in/kajkandler/","https://github.com/KajKandler","https://medium.com/@kajkandler","https://entitygarden.com/about_kaj_kandler/"]}],"@context":"https://schema.org"}</script>
 		
         
         
@@ -387,13 +387,41 @@ header {
 		<li>(Optional) Edit <code>eleventy.config.js</code> with your <a href="https://www.11ty.dev/docs/config/">configuration preferences</a>.</li>
 		<li>Delete this message from <code>_includes/layouts/home.njk</code>.</li>
 	</ol>
-	<p><em>This is an <a href="https://www.11ty.dev/">Eleventy project</a> created from the <a href="https://github.com/11ty/eleventy-base-blog"><code>eleventy-base-blog</code> repo</a>.</em></p>
-</div>
+	<p>
+		<em>This is an <a href="https://www.11ty.dev/">Eleventy project</a> created from the 
+		<a href="https://github.com/11ty/eleventy-base-blog"><code>eleventy-base-blog</code> repo</a>.</em>
+		It adds schema.org structured data for SEO and <a href="https://entitygarden.com/glossary/digital_persona_optimization/">Digital Persona Optimization</a>
+	</p>
+	<p>The Archive contains articles detailing the approach step by step. Start by understanding "<a href="/eleventy-base-blog-with-schema/blog/importance_of_schema_markup/">Why schema markup helps pages to rank</a> and 
+	why it helps you to get your important entities into Google's Knowledge Graph. You find an overview of the articles in the <a href="/eleventy-base-blog-with-schema/about/">About Page</a></p><p>
+</p></div>
 <!-- Stop deleting -->
 
-<h1 id="about">About</h1>
-<p>I am a person that writes stuff.</p>
+<h2 id="about-this-eleventy-starter-project">About this Eleventy Starter Project</h2>
+<p>This eleventy Starter Project demonstrates how to add schema.org markup to the eleventy base blog starter project.</p>
+<p>Schema markup <a href="/eleventy-base-blog-with-schema/blog/importance_of_schema_markup/">helps with SEO and Digital Persona Optimization</a>.</p>
+<p>It contains a step by step guide how to add schema markup without any plugins.</p>
+<ol>
+<li><a href="/eleventy-base-blog-with-schema/blog/importance_of_schema_markup/">Why is schema markup important</a> for a blog or a personal portfolio website?</li>
+<li>How can I <a href="/eleventy-base-blog-with-schema/blog/adding_global_schema_to_eleventy/">add global schema to all pages</a> generated by eleventy?</li>
+<li>Which <a href="/eleventy-base-blog-with-schema/blog/tools_to_validate_schema/">Tools to use for validating schema markup</a>?</li>
+<li>How to <a href="/eleventy-base-blog-with-schema/blog/adding_web_page_schema_globally.md">add WebPage schema to all pages</a>?</li>
+<li>How to <a href="/eleventy-base-blog-with-schema/blog/schema_markup_for_articles.md">mark up your articles with schema</a>?</li>
+<li>How to <a href="/eleventy-base-blog-with-schema/blog/automating_dates_for_schema.md">Automate the publishedDate and modifiedDate for your pages</a> and articles?</li>
+<li>How To <a href="/eleventy-base-blog-with-schema/blog/adding_breadcrumbs_with_schema.md">Add Breadcrumbs based on navigation hierarchy</a>. This article also show show to add the breadcrumb navigation to the website.</li>
+</ol>
+<!-- This blog is published live at ... -->
+<h2 id="about-kaj-kandler">About Kaj Kandler</h2>
+<p>This Eleventy Starter Project has been developed and documented by <a href="https://kajkandler.com/">Kaj Kandler</a></p>
+<p>Kaj Kandler is an expert in <a href="https://entitygarden.com/glossary/digital_persona_optimization/">Digital Persona Optimization (DPO)</a>. He lives in Berlin, Germany.
+Mr. Kandler helps solo professionals, coaches and public speakers to be visible in Google Search and AI chat bots. He elevates their personal brand through clarity and consistency of message.
+Kaj helps public personas build a brand that search engines understand. Search engines like Google Search will recognize consistent information as factual. Google shows a rich knowledge panel for the brand based on factual information.</p>
+<p>Kaj Kandler works with static site generators since his times at <a href="https://conficio.com">Conficio</a>, which he generated with <a href="https://cocoon.apache.org/">Apache Cocoon</a>. In 2025 he discovered <a href="https://www.11ty.dev/">Eleventy</a> (11ty) and migrated the websites <a href="https://kajkandler.com/">kajkandler.com</a> and <a href="https://entitygarden.com">Entity Garden</a> from <a href="https://github.com/blurry-dev/blurry">Blurry</a>. The main reason to migrate was the possibility to implement efficiently <a href="https://schema.org/">schema markup</a> through the <a href="https://www.11ty.dev/docs/data-cascade/">Data Cascade</a>.</p>
+<!-- ## About the 11ty Meetup
 
+Kaj Kandler published this 11ty Starter Project to present his methods to integrate schema markup at the 11ty Meetup. Anyone interested is invited to join the meetup and ask questions.
+
+A recording of the Meetup is available at ... -->
 
 			</heading-anchors>
 		</main>
@@ -403,7 +431,7 @@ header {
 				by <a href="https://kajkandler.com/">Kaj Kandler</a></em></p>
 		</footer>
 
-		<!-- This page `/about/` was built on 2025-06-14T09:19:21.142Z -->
+		<!-- This page `/about/` was built on 2025-06-14T10:08:50.237Z -->
 		<script type="module" src="/eleventy-base-blog-with-schema/dist/xbxy_EL6cU.js"></script>
 	</body>
 </html>
