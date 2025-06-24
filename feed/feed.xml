@@ -5,7 +5,7 @@
   <subtitle>The Eleventy (11ty) base-blog starter project enhanced with schema.org markup. Howto tutorial included!</subtitle>
   <link href="https://kajkandler.github.io/eleventy-base-blog-with-schema/feed/feed.xml" rel="self" />
   <link href="https://kajkandler.github.io/eleventy-base-blog-with-schema/" />
-  <updated>2025-06-18T13:32:37Z</updated>
+  <updated>2025-06-24T19:00:57Z</updated>
   <id>https://kajkandler.github.io/eleventy-base-blog-with-schema/</id>
   <author>
     <name>Kaj Kandler</name>
@@ -13,7 +13,7 @@
   <entry>
     <title>My Tools to Validate Schema Markup</title>
     <link href="https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/tools_to_validate_schema/" />
-    <updated>2025-06-18T13:32:37Z</updated>
+    <updated>2025-06-24T19:00:57Z</updated>
     <id>https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/tools_to_validate_schema/</id>
     <content type="html">&lt;p&gt;When applying schema, we want to validate that is appears and is correct.&lt;/p&gt;
 &lt;h2 id=&quot;validate-with-the-browser-developer-tools&quot;&gt;Validate with the Browser Developer Tools&lt;/h2&gt;
@@ -55,7 +55,7 @@ If that is not the case, you are missing some connections between the entities i
   <entry>
     <title>Schema Markup for Blog Articles</title>
     <link href="https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/schema_markup_for_articles/" />
-    <updated>2025-06-18T13:32:37Z</updated>
+    <updated>2025-06-24T19:00:57Z</updated>
     <id>https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/schema_markup_for_articles/</id>
     <content type="html">&lt;p&gt;Every blog post is best marked up as an article.&lt;/p&gt;
 &lt;h2 id=&quot;adding-article-schema-to-all-posts-in-the-blog&quot;&gt;Adding Article Schema to All Posts in the Blog&lt;/h2&gt;
@@ -144,7 +144,7 @@ If that is not the case, you are missing some connections between the entities i
   <entry>
     <title>Why is Schema Markup Important for any Website or Blog</title>
     <link href="https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/importance_of_schema_markup/" />
-    <updated>2025-06-18T13:32:37Z</updated>
+    <updated>2025-06-24T19:00:57Z</updated>
     <id>https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/importance_of_schema_markup/</id>
     <content type="html">&lt;p&gt;Search engines like Google have evolved from matching words to matching based on meaning of the words. That way Google can distinguish apple the company from apple the fruit. It also allows a search engine to take semantics into account.&lt;/p&gt;
 &lt;p&gt;Starting in 2012, the largest search engines in the world asked website publishers to mark up their semantic entities. They founded schema.org to build a common vocabulary of &amp;quot;things&amp;quot;. Things can be classified in a taxonomy, such as &amp;quot;Organization&amp;quot;, &amp;quot;Corporation&amp;quot;, &amp;quot;Person&amp;quot;, &amp;quot;Creative Work&amp;quot;, &amp;quot;Book&amp;quot;, &amp;quot;Website&amp;quot;, &amp;quot;Webapge&amp;quot;, or &amp;quot;Article&amp;quot;.&lt;/p&gt;
@@ -191,7 +191,7 @@ If that is not the case, you are missing some connections between the entities i
   <entry>
     <title>How to Automate &#39;datePublished&#39; and &#39;dateModified&#39; in Eleventy</title>
     <link href="https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/automating_dates_for_schema/" />
-    <updated>2025-06-18T13:32:37Z</updated>
+    <updated>2025-06-24T19:00:57Z</updated>
     <id>https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/automating_dates_for_schema/</id>
     <content type="html">&lt;p&gt;The schema of WebPages and Articles have two important attributes datePublished and dateModified.&lt;/p&gt;
 &lt;p&gt;I it is all too easy to forget updating these attributes with the final publish or any update. Therefore I set out to reasonably automate setting these attributes.&lt;/p&gt;
@@ -307,7 +307,7 @@ If that is not the case, you are missing some connections between the entities i
   <entry>
     <title>How to Add WebPage Schema to All Pages on the Website</title>
     <link href="https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/adding_web_page_schema_globally/" />
-    <updated>2025-06-18T13:32:37Z</updated>
+    <updated>2025-06-24T19:00:57Z</updated>
     <id>https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/adding_web_page_schema_globally/</id>
     <content type="html">&lt;p&gt;All pages on a website are WebPages. Let&#39;s reflect this in our schema.&lt;/p&gt;
 &lt;p&gt;But first lets talk about how to generate systematically URLs for &lt;code&gt;&amp;quot;@id&amp;quot;&lt;/code&gt; attributes.&lt;/p&gt;
@@ -380,7 +380,7 @@ Best practice is to copy paste the &lt;code&gt;&amp;quot;@type&amp;quot;&lt;/cod
   <entry>
     <title>How to Add Global Schema to a Website</title>
     <link href="https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/adding_global_schema_to_eleventy/" />
-    <updated>2025-06-18T13:32:37Z</updated>
+    <updated>2025-06-24T19:00:57Z</updated>
     <id>https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/adding_global_schema_to_eleventy/</id>
     <content type="html">&lt;p&gt;We can add schema markup in our global template so it is included in any page.&lt;/p&gt;
 &lt;h2 id=&quot;why-not-use-a-plugin-for-schema-markup&quot;&gt;Why not use a Plugin for Schema Markup&lt;/h2&gt;
@@ -388,7 +388,7 @@ Best practice is to copy paste the &lt;code&gt;&amp;quot;@type&amp;quot;&lt;/cod
 &lt;p&gt;The Plugin &amp;quot;&lt;a href=&quot;https://github.com/PauTym/simply-schema-eleventy/&quot;&gt;simply-schema-eleventy&lt;/a&gt;&amp;quot; removes the restrictions, yet it still overly complicates things in my view.&lt;/p&gt;
 &lt;h2 id=&quot;strategy-to-add-schema-to-the-website-no-plugin-required&quot;&gt;Strategy to Add Schema to the Website - no Plugin required&lt;/h2&gt;
 &lt;p&gt;My approach simply adds the schema to the front matter and dumps it as JSON into the base layout.&lt;/p&gt;
-&lt;h3 id=&quot;define-global-schema-as-global-data&quot;&gt;Define Global Schema as Global Data&lt;/h3&gt;
+&lt;h2 id=&quot;1-define-global-schema-as-global-data&quot;&gt;1. Define Global Schema as Global Data&lt;/h2&gt;
 &lt;p&gt;In a global data file at &lt;code&gt;_data/eleventyComputed.js&lt;/code&gt; I build up a tree under &lt;code&gt;schemaorg&lt;/code&gt; with the raw schema I need.&lt;/p&gt;
 &lt;p&gt;for example:&lt;/p&gt;
 &lt;pre class=&quot;language-js&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
@@ -410,32 +410,31 @@ Best practice is to copy paste the &lt;code&gt;&amp;quot;@type&amp;quot;&lt;/cod
     &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Add the graph under eleventyComputed because I want to integrate with the metadata structure already defined by the base-blog starter project.&lt;/p&gt;
-&lt;h4 id=&quot;why-use-a-graph-collection-for-the-schema&quot;&gt;Why use a &amp;quot;@graph&amp;quot; collection for the schema?&lt;/h4&gt;
+&lt;h3 id=&quot;why-use-a-graph-collection-for-the-schema&quot;&gt;Why use a &amp;quot;@graph&amp;quot; collection for the schema?&lt;/h3&gt;
 &lt;p&gt;If you use a &amp;quot;@graph&amp;quot; you can assemble the schema nicely at various levels. The eleventy data cascade merges the data from global, folder level and file level nicely into something that you want.&lt;/p&gt;
 &lt;p&gt;If you would start with a top level object you would have to inject nested objects into the tree, making the entire structure much more ridged and opinionated. See also &lt;a href=&quot;https://academy.yoast.com/app/uploads/sites/4/2020/11/2-1-the-yoast-seo-graph-structured-data-for-beginners.pdf&quot;&gt;the explanation by Yoast&lt;/a&gt;, a well known Schema Plugin for Wordpress.&lt;/p&gt;
-&lt;h2 id=&quot;inject-schema-into-all-pages-at-the-base-template&quot;&gt;Inject Schema into All Pages at the Base Template&lt;/h2&gt;
+&lt;h2 id=&quot;2-inject-schema-into-all-pages-at-the-base-template&quot;&gt;2. Inject Schema into All Pages at the Base Template&lt;/h2&gt;
 &lt;p&gt;We want the schema to go into the header of all pages. Therefore we inject it into your base layout template.&lt;/p&gt;
 &lt;p&gt;If we build the schema graph with simple front matter, we can dump it as JSON into the header of our &lt;code&gt;_includes/layouts/base.njk&lt;/code&gt; template like this:&lt;/p&gt;
-&lt;pre class=&quot;language-html&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-html&quot;&gt;		{# Add schema.org structured data as JSON-LD #}
-		&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;script&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;&lt;span class=&quot;token namespace&quot;&gt;eleventy:&lt;/span&gt;ignore&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation attr-equals&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;application/ld+json&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token script&quot;&gt;&lt;span class=&quot;token language-javascript&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; schemaorg &lt;span class=&quot;token operator&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;dump&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&#92;t&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;|&lt;/span&gt; safe &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;script&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&quot;language-html&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-html&quot;&gt;{# Add schema.org structured data as JSON-LD #}
+&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;script&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;&lt;span class=&quot;token namespace&quot;&gt;eleventy:&lt;/span&gt;ignore&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation attr-equals&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;application/ld+json&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token script&quot;&gt;&lt;span class=&quot;token language-javascript&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; schemaorg &lt;span class=&quot;token operator&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;dump&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&#92;t&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;|&lt;/span&gt; safe &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;script&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;blockquote&gt;
-&lt;p&gt;Note: We must use the &lt;code&gt;eleventy:ignore&lt;/code&gt; attribution or the script will be combined with other java script.&lt;/p&gt;
-&lt;p&gt;This behavior is caused by the config in the eleventy.config.js&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;We must use the &lt;code&gt;eleventy:ignore&lt;/code&gt; attribution or the script will be combined with other java script.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;blockquote&gt;
-&lt;pre class=&quot;language-js&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;	&lt;span class=&quot;token comment&quot;&gt;// Bundle &amp;lt;script&gt; content and adds a {&#92;% js %} paired shortcode&lt;/span&gt;
+&lt;p&gt;This behavior is caused by the config in the &lt;code&gt;eleventy.config.js&lt;/code&gt;:&lt;/p&gt;
+&lt;pre class=&quot;language-js&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;	&lt;span class=&quot;token comment&quot;&gt;// Bundle &amp;lt;script&gt; content and adds a {% js %} paired shortcode&lt;/span&gt;
 	eleventyConfig&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;addBundle&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;js&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
 		&lt;span class=&quot;token literal-property property&quot;&gt;toFileDirectory&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;dist&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
 		&lt;span class=&quot;token comment&quot;&gt;// Add all &amp;lt;script&gt; content to the `js` bundle (use eleventy:ignore to opt-out)&lt;/span&gt;
 		&lt;span class=&quot;token comment&quot;&gt;// supported selectors: https://www.npmjs.com/package/posthtml-match-helper&lt;/span&gt;
 		&lt;span class=&quot;token literal-property property&quot;&gt;bundleHtmlContentFromSelector&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;script&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
 	&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/blockquote&gt;
 &lt;h2 id=&quot;what-entities-to-generate-globally&quot;&gt;What Entities to Generate Globally?&lt;/h2&gt;
 &lt;p&gt;An entities in Schema is anything that has an ID. Most entities also have a &amp;quot;@type&amp;quot; from the schema.org vocabulary.&lt;/p&gt;
 &lt;p&gt;Any Website has an object of type Website, i.e. &lt;code&gt;&amp;quot;@type&amp;quot;: &amp;quot;Website&amp;quot;&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;Also a website has a publisher. This may be a person for a personal blog or an organization.&lt;/p&gt;
-&lt;p&gt;Here is myu complete global data:&lt;/p&gt;
+&lt;p&gt;Here is my complete global data:&lt;/p&gt;
 &lt;pre class=&quot;language-js&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
   &lt;span class=&quot;token literal-property property&quot;&gt;schemaorg&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;token string-property property&quot;&gt;&quot;@context&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;https://schema.org&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
@@ -469,16 +468,17 @@ Best practice is to copy paste the &lt;code&gt;&amp;quot;@type&amp;quot;&lt;/cod
     &lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
   &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;h3 id=&quot;connect-the-entities-to-a-single-graph&quot;&gt;Connect the Entities to a Single Graph&lt;/h3&gt;
+&lt;h2 id=&quot;connecting-all-entities-to-a-single-graph&quot;&gt;Connecting all Entities to a Single Graph&lt;/h2&gt;
 &lt;p&gt;Take not how the &lt;code&gt;Website&lt;/code&gt; has a property &lt;code&gt;publisher&lt;/code&gt;, which is a reference to an entity of type &amp;quot;Person&amp;quot; and an &amp;quot;@id&amp;quot;.&lt;/p&gt;
 &lt;p&gt;These two properties are exactly the same as the second entity in the graph, the &lt;code&gt;Person&lt;/code&gt; entity.&lt;/p&gt;
 &lt;p&gt;This is the way how to connect two entities.&lt;/p&gt;
+&lt;p&gt;&lt;picture&gt;&lt;source type=&quot;image/avif&quot; srcset=&quot;https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/adding_global_schema_to_eleventy/sg5WyticVs-784.avif 784w&quot;&gt;&lt;source type=&quot;image/webp&quot; srcset=&quot;https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/adding_global_schema_to_eleventy/sg5WyticVs-784.webp 784w&quot;&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/adding_global_schema_to_eleventy/sg5WyticVs-784.png&quot; alt=&quot;The current global schema graph&quot; width=&quot;784&quot; height=&quot;591&quot;&gt;&lt;/picture&gt;&lt;/p&gt;
 </content>
   </entry>
   <entry>
     <title>How to Add Breadcrumbs with Schema to All Pages</title>
     <link href="https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/adding_breadcrumbs_with_schema/" />
-    <updated>2025-06-18T13:32:37Z</updated>
+    <updated>2025-06-24T19:00:57Z</updated>
     <id>https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/adding_breadcrumbs_with_schema/</id>
     <content type="html">&lt;p&gt;Breadcrumbs are a common form of navigation on Blogs and Websites.&lt;/p&gt;
 &lt;p&gt;They help users to orient themselves with regards to the information hierarchy of the website.&lt;/p&gt;
