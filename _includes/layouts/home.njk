@@ -4,13 +4,38 @@ layout: layouts/base.njk
 <!-- Delete this block, which will also remove the component CSS from the bundle -->
 <style>{% include "css/message-box.css" %}</style>
 <div class="message-box">
-	<ol>
-		<li>Edit <code>_data/metadata.js</code> with your blog’s information.</li>
-		<li>(Optional) Edit <code>eleventy.config.js</code> with your <a href="https://www.11ty.dev/docs/config/">configuration preferences</a>.</li>
-		<li>Delete this message from <code>_includes/layouts/home.njk</code>.</li>
-	</ol>
-	<p><em>This is an <a href="https://www.11ty.dev/">Eleventy project</a> created from the <a href="https://github.com/11ty/eleventy-base-blog"><code>eleventy-base-blog</code> repo</a>.</em></p>
+	<h2>Learn How To Add Structured Data to Your Eleventy Website!</h2>
+	<p>
+		To get an overview start at the about page or dive into understanding 
+		&quot;<a href="/blog/importance_of_schema_markup/">Why schema markup helps pages to rank</a>&quot; and 
+		&quot;Why schema markup helps you to get your important entities into <em>Google's Knowledge Graph</em>.&quot;
+	</p>
+	<p>
+		You'll find an overview of the articles at the <a href="/about/">About Page</a>
+	</p>
 </div>
 <!-- Stop deleting -->
 
 {{ content | safe }}
+
+<!-- Delete this block, which will also remove the component CSS from the bundle -->
+<div class="message-box">
+	<p>
+		<em>This is a starter project demonstrating Schema.org markup for <a href="https://www.11ty.dev/">Eleventy</a>. 
+		It is published from the 
+		<a href="https://github.com/KajKandler/eleventy-base-blog-with-schema"><code>eleventy-base-blog-with-schema</code> Git repo</a>.</em>
+	</p>
+	<p>To use this as a starter project for you website with a blog:</p>
+	<ol>
+		<li>Edit <code>_data/metadata.js</code> with your blog’s information.</li>
+		<li>(Optional) Edit <code>eleventy.config.js</code> with your <a href="https://www.11ty.dev/docs/config/">configuration preferences</a>.</li>
+		<li>Delete these message from <code>_includes/layouts/home.njk</code>.</li>
+		<li>Delete the articles in <code>content/blog/*</code>.</li>
+	</ol>
+	<p>
+		<em>This <a href="https://www.11ty.dev/">Eleventy project</a> is forked from the 
+		<a href="https://github.com/11ty/eleventy-base-blog"><code>eleventy-base-blog</code> repo</a>.</em>
+		It adds schema.org structured data for SEO and <a href="https://entitygarden.com/glossary/digital_persona_optimization/">Digital Persona Optimization</a>
+	</p>
+</div>
+<!-- Stop deleting -->

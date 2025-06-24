@@ -1,10 +1,38 @@
----js
-const eleventyNavigation = {
-	key: "Home",
-	order: 1
-};
+---
+title: Home Page
+description: "An Eleventy Starter Project leveraging Structured Data for SEO and Digital Persona Optimization"
+eleventyNavigation:
+  key: "Home"
+  order: 1
 
-const numberOfLatestPostsToShow = 3;
+numberOfLatestPostsToShow: 3
+
+eleventyComputed:
+  schemaorg:
+    "@graph":
+    - "@type": "WebPage"
+      "@id": "{{ page.url | constructID(metadata.url, '#webpage') }}"
+      about:
+      - "@type": "Thing"
+        "@id": "https://www.11ty.dev/"
+        name: "Eleventy"
+        alternateName:
+        - "11ty"
+        url: "https://www.11ty.dev/"
+        sameAs:
+        - "https://github.com/11ty/eleventy/"
+        - "https://www.youtube.com/c/EleventyVideo"
+        - "https://neighborhood.11ty.dev/@11ty"
+        - "https://bsky.app/profile/11ty.dev"
+      - "@type": "Thing"
+        "@id": "https://schema.org/"
+        name: "schema.org"
+        description: "Schema.org is an initiative by the major search engines to collaboratively create and maintain structured data on the Internet."
+        url: "https://schema.org/"
+        sameAs: 
+        - "https://schema.org/docs/about.html"
+      mentions: 
+
 ---
 {% set postsCount = collections.posts | length %}
 {% set latestPostsCount = postsCount | min(numberOfLatestPostsToShow) %}
