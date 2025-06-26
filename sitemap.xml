@@ -2,43 +2,43 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 	
 	<url>
-		<loc>https://kajkandler.github.io/eleventy-base-blog-with-schema/about/</loc>
-		<lastmod>2025-06-26</lastmod>
-	</url>
-	
-	<url>
-		<loc>https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/adding_breadcrumbs_with_schema/</loc>
-		<lastmod>2025-06-26</lastmod>
+		<loc>https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/importance_of_schema_markup/</loc>
+		<lastmod>2025-06-03</lastmod>
 	</url>
 	
 	<url>
 		<loc>https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/adding_global_schema_to_eleventy/</loc>
-		<lastmod>2025-06-26</lastmod>
-	</url>
-	
-	<url>
-		<loc>https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/adding_web_page_schema_globally/</loc>
-		<lastmod>2025-06-26</lastmod>
-	</url>
-	
-	<url>
-		<loc>https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/automating_dates_for_schema/</loc>
-		<lastmod>2025-06-26</lastmod>
-	</url>
-	
-	<url>
-		<loc>https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/importance_of_schema_markup/</loc>
-		<lastmod>2025-06-26</lastmod>
-	</url>
-	
-	<url>
-		<loc>https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/schema_markup_for_articles/</loc>
-		<lastmod>2025-06-26</lastmod>
+		<lastmod>2025-06-03</lastmod>
 	</url>
 	
 	<url>
 		<loc>https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/tools_to_validate_schema/</loc>
-		<lastmod>2025-06-26</lastmod>
+		<lastmod>2025-06-04</lastmod>
+	</url>
+	
+	<url>
+		<loc>https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/adding_web_page_schema_globally/</loc>
+		<lastmod>2025-06-04</lastmod>
+	</url>
+	
+	<url>
+		<loc>https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/schema_markup_for_articles/</loc>
+		<lastmod>2025-06-04</lastmod>
+	</url>
+	
+	<url>
+		<loc>https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/automating_dates_for_schema/</loc>
+		<lastmod>2025-06-09</lastmod>
+	</url>
+	
+	<url>
+		<loc>https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/adding_breadcrumbs_with_schema/</loc>
+		<lastmod>2025-06-12</lastmod>
+	</url>
+	
+	<url>
+		<loc>https://kajkandler.github.io/eleventy-base-blog-with-schema/about/</loc>
+		<lastmod>2025-06-24</lastmod>
 	</url>
 	
 	<url>
