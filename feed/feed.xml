@@ -5,7 +5,7 @@
   <subtitle>The Eleventy (11ty) base-blog starter project enhanced with schema.org markup. Howto tutorial included!</subtitle>
   <link href="https://kajkandler.github.io/eleventy-base-blog-with-schema/feed/feed.xml" rel="self" />
   <link href="https://kajkandler.github.io/eleventy-base-blog-with-schema/" />
-  <updated>2025-06-26T17:56:40Z</updated>
+  <updated>2025-06-26T17:58:07Z</updated>
   <id>https://kajkandler.github.io/eleventy-base-blog-with-schema/</id>
   <author>
     <name>Kaj Kandler</name>
@@ -13,7 +13,7 @@
   <entry>
     <title>My Tools to Validate Schema Markup</title>
     <link href="https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/tools_to_validate_schema/" />
-    <updated>2025-06-26T17:56:40Z</updated>
+    <updated>2025-06-26T17:58:07Z</updated>
     <id>https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/tools_to_validate_schema/</id>
     <content type="html">&lt;p&gt;When applying schema, we want to validate that is appears and is correct.&lt;/p&gt;
 &lt;h2 id=&quot;validate-with-the-browser-developer-tools&quot;&gt;Validate with the Browser Developer Tools&lt;/h2&gt;
@@ -55,7 +55,7 @@ If that is not the case, you are missing some connections between the entities i
   <entry>
     <title>Schema Markup for Blog Articles</title>
     <link href="https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/schema_markup_for_articles/" />
-    <updated>2025-06-26T17:56:40Z</updated>
+    <updated>2025-06-26T17:58:07Z</updated>
     <id>https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/schema_markup_for_articles/</id>
     <content type="html">&lt;p&gt;Every blog post is best marked up as an article.&lt;/p&gt;
 &lt;h2 id=&quot;adding-article-schema-to-all-posts-in-the-blog&quot;&gt;Adding Article Schema to All Posts in the Blog&lt;/h2&gt;
@@ -144,7 +144,7 @@ If that is not the case, you are missing some connections between the entities i
   <entry>
     <title>Why is Schema Markup Important for any Website or Blog</title>
     <link href="https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/importance_of_schema_markup/" />
-    <updated>2025-06-26T17:56:40Z</updated>
+    <updated>2025-06-26T17:58:07Z</updated>
     <id>https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/importance_of_schema_markup/</id>
     <content type="html">&lt;p&gt;Search engines like Google have evolved from matching words to matching based on meaning of the words. That way Google can distinguish apple the company from apple the fruit. It also allows a search engine to take semantics into account.&lt;/p&gt;
 &lt;p&gt;Starting in 2012, the largest search engines in the world asked website publishers to mark up their semantic entities. They founded schema.org to build a common vocabulary of &amp;quot;things&amp;quot;. Things can be classified in a taxonomy, such as &amp;quot;Organization&amp;quot;, &amp;quot;Corporation&amp;quot;, &amp;quot;Person&amp;quot;, &amp;quot;Creative Work&amp;quot;, &amp;quot;Book&amp;quot;, &amp;quot;Website&amp;quot;, &amp;quot;Webapge&amp;quot;, or &amp;quot;Article&amp;quot;.&lt;/p&gt;
@@ -191,7 +191,7 @@ If that is not the case, you are missing some connections between the entities i
   <entry>
     <title>How to Automate &#39;datePublished&#39; and &#39;dateModified&#39; in Eleventy</title>
     <link href="https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/automating_dates_for_schema/" />
-    <updated>2025-06-26T17:56:40Z</updated>
+    <updated>2025-06-26T17:58:07Z</updated>
     <id>https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/automating_dates_for_schema/</id>
     <content type="html">&lt;p&gt;The schema of WebPages and Articles have two important attributes datePublished and dateModified.&lt;/p&gt;
 &lt;p&gt;I it is all too easy to forget updating these attributes with the final publish or any update. Therefore I set out to reasonably automate setting these attributes.&lt;/p&gt;
@@ -307,7 +307,7 @@ If that is not the case, you are missing some connections between the entities i
   <entry>
     <title>How to Add WebPage Schema to All Pages on the Website</title>
     <link href="https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/adding_web_page_schema_globally/" />
-    <updated>2025-06-26T17:56:40Z</updated>
+    <updated>2025-06-26T17:58:07Z</updated>
     <id>https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/adding_web_page_schema_globally/</id>
     <content type="html">&lt;p&gt;All pages on a website are WebPages. Let&#39;s reflect this in our schema.&lt;/p&gt;
 &lt;p&gt;But first lets talk about how to generate systematically URLs for &lt;code&gt;&amp;quot;@id&amp;quot;&lt;/code&gt; attributes.&lt;/p&gt;
@@ -380,7 +380,7 @@ Best practice is to copy paste the &lt;code&gt;&amp;quot;@type&amp;quot;&lt;/cod
   <entry>
     <title>How to Add Global Schema to a Website</title>
     <link href="https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/adding_global_schema_to_eleventy/" />
-    <updated>2025-06-26T17:56:40Z</updated>
+    <updated>2025-06-26T17:58:07Z</updated>
     <id>https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/adding_global_schema_to_eleventy/</id>
     <content type="html">&lt;p&gt;We can add schema markup in our global template so it is included in any page.&lt;/p&gt;
 &lt;h2 id=&quot;why-not-use-a-plugin-for-schema-markup&quot;&gt;Why not use a Plugin for Schema Markup&lt;/h2&gt;
@@ -478,7 +478,7 @@ Best practice is to copy paste the &lt;code&gt;&amp;quot;@type&amp;quot;&lt;/cod
   <entry>
     <title>How to Add Breadcrumbs with Schema to All Pages</title>
     <link href="https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/adding_breadcrumbs_with_schema/" />
-    <updated>2025-06-26T17:56:40Z</updated>
+    <updated>2025-06-26T17:58:07Z</updated>
     <id>https://kajkandler.github.io/eleventy-base-blog-with-schema/blog/adding_breadcrumbs_with_schema/</id>
     <content type="html">&lt;p&gt;Breadcrumbs are a common form of navigation on Blogs and Websites.&lt;/p&gt;
 &lt;p&gt;They help users to orient themselves with regards to the information hierarchy of the website.&lt;/p&gt;
