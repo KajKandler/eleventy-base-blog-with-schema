@@ -1,11 +1,12 @@
 ---
-title: Why is Schema Markup important for any Website or Blog
+title: Why is Schema Markup Important for any Website or Blog
 description: This articles describes the influence of structured data on SEO and optimizing your digital persona hub.
-date: "git Last Modified"
+date: "git Created"
 tags:
 - Concept
 - SEO
 - DigitalPersona
+
 eleventyComputed:
   schemaorg:
     "@graph":

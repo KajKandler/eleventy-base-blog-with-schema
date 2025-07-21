@@ -1,7 +1,7 @@
 ---
 title: "Schema Markup for Blog Articles"
 description: This articles teaches how to add schema to pages that are articles such as in a blog.
-date: "git Last Modified"
+date: "git Created"
 tags:
 - Article
 - FolderLevel
