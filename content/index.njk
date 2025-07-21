@@ -25,18 +25,121 @@ eleventyComputed:
         - "https://neighborhood.11ty.dev/@11ty"
         - "https://bsky.app/profile/11ty.dev"
       - "@type": "Thing"
-        "@id": "https://schema.org/"
+        "@id": "https://schema.org"
         name: "schema.org"
         description: "Schema.org is an initiative by the major search engines to collaboratively create and maintain structured data on the Internet."
-        url: "https://schema.org/"
+        url: "https://schema.org"
         sameAs: 
         - "https://schema.org/docs/about.html"
+        - https://en.wikipedia.org/wiki/Schema.org
+        - https://schema.org
       mentions: 
+        - '@type': Event
+          "@id": "https://11tymeetup.dev/events/ep-25-structured-data-and-deploying-11ty/"
+    - '@type': Event
+      "@id": "https://11tymeetup.dev/events/ep-25-structured-data-and-deploying-11ty/"
+      name: "11ty Meetup #25"
+      alternateName: "Eleventy Meetup #25"
+      description: >-
+        This is the 25th 11ty Meetup. It features two presentations. First presentation from Kaj Kandler about "How I added structured data to my personal website and blog". 
+        The second presentation is by Michael W. Delaney, titled "Deploying 11ty Automatically"
+      url: >-
+        https://11tymeetup.dev/events/ep-25-structured-data-and-deploying-11ty
+      startDate: '2015-07-23T06:00:00+02:00'
+      endDate: '2015-07-23T19:00:00+02:00'
+      eventAttendanceMode: 'https://schema.org/OnlineEventAttendanceMode'
+      eventStatus: 'https://schema.org/EventScheduled'
+      location:
+        "@type": VirtualLocation
+        name: "Online Meeting"
+      sameAs:
+        - https://11tymeetup.dev/events/ep-25-structured-data-and-deploying-11ty/
+        - https://www.linkedin.com/events/eleventymeetup-257351487290721898496/comments/
+      organizer:
+        '@type': Person
+        '@id': 'https://sia.codes/about/'
+      performer:
+      - "@type": Person
+        "@id": '{{ "/" | constructID(metadata.url, "#person_kaj_kandler") }}'
+        knows:
+        - "@type": Person
+          "@id": 'https://mwdelaney.me/'
+        - '@type': Person
+          '@id': 'https://sia.codes/about/'
+      - "@type": Person
+        "@id": 'https://mwdelaney.me/'
+        name: Michel W Delaney
+      about:
+        - '@type': Thing
+          '@id': 'https://www.11ty.dev/'
+          name: Eleventy
+          alternateName:
+          - 11ty
+          - Eleventy Static Site Generator
+          url: https://www.11ty.dev/
+          sameAs:
+          - https://github.com/11ty/eleventy/
+          - https://www.youtube.com/c/EleventyVideo
+          - https://neighborhood.11ty.dev/@11ty
+          - https://bsky.app/profile/11ty.dev
+        - '@type': Thing
+          '@id': 'https://schema.org'
+        - '@type': Thing
+          '@id': 'https://en.wikipedia.org/wiki/Software_deployment'
+          name: Software Deployment 
+          sameAs:
+          - https://en.wikipedia.org/wiki/Software_deployment
+    - "@type": Person
+      "@id": 'https://mwdelaney.me/'
+      name: Michel W Delaney
+      givenName: Michael
+      familyName: Delaney
+      alternateName:
+      - Michael Delaney
+      - Michael W. Delaney
+      - MWDelaney
+      url: https://mwdelaney.me/
+      jobTitle: web developer
+      sameAs:
+      - https://mwdelaney.me/
+      - https://github.com/mwdelaney
+      - https://bsky.app/profile/mwdelaney.me
+      email: michael@michaeldelaney.me
+      knows:
+      - "@type": Person
+        "@id": '{{ "/" | constructID(metadata.url, "#person_kaj_kandler") }}'
+      - '@type': Person
+        '@id': 'https://sia.codes/about/'
+    - '@type': Person
+      '@id': 'https://sia.codes/about/'
+      name: Sia Karamalegos
+      url: https://sia.codes/
+      jobTitle: Web Performance Engineer
+      sameAs:
+      - https://sia.codes/about/
+      - https://github.com/siakaramalegos
+      - https://www.linkedin.com/in/karamalegos/
+      - https://front-end.social/@sia
+      - https://medium.com/@thegreengreek
+      - https://www.instagram.com/sia.karamalegos/
+      knows:
+      - "@type": Person
+        "@id": 'https://mwdelaney.me/'
+      - "@type": Person
+        "@id": 'https://mwdelaney.me/'
+        name: Michel W Delaney
 
 ---
 {% set postsCount = collections.posts | length %}
 {% set latestPostsCount = postsCount | min(numberOfLatestPostsToShow) %}
-<h1>Latest {{ latestPostsCount }} Post{% if latestPostsCount != 1 %}s{% endif %}</h1>
+<h2>Announcement: Presentation at 11ty Meetup - 07/23/25 6PM CEST</h2>
+<img src="20250723THE11tyMeetup#25.png" alt="Announcement of the 25th 11ty Meetup on 23rd of July 2025, featuring Kaj Kandler as Presenter" width="100%">
+<p><a href="https://kajkandler.com/">Kaj Kandler</a> will present this 11ty starter project at the 11ty Meetup in July 2025.<p>
+<p><a href = "https://11tymeetup.dev/events/ep-25-structured-data-and-deploying-11ty/">Eleventy Meetup #25 - 23rd of July 2025 at 6PM CEST</a></p> 
+<p><a href="https://mwdelaney.me/">Michael W. Delaney</a> will give a scond talk, titled &quot;Deploying 11ty Automatically&quot;</p>
+<p>Thanks to <a href="https://sia.codes/about/">Sia Karamalegos</a> for organizing the Meetup</p>
+
+<h2>Latest {{ latestPostsCount }} Post{% if latestPostsCount != 1 %}s{% endif %}</h2>
 
 {% set postslist = collections.posts | head(-1 * numberOfLatestPostsToShow) %}
 {% set postslistCounter = postsCount %}
@@ -50,8 +153,8 @@ eleventyComputed:
 {# List every content page in the project #}
 {#
 <ul>
-	{%- for entry in collections.all %}
-	<li><a href="{{ entry.url }}"><code>{{ entry.url }}</code></a></li>
-	{%- endfor %}
+  {%- for entry in collections.all %}
+  <li><a href="{{ entry.url }}"><code>{{ entry.url }}</code></a></li>
+  {%- endfor %}
 </ul>
 #}
