@@ -90,12 +90,53 @@ eleventyComputed:
         founder:
           "@type": "Person"
           "@id": '{{ "/" | constructID(metadata.url, "#person_kaj_kandler") }}'
+      - "@type": VideoObject
+        "@id": "https://www.youtube.com/watch?v=Z-83f8qa0_c"
+    - "@type": VideoObject
+      "@id": "https://www.youtube.com/watch?v=Z-83f8qa0_c"
+      name: Recording of Presentation
+      headline: How I Added Schema Markup to my Eleventy Blog
+      url: "https://www.youtube.com/watch?v=Z-83f8qa0_c"
+      description: >-
+        Kaj Kandler presents at THE 11ty Meetup #25 about adding schema markup to an 11ty website.
+        Mr. Kandler demonstrates how to leverage the 11ty data cascade for adding schema markup. 
+        His method avoids any dependencies on plugins.
+      abstract: >-
+        Kaj Kandler presents at THE 11ty Meetup #25 about adding schema markup to an 11ty website.
+        Mr. Kandler demonstrates how to leverage the 11ty data cascade for adding schema markup. 
+        His method avoids any dependencies on plugins.
+      mainEntityOfPage: "https://www.youtube.com/watch?v=Z-83f8qa0_c"
+      contentUrl: "https://www.youtube.com/watch?v=Z-83f8qa0_c"
+      uploadDate: '2025-07-28T08:00:00-06:00'
+      thumbnailUrl: 'https://i.ytimg.com/an_webp/Z-83f8qa0_c/mqdefault_6s.webp?du=3000&sqp=CJm4ocQG&rs=AOn4CLCfFZX4FpFwQgAxYgeig_QDkAWURg'
+      embedUrl: 'https://www.youtube.com/embed/Z-83f8qa0_c?si=pgg5hn6Ji5NisdH_'
+      author:
+        '@type': Person
+        '@id': 'https://kajkandler.com/'
+      publisher:
+        "@type": "Person"
+        "@id": "https://sia.codes/about/"
+      associatedArticle:
+        '@type': NewsArticle
+        '@id': https://kajkandler.github.io/eleventy-base-blog-with-schema/about/
+        name: 11ty Meetup presentation
+        url: https://kajkandler.github.io/eleventy-base-blog-with-schema/about/
+      about:
+      - "@type": Thing
+        "@id": https://www.11ty.dev/
+      - "@type": Thing
+        "@id": https://schema.org/
+
 
 ---
 
 ## About this Eleventy Starter Project
 
 This eleventy Starter Project demonstrates how to add schema.org markup to the eleventy base blog starter project.
+
+![Also presented at the 11ty Meetup #25](/VideoTHE11tyMeetup#25.png "Presentation available on YouTube")
+
+[Watch on YouTube](https://www.youtube.com/watch?v=Z-83f8qa0_c)
 
 Schema markup [helps with SEO and Digital Persona Optimization](/blog/importance_of_schema_markup.md).
 

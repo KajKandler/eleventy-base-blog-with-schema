@@ -1,0 +1,115 @@
+---
+title: "11ty Meetup #25: Presentation of Kaj Kandler"
+description: Presenting this Eleventy Starter Project and Schema Markup tutorial at 11ty Meetup #25
+date: "git Created"
+tags: 
+eleventyComputed:
+  schemaorg:
+    "@graph":
+    - "@type": "Article"
+      "@id": "{{ page.url | constructID(metadata.url, '#article') }}"
+      about:
+      - "@type": "Thing"
+        "@id": "https://schema.org/"
+      - "@type": "EventSeries"
+        "@id": "https://11tymeetup.dev/"
+        name: "Eleventy Meetup"
+        alternateName:
+        - "11ty Meetup"
+        url: "https://11tymeetup.dev/"
+        sameAs:
+        - "https://www.youtube.com/channel/UC1QVD9VQPteu0E5Qq5vZAQA"
+        organizer:
+        - "@type": "Person"
+          "@id": "https://sia.codes/about/"
+        about:
+        - "@type": "Thing"
+          "@id": "https://www.11ty.dev/"
+      - "@type": "Thing"
+        "@id": "https://www.11ty.dev/"
+      mentions:
+      - "@type": VideoObject
+        "@id": "https://www.youtube.com/watch?v=Z-83f8qa0_c"
+    - "@type": "Thing"
+      "@id": "https://schema.org/"
+      name: "schema.org"
+      description: "Schema.org is an initiative by the major search engines to collaboratively create and maintain structured data on the Internet."
+      url: "https://schema.org/"
+      sameAs:
+      - "https://schema.org/docs/about.html"
+    - "@type": VideoObject
+      "@id": "https://www.youtube.com/watch?v=Z-83f8qa0_c"
+      name: Recording of Presentation
+      headline: How I Added Schema Markup to my Eleventy Blog
+      url: "https://www.youtube.com/watch?v=Z-83f8qa0_c"
+      description: >-
+        Kaj Kandler presents at THE 11ty Meetup #25 about adding schema markup to an 11ty website.
+        Mr. Kandler demonstrates how to leverage the 11ty data cascade for adding schema markup. 
+        His method avoids any dependencies on plugins.
+      abstract: >-
+        Kaj Kandler presents at THE 11ty Meetup #25 about adding schema markup to an 11ty website.
+        Mr. Kandler demonstrates how to leverage the 11ty data cascade for adding schema markup. 
+        His method avoids any dependencies on plugins.
+      mainEntityOfPage: "https://www.youtube.com/watch?v=Z-83f8qa0_c"
+      contentUrl: "https://www.youtube.com/watch?v=Z-83f8qa0_c"
+      uploadDate: '2025-07-28T08:00:00-06:00'
+      thumbnailUrl: 'https://i.ytimg.com/an_webp/Z-83f8qa0_c/mqdefault_6s.webp?du=3000&sqp=CJm4ocQG&rs=AOn4CLCfFZX4FpFwQgAxYgeig_QDkAWURg'
+      embedUrl: 'https://www.youtube.com/embed/Z-83f8qa0_c?si=pgg5hn6Ji5NisdH_'
+      author:
+        '@type': Person
+        '@id': 'https://kajkandler.com/'
+      publisher:
+        "@type": "Person"
+        "@id": "https://sia.codes/about/"
+      associatedArticle:
+        '@type': NewsArticle
+        '@id': https://kajkandler.github.io/eleventy-base-blog-with-schema/about/
+        name: 11ty Meetup presentation
+        url: https://kajkandler.github.io/eleventy-base-blog-with-schema/about/
+      about:
+      - "@type": "Thing"
+        "@id": "https://www.11ty.dev/"
+    - "@type": "Person"
+      "@id": "https://sia.codes/about/"
+      name: "Sia Karamalegos"
+      description: "Sia Karamalegos builds fast, resilient websites. She specializes in optimizing web performance. Sia Karamalegos is a public speaker and organizes the Eleventy Meetup."
+      url: "https://sia.codes/about/"
+      mainEntityOfPage: "https://sia.codes/about/"
+      sameAs:
+      - "https://sia.codes/about/"
+      - "https://www.google.com/search?kgmid=/g/11gbhswntq"
+      - "https://github.com/siakaramalegos"
+      - "https://bsky.app/profile/sia.codes"
+      - "https://front-end.social/@sia"
+      - "https://www.linkedin.com/in/karamalegos/"
+    - "@type": "Thing"
+      "@id": "https://www.11ty.dev/"
+      name: "Eleventy"
+      alternateName: 
+      - "11ty"
+      url: "https://www.11ty.dev/"
+      sameAs:
+      - "https://github.com/11ty/eleventy/"
+      - "https://www.youtube.com/c/EleventyVideo"
+      - "https://neighborhood.11ty.dev/@11ty"
+      - "https://bsky.app/profile/11ty.dev"
+---
+
+Kaj Kandler presented this Eleventy starter project and its tutorial "How to Add Schema Markup to an Eleventy Based Blog" at the 11ty Meetup in July 2025.
+
+<iframe width="560" height="315" 
+  src="https://www.youtube.com/embed/Z-83f8qa0_c?si=PRIuNmR55TLtVkWR" 
+  title="YouTube video player" 
+  frameborder="0" 
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" 
+  allowfullscreen></iframe>
+
+The presentation contains a step by step guide on how to add schema markup to an Eleventy based website without any plugins.
+
+1. [Why is schema markup important](/blog/importance_of_schema_markup.md) for a blog or a personal portfolio website?
+1. How can I [add global schema to all pages](/blog/adding_global_schema_to_eleventy.md) generated by eleventy?
+1. Which [Tools to use for validating schema markup](/blog/tools_to_validate_schema.md)?
+1. How to [add WebPage schema to all pages](/blog/adding_web_page_schema_globally.md)?
+1. How to [mark up your articles with schema](/blog/schema_markup_for_articles.md)?
+1. How to [Automate the publishedDate and modifiedDate for your pages](/blog/automating_dates_for_schema.md) and articles?
+1. How To [Add Breadcrumbs based on navigation hierarchy](/blog/adding_breadcrumbs_with_schema.md). This article also show show to add the breadcrumb navigation to the website.

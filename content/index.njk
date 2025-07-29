@@ -89,6 +89,8 @@ eleventyComputed:
           name: Software Deployment 
           sameAs:
           - https://en.wikipedia.org/wiki/Software_deployment
+        - "@type": VideoObject
+          "@id": "https://www.youtube.com/watch?v=Z-83f8qa0_c"
     - "@type": Person
       "@id": 'https://mwdelaney.me/'
       name: Michel W Delaney
@@ -128,16 +130,46 @@ eleventyComputed:
       - "@type": Person
         "@id": 'https://mwdelaney.me/'
         name: Michel W Delaney
+    - "@type": VideoObject
+      "@id": "https://www.youtube.com/watch?v=Z-83f8qa0_c"
+      name: Recording of Presentation
+      headline: How I Added Schema Markup to my Eleventy Blog
+      url: "https://www.youtube.com/watch?v=Z-83f8qa0_c"
+      description: >-
+        Kaj Kandler presents at THE 11ty Meetup #25 about adding schema markup to an 11ty website.
+        Mr. Kandler demonstrates how to leverage the 11ty data cascade for adding schema markup. 
+        His method avoids any dependencies on plugins.
+      abstract: >-
+        Kaj Kandler presents at THE 11ty Meetup #25 about adding schema markup to an 11ty website.
+        Mr. Kandler demonstrates how to leverage the 11ty data cascade for adding schema markup. 
+        His method avoids any dependencies on plugins.
+      mainEntityOfPage: "https://www.youtube.com/watch?v=Z-83f8qa0_c"
+      contentUrl: "https://www.youtube.com/watch?v=Z-83f8qa0_c"
+      uploadDate: '2025-07-28T08:00:00-06:00'
+      thumbnailUrl: 'https://i.ytimg.com/an_webp/Z-83f8qa0_c/mqdefault_6s.webp?du=3000&sqp=CJm4ocQG&rs=AOn4CLCfFZX4FpFwQgAxYgeig_QDkAWURg'
+      embedUrl: 'https://www.youtube.com/embed/Z-83f8qa0_c?si=pgg5hn6Ji5NisdH_'
+      author:
+        '@type': Person
+        '@id': 'https://kajkandler.com/'
+      publisher:
+        "@type": "Person"
+        "@id": "https://sia.codes/about/"
+      associatedArticle:
+        '@type': NewsArticle
+        '@id': https://kajkandler.github.io/eleventy-base-blog-with-schema/about/
+        name: 11ty Meetup presentation
+        url: https://kajkandler.github.io/eleventy-base-blog-with-schema/about/
+      about:
+      - "@type": "Thing"
+        "@id": "https://www.11ty.dev/"
 
 ---
 {% set postsCount = collections.posts | length %}
 {% set latestPostsCount = postsCount | min(numberOfLatestPostsToShow) %}
-<h2>Announcement: Presentation at 11ty Meetup - 07/23/25 6PM CEST</h2>
-<img src="20250723THE11tyMeetup#25.png" alt="Announcement of the 25th 11ty Meetup on 23rd of July 2025, featuring Kaj Kandler as Presenter" width="100%">
-<p><a href="https://kajkandler.com/">Kaj Kandler</a> will present this 11ty starter project at the 11ty Meetup in July 2025.<p>
-<p><a href = "https://11tymeetup.dev/events/ep-25-structured-data-and-deploying-11ty/">Eleventy Meetup #25 - 23rd of July 2025 at 6PM CEST</a></p> 
-<p><a href="https://mwdelaney.me/">Michael W. Delaney</a> will give a scond talk, titled &quot;Deploying 11ty Automatically&quot;</p>
-<p>Thanks to <a href="https://sia.codes/about/">Sia Karamalegos</a> for organizing the Meetup</p>
+<h2>Now On YouTube: How I Added Schema Markup to my 11ty Blog</h2>
+<p><a href ="https://www.youtube.com/watch?v=Z-83f8qa0_c"><img src="Video THE 11ty Meetup#25.png" alt="Recording of the 25th 11ty Meetup on 23rd of July 2025, featuring Kaj Kandler as Presenter" width="100%"></a>
+<p><a href="https://kajkandler.com/">Kaj Kandler</a> presented this 11ty starter project at the 11ty Meetup in July 2025. 
+<a href = "https://www.youtube.com/watch?v=Z-83f8qa0_c">The recording is available on YouTube</a></p> 
 
 <h2>Latest {{ latestPostsCount }} Post{% if latestPostsCount != 1 %}s{% endif %}</h2>
 
