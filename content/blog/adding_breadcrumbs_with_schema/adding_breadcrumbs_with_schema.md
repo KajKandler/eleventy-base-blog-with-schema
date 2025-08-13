@@ -156,7 +156,7 @@ We will generate our breadcrumbs based on the navigation hierary we built with e
     {%- set bb = { key: b.key, title: b.title, url: absolutePostUrl, pluginType: b.pluginType } %}
     {%- set breadcrumbSchema = (breadcrumbSchema.push(bb), breadcrumbSchema) %}
 {% endfor %}
-<script eleventy:ignore type="application/ld+json">{{ breadcrumbSchema | eleventyNavigationToSchemaOrg | dump(\t) | safe }}</script>
+<script eleventy:ignore type="application/ld+json">{{ breadcrumbSchema | eleventyNavigationToSchemaOrg | dump('\t') | safe }}</script>
 ```
 {% endraw %}
 
