@@ -111,7 +111,7 @@ If we build the schema graph with simple front matter, we can dump it as JSON in
 {% raw %}
 ```html
 {# Add schema.org structured data as JSON-LD #}
-<script eleventy:ignore type="application/ld+json">{{ schemaorg | dump(\t) | safe }}</script>
+<script eleventy:ignore type="application/ld+json">{{ schemaorg | dump('\t') | safe }}</script>
 ```
 {% endraw %}
 
