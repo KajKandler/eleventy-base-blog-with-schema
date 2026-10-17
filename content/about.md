@@ -68,9 +68,9 @@ eleventyComputed:
         url: "https://entitygarden.com/"
         publisher:
           "@type": "Organization"
-          "@id": '{{ "/" | constructID("https://entitygarden.com/" , "#organization") }}'
+          "@id": 'https://entitygarden.com/#organization'
       - "@type": "Organization"
-        "@id": '{{ "/" | constructID("https://entitygarden.com/" , "#organization") }}'
+        "@id": 'https://entitygarden.com/#organization'
         name: "Entity Garden"
         alternateName:
         - "Entity Garden by Kaj Kandler"
@@ -81,7 +81,7 @@ eleventyComputed:
         - "https://www.crunchbase.com/organization/entity-garden"
         address:
           "@type": "PostalAddress"
-          "@id": '{{ "/" | constructID("https://entitygarden.com/" , "#address") }}'
+          "@id": 'https://entitygarden.com/#address'
           name: "Entity Garden Address"
           streetAddress: "Sangestr. 22"
           addressCountry: "DE"
