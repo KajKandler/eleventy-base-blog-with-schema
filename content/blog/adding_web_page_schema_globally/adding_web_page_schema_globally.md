@@ -117,13 +117,13 @@ I added the WebPage schema into  `content/content.11data.js` as the most appropr
 ```
 {% endraw %}
 
-As you can see I connect all "WebPage" entities to the []"WebSite" entity created as global schema](/blog/adding_global_schema_to_eleventy.md).
+As you can see I connect all "WebPage" entities to the []"WebSite" entity created as global schema](/blog/adding_global_schema_to_eleventy/).
 
 Furthermore, I reuse the person already declared globally as the author of all pages. You can adjust this to your needs.
 
 ## Do Not Forget to Validate your Schema
 
-As a reminder, do not forget to [validate every step your schema markup](/blog/tools_to_validate_schema.md).
+As a reminder, do not forget to [validate every step your schema markup](/blog/tools_to_validate_schema/).
 
 > **Note:**
 >
